@@ -1,6 +1,13 @@
 async function getMarineForecast() {
   try {
-    const response = await fetch('https://api.weather.gov/zones/marine/LEZ146/forecast');
+    const response = await fetch('https://api.weather.gov/zones/marine/LEZ148/forecast', {
+      headers: {
+        'User-Agent': '(myweatherapp.com, contact@myweatherapp.com)'
+      }
+    });
+    if (!response.ok) {
+      throw new Error('Network response was not ok: ' + response.statusText);
+    }
     const data = await response.json();
     
     // Display the forecast data
@@ -13,6 +20,3 @@ async function getMarineForecast() {
     console.error('Error fetching forecast:', error);
   }
 }
-
-// Trigger the forecast update on button click
-document.getElementById('updateBtn').addEventListener('click', getMarineForecast);
