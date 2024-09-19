@@ -5,9 +5,12 @@ async function getMarineForecast() {
         'User-Agent': '(myweatherapp.com, contact@myweatherapp.com)'
       }
     });
+    
     if (!response.ok) {
-      throw new Error('Network response was not ok: ' + response.statusText);
+      const errorData = await response.json(); // Get error response from the API
+      throw new Error(errorData.detail || 'Network response was not ok'); // Use error message or fallback
     }
+    
     const data = await response.json();
     
     // Display the forecast data
@@ -16,7 +19,8 @@ async function getMarineForecast() {
       <p>${data.properties.forecast}</p>
     `;
   } catch (error) {
-    document.getElementById('forecast').innerHTML = `<p>Sorry, we couldn't fetch the forecast. Please try again later.</p>`;
+    // Display specific error message
+    document.getElementById('forecast').innerHTML = `<p>Error: ${error.message}</p>`;
     console.error('Error fetching forecast:', error);
   }
 }
