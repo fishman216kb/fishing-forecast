@@ -21,7 +21,23 @@
     </script>
 
     <h2>Rocky River Buoy</h2>
-    <p id="rocky-river-buoy">Loading...</p>
+    <p id="45196">Loading...</p>
+
+    <script>
+        fetch('https://limno.io/api/now/45196')  // Replace with the correct endpoint
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok ' + response.statusText);
+                }
+                return response.json();
+            })
+            .then(data => {
+                const waterTemp = data.waterTemperature;  // Adjust based on actual data structure
+                const waveHeight = data.waveHeight;        // Adjust based on actual data structure
+                document.getElementById('rocky-river-buoy').textContent = `Water Temp: ${waterTemp}°F, Wave Height: ${waveHeight} ft`;
+            })
+            .catch(error => console.error('Error fetching buoy data:', error));
+    </script>
 
 </body>
 </html>
