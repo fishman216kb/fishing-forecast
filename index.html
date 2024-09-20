@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fishing Forecast</title>
+</head>
+<body>
+    <h1>Fishing Forecast</h1>
+    <pre id="forecast"></pre>
+
+    <script>
+        fetch('https://raw.githubusercontent.com/your-username/fishing-forecast/main/forecast.txt')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('forecast').textContent = data;
+        })
+        .catch(error => {
+            document.getElementById('forecast').textContent = "Error loading forecast.";
+        });
+    </script>
+</body>
+</html>
