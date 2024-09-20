@@ -10,7 +10,7 @@
     <pre id="forecast"></pre>
 
     <script>
-        fetch('https://raw.githubusercontent.com/your-username/fishing-forecast/main/forecast.txt')
+        fetch('https://raw.githubusercontent.com/fishman216kb/fishing-forecast/main/forecast.txt')
         .then(response => response.text())
         .then(data => {
             document.getElementById('forecast').textContent = data;
