@@ -4,9 +4,59 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fishing Forecast</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff;
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        h1 {
+            color: #2e8b57;
+            text-align: center;
+        }
+        h2 {
+            color: #4682b4;
+        }
+        p {
+            font-size: 18px;
+        }
+        pre {
+            background-color: #f8f8f8;
+            border: 1px solid #ddd;
+            padding: 15px;
+            font-size: 16px;
+        }
+        a {
+            color: #1e90ff;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        iframe {
+            display: block;
+            margin: 20px auto;
+            border: 1px solid #ddd;
+        }
+        .buoy-links {
+            margin-bottom: 20px;
+        }
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            background-color: #f0f8ff;
+        }
+    </style>
 </head>
 <body>
-    <h1>Fishing Forecast</h1>
+
+    <header style="background-color: #2e8b57; color: white; padding: 10px 0; text-align: center;">
+        <h1>Fishing Forecast</h1>
+    </header>
+
     <pre id="forecast"></pre>
 
     <script>
@@ -20,23 +70,24 @@
         });
     </script>
 
-    <h2>Rocky River Buoy</h2>
-    <p><a href="https://limno.io/station/45196" target="_blank">View Rocky River Buoy Data</a></p>
-
-    <h2>Edgewater Buoy</h2>
-    <p><a href="https://limno.io/station/45205" target="_blank">View Edgewater Buoy Data</a></p>
-
-    <h2>Crib Buoy</h2>
-    <p><a href="https://limno.io/station/45176" target="_blank">View Crib Buoy Data</a></p>
+    <div class="buoy-links">
+        <h2>Buoy Data</h2>
+        <p><a href="https://limno.io/station/45196" target="_blank">Rocky River Buoy Data</a></p>
+        <p><a href="https://limno.io/station/45205" target="_blank">Edgewater Buoy Data</a></p>
+        <p><a href="https://limno.io/station/45176" target="_blank">Crib Buoy Data</a></p>
+    </div>
 
     <h2>Crib Cam</h2>
     <iframe width="560" height="315" src="https://www.youtube.com/embed/oo_CcmOMPvk" 
     title="Crib Cam" frameborder="0" 
-    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>\
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
     <h2>Pier W</h2>
     <p><a href="https://www.earthcam.com/usa/ohio/cleveland/?cam=pierw" target="_blank">Open Pier W Cam Feed</a></p>
 
+    <footer>
+        <p>For more forecasts, visit <a href="https://limno.io">Limno.io</a> or <a href="https://earthcam.com">EarthCam</a>.</p>
+    </footer>
 
 </body>
 </html>
