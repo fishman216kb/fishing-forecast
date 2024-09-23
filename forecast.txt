@@ -1,13 +1,12 @@
 Weather Info:
 Avon Point to Willowick OH-
-558 AM EDT Mon Sep 23 2024
+924 AM EDT Mon Sep 23 2024
 
-...SMALL CRAFT ADVISORY IN EFFECT UNTIL 2 PM EDT THIS AFTERNOON...
+...SMALL CRAFT ADVISORY IN EFFECT UNTIL 2 PM EDT...
 
-.TODAY...Northwest winds 15 to 20 knots diminishing to 10 to
-15 knots. A slight chance of showers early. A slight chance of
-showers early this afternoon. Waves 2 to 5 feet subsiding to 1 to
-3 feet. 
+.THIS AFTERNOON...Northwest winds 15 to 20 knots diminishing to
+10 to 15 knots. A slight chance of showers. Waves 2 to 4 feet
+subsiding to 1 to 3 feet. 
 .TONIGHT...North winds 5 to 15 knots becoming east less than
 10 knots. A slight chance of showers in the evening. Waves 2 feet
 or less. 
