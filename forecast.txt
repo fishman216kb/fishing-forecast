@@ -1,12 +1,12 @@
 Weather Info:
 Avon Point to Willowick OH-
 Willowick to Geneva-on-the Lake OH-
-353 AM EDT Tue Sep 24 2024
+918 AM EDT Tue Sep 24 2024
 
-.TODAY...Southeast winds 5 to 15 knots. Showers with a slight
-chance of thunderstorms this morning, then showers with a chance
-of thunderstorms early this afternoon. Showers and thunderstorms
-likely late. Waves 1 foot or less. 
+.REST OF TODAY...Southeast winds 5 to 15 knots. Showers with a
+slight chance of thunderstorms late this morning, then showers
+with a chance of thunderstorms early this afternoon. A chance of
+showers and thunderstorms late. Waves 1 foot or less. 
 .TONIGHT...Southeast winds 15 to 20 knots becoming south. Showers
 and thunderstorms likely in the evening, then a chance of showers
 and thunderstorms overnight. Waves 2 feet or less. 
