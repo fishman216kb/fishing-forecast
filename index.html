@@ -107,15 +107,15 @@
     <script>
         // Fetch discharge data from USGS
         fetch('https://waterservices.usgs.gov/nwis/iv/?format=json&sites=04201500&parameterCd=00060')
-    .then(response => response.json())
-    .then(data => {
+        .then(response => response.json())
+        .then(data => {
         const timeSeries = data.value.timeSeries[0];
         const discharge = timeSeries.values[0].value[0].value; // Correctly accessing the discharge value
         document.getElementById('discharge-value').textContent = `Current discharge value: ${discharge} cubic feet per second (cfs)`;
-    })
-    .catch(error => {
+        })
+        .catch(error => {
         document.getElementById('discharge-value').textContent = "Error loading discharge value.";
-    });
+        });
 
     </script>
 
