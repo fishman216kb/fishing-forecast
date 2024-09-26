@@ -12,7 +12,7 @@ def scrape_weather():
         
         # Save the weather information to a file
         with open('forecast.txt', 'w') as f:
-            f.write(f"Weather Info:\n{weather_info}")
+            f.write(f"{weather_info}")
         
         return weather_info
     else:
