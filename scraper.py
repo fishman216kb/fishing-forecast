@@ -7,7 +7,7 @@ def scrape_weather():
     if response.status_code == 200:
         data = response.text
         start = data.find("Avon Point to Willowick OH")
-        end = data.find("See Lake Erie open lakes forecast", start)
+        end = data.find("$$", start)
         weather_info = data[start:end].strip()
         
         # Save the weather information to a file
