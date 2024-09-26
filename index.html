@@ -71,7 +71,27 @@
         fetch('https://raw.githubusercontent.com/fishman216kb/fishing-forecast/main/forecast.txt')
         .then(response => response.text())
         .then(data => {
-            document.getElementById('forecast').textContent = data;
+            // Split the data into lines
+            const lines = data.split('\n');
+
+            // Array to hold the cleaned lines
+            const cleanedLines = [];
+
+            for (let line of lines) {
+                // Stop capturing once we hit "$$"
+                if (line.includes('$$')) break;
+
+                // Skip lines that start with "See Lake Erie" or "Wind and waves"
+                if (line.toLowerCase().startsWith('see lake erie') || line.toLowerCase().startsWith('wind and waves')) {
+                    continue;
+                }
+
+                // Add remaining lines to cleanedLines array
+                cleanedLines.push(line);
+            }
+
+            // Join the cleaned lines and display in the preformatted text block
+            document.getElementById('forecast').textContent = cleanedLines.join('\n');
         })
         .catch(error => {
             document.getElementById('forecast').textContent = "Error loading forecast.";
