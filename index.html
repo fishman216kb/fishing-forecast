@@ -34,6 +34,7 @@
             width: 90%;
             max-width: 600px;
             margin: 20px auto;
+            white-space: pre-wrap; /* Allow text to wrap properly on small screens */
         }
         a {
             color: #1e90ff;
@@ -55,6 +56,9 @@
             iframe {
                 width: 100%; /* Full width on mobile */
                 height: auto; /* Adjust height automatically */
+            }
+            pre {
+                width: 100%; /* Ensure the forecast text takes full width on mobile */
             }
         }
         .buoy-links, .cam-links {
