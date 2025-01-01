@@ -1,14 +1,14 @@
 Avon Point to Willowick OH-
 Willowick to Geneva-on-the Lake OH-Geneva-on-the-
 Lake to Conneaut OH-
-358 AM EST Wed Jan 1 2025
+931 AM EST Wed Jan 1 2025
 
 ...SMALL CRAFT ADVISORY IN EFFECT THROUGH SUNDAY AFTERNOON...
 
-.TODAY...West winds to 30 knots. Snow and rain showers. Waves
-6 to 9 feet. Waves occasionally around 11 feet. 
-.TONIGHT...West winds to 30 knots. Snow showers likely. Waves
-6 to 10 feet. Waves occasionally around 13 feet. 
+.THIS AFTERNOON...West winds to 30 knots. Snow showers. Waves 6 to
+9 feet. Waves occasionally around 11 feet. 
+.TONIGHT...West winds to 30 knots. Snow showers. Waves 6 to
+10 feet. Waves occasionally around 13 feet. 
 .THURSDAY...West winds 15 to 25 knots. Snow showers. Waves 5 to
 9 feet. Waves occasionally around 11 feet. 
 .THURSDAY NIGHT...West winds 15 to 25 knots. Snow showers likely.
@@ -17,5 +17,5 @@ around 9 feet.
 
 See Lake Erie open lakes forecast for Friday through Sunday.
 
-The water temperature off Toledo is 36 degrees, off Cleveland 39
+The water temperature off Toledo is 38 degrees, off Cleveland 39
 degrees, and off Erie 38 degrees.
