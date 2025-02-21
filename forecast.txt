@@ -1,11 +1,10 @@
 Avon Point to Willowick OH-
 Willowick to Geneva-on-the Lake OH-
-251 AM EST Fri Feb 21 2025
+930 AM EST Fri Feb 21 2025
 
-.TODAY...West winds 5 to 15 knots. A slight chance of snow
-showers this morning. The lake is mostly ice covered.
-.TONIGHT...Southwest winds 5 to 10 knots. Mostly cloudy in the
-evening, then becoming partly cloudy. 
+.REST OF TODAY...West winds 5 to 15 knots. A chance of snow
+showers. The lake is mostly ice covered.
+.TONIGHT...Southwest winds 5 to 10 knots. Mostly cloudy. 
 .SATURDAY...Southwest winds 10 to 15 knots. Mostly sunny. 
 .SATURDAY NIGHT...Southwest winds 10 to 15 knots. Partly cloudy
 in the evening, then becoming mostly cloudy. 
@@ -14,5 +13,5 @@ Waves omitted due to the lake being mostly ice covered.
 
 See Lake Erie open lakes forecast for Sunday through Tuesday.
 
-The water temperature off Toledo is 34 degrees, off Cleveland 33
+The water temperature off Toledo is 33 degrees, off Cleveland 33
 degrees, and off Erie 33 degrees.
