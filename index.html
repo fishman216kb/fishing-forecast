@@ -131,12 +131,13 @@
     </script>
 
     <div class="buoy-links and other info">
+        <!--  tourney leaderboards for fall time
         <h2>Tourney Leaderboards</h2>
         <p><a href="https://lakeeriefallbrawl.com/fb2024/standings-all/" target="_blank">Fall Brawl Leaderboard</a></p>
         <p><a href="https://www.walleyeslam.com/leaderboard" target="_blank">Walleye Slam Leaderboard</a></p>
+        -->
         <br>
         <h2>Buoy Links & Other Info</h2>
-        <p>*** Buoys have been pulled for the winter ***</p>
         <p><a href="https://limno.io/station/45196" target="_blank">Rocky River Buoy Data</a></p>
         <p><a href="https://limno.io/station/45176" target="_blank">Crib Buoy Data</a></p>
         <p><a href="https://limno.io/station/45205" target="_blank">Edgewater Buoy Data</a></p>
@@ -145,7 +146,7 @@
         <br>
         <p><a href="https://www.clevelandmetroparks.com/fishing" target="_blank">Metroparks Fishing Report</a></p>
         <br>
-        <p><a href="https://waterdata.usgs.gov/monitoring-location/04201500/#parameterCode=00060&period=P7D&showMedian=false" target="_blank">Rocky River Flow Gauge</a></p>
+        <p><a href="https://waterdata.usgs.gov/monitoring-location/04201500/#parameterCode=00060&period=P7D&showMedian=false" target="_blank">Rocky River East Branch Flow Gauge</a></p>
         <p id="discharge-value">Loading discharge value...</p> <!-- Placeholder for the discharge value -->
         <br>
     </div>
@@ -165,12 +166,12 @@
 
     <footer>
         <p><a href="mailto:admin@216fishing.com">admin@216fishing.com</a></p>
-        <p>© 216fishing 2024.00103</p>
+        <p>© 216fishing 2024.00104</p>
     </footer>
 
     <script>
         // Fetch discharge data from USGS
-        fetch('https://waterservices.usgs.gov/nwis/iv/?format=json&sites=04201500&parameterCd=00060')
+        fetch('https://waterservices.usgs.gov/nwis/iv/?format=json&sites=04201484&parameterCd=00060')
         .then(response => response.json())
         .then(data => {
         const timeSeries = data.value.timeSeries[0];
