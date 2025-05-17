@@ -2,40 +2,34 @@ import requests
 
 url = "https://tgftp.nws.noaa.gov/data/raw/fz/fzus51.kcle.nsh.cle.txt"
 
-def scrape_lez146_forecast():
+def scrape_weather():
     response = requests.get(url)
-    if response.status_code != 200:
-        print(f"Error: {response.status_code}")
-        return
-
-    text = response.text
-
-    # Identify the start of the LEZ145>148 forecast block
-    start_phrase = "LEZ145>148"
-    start_idx = text.find(start_phrase)
-    if start_idx == -1:
-        print("Could not find LEZ145>148 forecast block.")
-        return
-
-    # Find where the block ends, which is marked by "$$"
-    end_idx = text.find("$$", start_idx)
-    if end_idx == -1:
-        print("Could not find end of forecast block.")
-        return
-
-    # Extract the forecast block and preserve formatting
-    forecast_block = text[start_idx:end_idx].strip()
-
-    # Optionally, add attribution and formatting
-    cleaned_forecast = (
-        f"{forecast_block}\n\nSource: NOAA/National Weather Service"
-    )
-
-    # Save to file
-    with open("forecast.txt", "w") as f:
-        f.write(cleaned_forecast)
-
-    print("Forecast saved successfully.")
+    if response.status_code == 200:
+        data = response.text
+        
+        # Find the start of the section by searching for the specific text snippet
+        start_index = data.find("Avon Point to Willowick OH")
+        if start_index == -1:
+            print("Could not find the forecast section for Avon Point to Willowick OH")
+            return None
+        
+        # Find the end of this section marked by "$$" after the start index
+        end_index = data.find("$$", start_index)
+        if end_index == -1:
+            # Just take till end of file if no $$ found
+            end_index = len(data)
+        
+        forecast_section = data[start_index:end_index].strip()
+        
+        # Save to file
+        with open('forecast.txt', 'w') as f:
+            f.write(forecast_section)
+        
+        print("Forecast section saved to forecast.txt")
+        return forecast_section
+    else:
+        print(f"Error fetching data: HTTP {response.status_code}")
+        return None
 
 if __name__ == "__main__":
-    scrape_lez146_forecast()
+    scrape_weather()
