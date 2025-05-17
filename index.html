@@ -117,26 +117,68 @@
 
     <h2>Nearshore Forecast for Cleveland</h2>
     <pre id="forecast"></pre>
+<p id="attribution" style="font-size: 12px; color: #555; margin-top: 20px;"></p>
 
-  <script>
-    fetch('https://raw.githubusercontent.com/fishman216kb/fishing-forecast/main/forecast.txt')
-    .then(response => response.text())
-    .then(data => {
-        console.log("Fetched forecast data:", data); // Debug output
-        const forecastElement = document.getElementById('forecast');
+<script>
+fetch('https://raw.githubusercontent.com/fishman216kb/fishing-forecast/main/forecast.txt')
+.then(response => response.text())
+.then(data => {
+    // Clean the data a bit: remove empty lines at start and end
+    let lines = data.trim().split('\n');
 
-        // Check if data is non-empty
-        if (data && data.trim().length > 0) {
-            forecastElement.textContent = data;
+    // Extract header info (the first few lines before blank line)
+    let headerLines = [];
+    while(lines.length > 0 && lines[0].trim() !== '') {
+        headerLines.push(lines.shift());
+    }
+    // Remove any empty lines after header
+    while(lines.length > 0 && lines[0].trim() === '') {
+        lines.shift();
+    }
+
+    // Join header to a single block
+    const headerText = headerLines.join(' ');
+
+    // Extract advisory (look for lines starting with "...", e.g. ...SMALL CRAFT ADVISORY...)
+    let advisory = '';
+    if(lines.length > 0 && lines[0].startsWith('...')) {
+        advisory = lines.shift();
+    }
+
+    // Forecast periods start with a dot like ".TONIGHT...", group them into a list
+    const periods = [];
+    let currentPeriod = '';
+    for(let line of lines) {
+        if(line.startsWith('.')) {
+            if(currentPeriod) periods.push(currentPeriod.trim());
+            currentPeriod = line;
         } else {
-            forecastElement.textContent = "No forecast data found.";
+            currentPeriod += ' ' + line.trim();
         }
-    })
-    .catch(error => {
-        console.error("Error loading forecast:", error);
-        document.getElementById('forecast').textContent = "Error loading forecast.";
-    });
+    }
+    if(currentPeriod) periods.push(currentPeriod.trim());
+
+    // Build HTML output
+    let output = `<strong>${headerText}</strong>\n\n`;
+    if(advisory) output += `<em>${advisory}</em>\n\n`;
+    output += periods.map(p => p.replace(/^\./, '')).join('\n\n');
+
+    // Insert formatted forecast into the page
+    document.getElementById('forecast').innerHTML = output.replace(/\n/g, '<br>');
+
+    // Add attribution link below forecast
+    const attributionHtml = `
+        Source: <a href="https://forecast.weather.gov/MapClick.php?zoneid=LEZ146" target="_blank" rel="noopener noreferrer">
+        National Weather Service Cleveland</a>
+    `;
+    document.getElementById('attribution').innerHTML = attributionHtml;
+
+})
+.catch(error => {
+    document.getElementById('forecast').textContent = "Error loading forecast.";
+});
 </script>
+
 
 
 
