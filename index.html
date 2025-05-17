@@ -118,40 +118,26 @@
     <h2>Nearshore Forecast for Cleveland</h2>
     <pre id="forecast"></pre>
 
-   <script>
+  <script>
     fetch('https://raw.githubusercontent.com/fishman216kb/fishing-forecast/main/forecast.txt')
     .then(response => response.text())
     .then(data => {
-        const lines = data.split('\n');
-        const container = document.getElementById('forecast');
+        console.log("Fetched forecast data:", data); // Debug output
+        const forecastElement = document.getElementById('forecast');
 
-        let htmlOutput = '';
-
-        for (let i = 0; i < lines.length; i++) {
-            const line = lines[i].trim();
-
-            // Period headers (e.g., TONIGHT)
-            if (line && /^[A-Z ]+$/.test(line) && !line.startsWith('Source')) {
-                htmlOutput += `<strong>${line}</strong><br>`;
-            }
-            // Wind/Waves
-            else if (line.toLowerCase().startsWith("wind")) {
-                htmlOutput += `🌬️ ${line}<br>`;
-            }
-            else if (line.toLowerCase().startsWith("waves")) {
-                htmlOutput += `🌊 ${line}<br><br>`;
-            }
-            else if (line.toLowerCase().startsWith("source")) {
-                htmlOutput += `<small>${line}</small><br>`;
-            }
+        // Check if data is non-empty
+        if (data && data.trim().length > 0) {
+            forecastElement.textContent = data;
+        } else {
+            forecastElement.textContent = "No forecast data found.";
         }
-
-        container.innerHTML = htmlOutput;
     })
     .catch(error => {
+        console.error("Error loading forecast:", error);
         document.getElementById('forecast').textContent = "Error loading forecast.";
     });
 </script>
+
 
 
     <div class="buoy-links and other info">
