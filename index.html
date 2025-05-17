@@ -63,6 +63,25 @@
             aspect-ratio: 16 / 9; /* Maintain aspect ratio */
         }
 
+         #forecast {
+            font-size: 17px;
+            text-align: left;
+            line-height: 1.8;
+        }
+        
+        #forecast strong {
+            color: #2e8b57;
+            font-size: 18px;
+        }
+        
+        #forecast small {
+            display: block;
+            margin-top: 10px;
+            font-size: 12px;
+            color: #888;
+        }
+
+
         
         /* Media query for mobile screens */
         @media screen and (max-width: 768px) {
@@ -99,36 +118,41 @@
     <h2>Nearshore Forecast for Cleveland</h2>
     <pre id="forecast"></pre>
 
-    <script>
-        fetch('https://raw.githubusercontent.com/fishman216kb/fishing-forecast/main/forecast.txt')
-        .then(response => response.text())
-        .then(data => {
-            // Split the data into lines
-            const lines = data.split('\n');
+   <script>
+    fetch('https://raw.githubusercontent.com/fishman216kb/fishing-forecast/main/forecast.txt')
+    .then(response => response.text())
+    .then(data => {
+        const lines = data.split('\n');
+        const container = document.getElementById('forecast');
 
-            // Array to hold the cleaned lines
-            const cleanedLines = [];
+        let htmlOutput = '';
 
-            for (let line of lines) {
-                // Stop capturing once we hit "$$"
-                if (line.includes('$$')) break;
+        for (let i = 0; i < lines.length; i++) {
+            const line = lines[i].trim();
 
-                // Skip lines that start with "See Lake Erie" or "Wind and waves"
-                if (line.toLowerCase().startsWith('see lake erie') || line.toLowerCase().startsWith('winds and waves')) {
-                    continue;
-                }
-
-                // Add remaining lines to cleanedLines array
-                cleanedLines.push(line);
+            // Period headers (e.g., TONIGHT)
+            if (line && /^[A-Z ]+$/.test(line) && !line.startsWith('Source')) {
+                htmlOutput += `<strong>${line}</strong><br>`;
             }
+            // Wind/Waves
+            else if (line.toLowerCase().startsWith("wind")) {
+                htmlOutput += `🌬️ ${line}<br>`;
+            }
+            else if (line.toLowerCase().startsWith("waves")) {
+                htmlOutput += `🌊 ${line}<br><br>`;
+            }
+            else if (line.toLowerCase().startsWith("source")) {
+                htmlOutput += `<small>${line}</small><br>`;
+            }
+        }
 
-            // Join the cleaned lines and display in the preformatted text block
-            document.getElementById('forecast').textContent = cleanedLines.join('\n');
-        })
-        .catch(error => {
-            document.getElementById('forecast').textContent = "Error loading forecast.";
-        });
-    </script>
+        container.innerHTML = htmlOutput;
+    })
+    .catch(error => {
+        document.getElementById('forecast').textContent = "Error loading forecast.";
+    });
+</script>
+
 
     <div class="buoy-links and other info">
         <!--  tourney leaderboards for fall time
