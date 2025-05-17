@@ -127,46 +127,45 @@
         const cleanedLines = [];
 
         for (let line of lines) {
-            // Stop capturing once we hit "$$"
             if (line.includes('$$')) break;
-
-            // Skip unwanted lines
-            if (line.toLowerCase().startsWith('see lake erie open lakes forecast')) {
-                continue;
-            }
-
+            if (line.toLowerCase().startsWith('see lake erie open lakes forecast')) continue;
             cleanedLines.push(line);
         }
 
-        // Reformat water temperature lines
         let reformattedLines = [];
         for (let line of cleanedLines) {
             if (line.toLowerCase().startsWith('the water temperature')) {
-                const toledoMatch = line.match(/toledo is (\d+ degrees)/i);
-                const clevelandMatch = line.match(/cleveland (\d+ degrees)/i);
-                const erieMatch = line.match(/erie (\d+ degrees)/i);
+                // Extract temps using regex capturing all three temps from the full line
+                // Example line:
+                // The water temperature off Toledo is 65 degrees, off Cleveland 56 degrees, and off Erie 53 degrees.
 
-                reformattedLines.push("Water temps:");
-                if (toledoMatch) reformattedLines.push(`Toledo: ${toledoMatch[1]}`);
-                if (clevelandMatch) reformattedLines.push(`Cleveland: ${clevelandMatch[1]}`);
-                if (erieMatch) reformattedLines.push(`Erie: ${erieMatch[1]}`);
+                const regex = /Toledo is (\d+) degrees, off Cleveland (\d+) degrees, and off Erie (\d+) degrees\./i;
+                const match = line.match(regex);
+
+                if (match) {
+                    reformattedLines.push("Water temps:<br>");
+                    reformattedLines.push(`Toledo: ${match[1]} degrees<br>`);
+                    reformattedLines.push(`Cleveland: ${match[2]} degrees<br>`);
+                    reformattedLines.push(`Erie: ${match[3]} degrees<br>`);
+                } else {
+                    // fallback: just output line if regex fails
+                    reformattedLines.push(line + "<br>");
+                }
             } else {
-                reformattedLines.push(line);
+                reformattedLines.push(line + "<br>");
             }
         }
 
-        // Add attribution line
-        reformattedLines.push("");
-        reformattedLines.push("Source: NOAA / National Weather Service");
-        reformattedLines.push("https://www.weather.gov/cle/");
+        // Add clickable attribution link with small text
+        reformattedLines.push('<br><small>Source: <a href="https://www.weather.gov/cle/" target="_blank" rel="noopener noreferrer">NOAA / National Weather Service</a></small>');
 
-        // Display the result
-        document.getElementById('forecast').textContent = reformattedLines.join('\n');
+        document.getElementById('forecast').innerHTML = reformattedLines.join('');
     })
     .catch(error => {
         document.getElementById('forecast').textContent = "Error loading forecast.";
     });
 </script>
+
 
 
 
