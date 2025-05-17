@@ -1,38 +1,41 @@
 import requests
-import re
 
 url = "https://tgftp.nws.noaa.gov/data/raw/fz/fzus51.kcle.nsh.cle.txt"
 
-def extract_forecast_for_lez146(text):
-    # Define the LEZ146 zone section
-    pattern = r"LEZ145>148-.*?(?=\n\n|\Z)"  # Match from LEZ145>148 to the next double newline
-    match = re.search(pattern, text, re.DOTALL)
-    
-    if not match:
-        return "Could not find forecast for LEZ146."
-    
-    # Extract and clean the section
-    section = match.group(0)
-    
-    # Optionally clean "$$" or trailing metadata
-    section = section.split("$$")[0].strip()
-    return section
-
-def save_forecast():
+def scrape_lez146_forecast():
     response = requests.get(url)
-    if response.status_code == 200:
-        raw_text = response.text
-        forecast = extract_forecast_for_lez146(raw_text)
+    if response.status_code != 200:
+        print(f"Error: {response.status_code}")
+        return
 
-        # Save to file
-        with open('forecast.txt', 'w') as f:
-            f.write(forecast)
+    text = response.text
 
-        print("✅ Forecast extracted and saved.")
-        print("\n--- Forecast Preview ---\n")
-        print(forecast)
-    else:
-        print(f"❌ Error: {response.status_code}")
+    # Identify the start of the LEZ145>148 forecast block
+    start_phrase = "LEZ145>148"
+    start_idx = text.find(start_phrase)
+    if start_idx == -1:
+        print("Could not find LEZ145>148 forecast block.")
+        return
+
+    # Find where the block ends, which is marked by "$$"
+    end_idx = text.find("$$", start_idx)
+    if end_idx == -1:
+        print("Could not find end of forecast block.")
+        return
+
+    # Extract the forecast block and preserve formatting
+    forecast_block = text[start_idx:end_idx].strip()
+
+    # Optionally, add attribution and formatting
+    cleaned_forecast = (
+        f"{forecast_block}\n\nSource: NOAA/National Weather Service"
+    )
+
+    # Save to file
+    with open("forecast.txt", "w") as f:
+        f.write(cleaned_forecast)
+
+    print("Forecast saved successfully.")
 
 if __name__ == "__main__":
-    save_forecast()
+    scrape_lez146_forecast()
