@@ -1,10 +1,11 @@
 import re
 from datetime import datetime
+from zoneinfo import ZoneInfo
 
 with open("forecast.txt", "r") as f:
     raw_text = f.read()
 
-update_time = datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S UTC")
+update_time = datetime.now(ZoneInfo("America/New_York")).strftime("%Y-%m-%d %I:%M:%S %p %Z")
 
 # Extract water temps from the original raw text BEFORE trimming
 temps_match = re.search(
