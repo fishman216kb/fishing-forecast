@@ -49,9 +49,9 @@ for line in lines[start_index:]:
     if re.match(r".*\d{1,2}(:\d{2})? ?(AM|PM)", line):
         html_parts.append(f"{line}<br><br>")
         continue
-    if "ADVISORY" or "GALE" in line:
-        html_parts.append(f"<advisory>{line}</advisory><br><br>")
-        continue
+   # if "ADVISORY" or "GALE" in line:
+       # html_parts.append(f"<advisory>{line}</advisory><br><br>")
+       # continue
     if line.startswith(".") and "..." in line:
         label, _, remainder = line[1:].partition("...")
         html_parts.append(f"""
