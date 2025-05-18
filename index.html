@@ -120,46 +120,18 @@
 <p id="attribution" style="font-size: 12px; color: #555; margin-top: 20px;"></p>
 
 <script>
-fetch('https://raw.githubusercontent.com/fishman216kb/fishing-forecast/main/forecast.txt')
+fetch('https://raw.githubusercontent.com/fishman216kb/fishing-forecast/main/formatted_forecast.txt')
     .then(response => response.text())
     .then(data => {
-        const lines = data.split('\n');
-        const cleanedLines = [];
-
-        for (let line of lines) {
-            if (line.includes('$$')) break;
-            if (line.toLowerCase().startsWith('see lake erie open lakes forecast')) continue;
-            cleanedLines.push(line);
-        }
-
-        let reformattedLines = [];
-        for (let line of cleanedLines) {
-            if (line.toLowerCase().startsWith('the water temperature')) {
-                const regex = /Toledo is (\d+) degrees, off Cleveland (\d+) degrees, and off Erie (\d+) degrees\./i;
-                const match = line.match(regex);
-
-                if (match) {
-                    reformattedLines.push("Water temps:<br>");
-                    reformattedLines.push(`Toledo: ${match[1]} degrees<br>`);
-                    reformattedLines.push(`Cleveland: ${match[2]} degrees<br>`);
-                    reformattedLines.push(`Erie: ${match[3]} degrees<br>`);
-                } else {
-                    reformattedLines.push(line + "<br>");
-                }
-            } else {
-                reformattedLines.push(line + "<br>");
-            }
-        }
-
-        // Add attribution with direct link to NOAA forecast page
-        reformattedLines.push('<br><small>Source: <a href="https://www.ndbc.noaa.gov/data/Forecasts/FZUS51.KCLE.html" target="_blank" rel="noopener noreferrer">NOAA / National Weather Service</a></small>');
-
-        document.getElementById('forecast').innerHTML = reformattedLines.join('');
+        // Replace newlines with <br> for HTML display
+        const htmlFormatted = data.replace(/\n/g, '<br>');
+        document.getElementById('forecast').innerHTML = htmlFormatted;
     })
     .catch(error => {
         document.getElementById('forecast').textContent = "Error loading forecast.";
     });
 </script>
+
 
 
 
