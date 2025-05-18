@@ -1,6 +1,7 @@
 # reformat_forecast.py
 
 import re
+from datetime import datetime
 
 def reformat_forecast(input_file='forecast.txt', output_file='formatted_forecast.txt'):
     with open(input_file, 'r') as f:
@@ -34,22 +35,20 @@ def reformat_forecast(input_file='forecast.txt', output_file='formatted_forecast
 
         reformatted.append(stripped)
 
-    # Add parsed water temps using stricter matching
+    # Add parsed water temps
     if water_temp_line:
         try:
-            cities = ['Toledo', 'Cleveland', 'Erie']
+            # Find each city and the first two-digit number after it
             temps = {}
-
-            for city in cities:
-                # Match city name followed by non-digits, then 1–2 digit number
-                match = re.search(rf'{city}\D+?(\d{{1,2}})', water_temp_line)
+            for city in ['Toledo', 'Cleveland', 'Erie']:
+                match = re.search(rf'{city}.*?(\d{{2}})', water_temp_line)
                 if match:
                     temps[city] = match.group(1)
 
-            if temps:  # <-- This line was missing a colon before
+            if temps:
                 reformatted.append("")
                 reformatted.append("Water temps:")
-                for city in cities:
+                for city in ['Toledo', 'Cleveland', 'Erie']:
                     if city in temps:
                         reformatted.append(f"{city}: {temps[city]}°F")
         except Exception as e:
@@ -60,6 +59,11 @@ def reformat_forecast(input_file='forecast.txt', output_file='formatted_forecast
     reformatted.append("")
     reformatted.append("Source: NOAA / National Weather Service")
     reformatted.append("https://www.ndbc.noaa.gov/data/Forecasts/FZUS51.KCLE.html")
+
+    # Add timestamp of last update
+    now_utc = datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S UTC')
+    reformatted.append("")
+    reformatted.append(f"Last Update: {now_utc}")
 
     # Write to file
     with open(output_file, 'w') as f:
