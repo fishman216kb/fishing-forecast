@@ -2,7 +2,7 @@ import re
 from datetime import datetime
 
 # Load raw forecast text
-with open("raw_forecast.txt", "r") as f:
+with open("forecast.txt", "r") as f:
     raw_text = f.read()
 
 # Extract water temps using simple city + number match
