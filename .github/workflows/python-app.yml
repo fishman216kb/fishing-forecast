@@ -1,4 +1,4 @@
-name: Python Scraper
+name: Python Scraper & Formatter
 
 on:
   push:
@@ -12,15 +12,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout repo
+        uses: actions/checkout@v3
 
-      # Set up Node.js 20
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '20'
 
-      # Set up Python
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
@@ -31,20 +30,18 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Run scraper script
+      - name: Run scraper.py
         run: python scraper.py
 
-      - name: Run forecast reformatter
+      - name: Run reformat_forecast.py
         run: python reformat_forecast.py
 
-           # Commit the formatted forecast file
-      - name: Commit formatted forecast
+      - name: Commit updated forecast files
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-          git add formatted_forecast.txt
-          git commit -m "Update formatted forecast" || echo "No changes to commit"
+          git add forecast.txt formatted_forecast.txt
+          git commit -m "Update forecast and formatted forecast" || echo "No changes to commit"
           git push origin main
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
