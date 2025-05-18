@@ -63,11 +63,15 @@
             aspect-ratio: 16 / 9;
         }
 
-        #forecast {
-            font-size: 17px;
-            text-align: left;
-            line-height: 1.8;
+           #forecast {
+        font-size: 17px;
+        text-align: left;
+        line-height: 1.8;
+        max-width: 100ch;     /* limit to approx 100 characters wide */
+        margin: 0 auto;       /* center the container */
+        padding: 0 10px;      /* optional: add a little side padding for small screens */
         }
+
         
         #forecast strong {
             color: #2e8b57;
