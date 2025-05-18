@@ -55,7 +55,7 @@ for line in lines[start_index:]:
     if line.startswith(".") and "..." in line:
         label, _, remainder = line[1:].partition("...")
         html_parts.append(f"""
-<div class="forecast-period">
+<div class="forecast-period"><br>
   <div class="period-label">{label.strip()}</div>
   <div class="period-text">{remainder.strip()}</div>
 </div>
