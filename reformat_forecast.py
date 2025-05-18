@@ -6,6 +6,21 @@ with open("forecast.txt", "r") as f:
 
 update_time = datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S UTC")
 
+# Extract water temps from the original raw text BEFORE trimming
+temps_match = re.search(
+    r"The water temperature off Toledo is (\d+) degrees, off Cleveland (\d+)\s*degrees, and off Erie (\d+)\s*degrees\.",
+    raw_text
+)
+water_temps_html = ""
+if temps_match:
+    t, c, e = temps_match.groups()
+    water_temps_html = f"""
+<br><strong>Water temps:</strong><br>
+Toledo: {t}°F<br>
+Cleveland: {c}°F<br>
+Erie: {e}°F<br>
+"""
+
 # Cut off everything after the "See Lake Erie open lakes forecast" line
 cutoff_match = re.search(r"See Lake Erie open lakes forecast", raw_text)
 if cutoff_match:
@@ -19,24 +34,20 @@ html_parts = []
 start_index = 0
 for i, line in enumerate(lines):
     if "Avon Point to Willowick OH" in line:
-        # Keep only "Avon Point to Willowick OH-" part and discard remainder of this line
         trimmed_location = "Avon Point to Willowick OH-"
         html_parts.append(f"<strong>{trimmed_location}</strong><br><br>")
-
-        # Skip the next line after this one (so start from i+2)
+        # Skip the next line after this one (start at i+2)
         start_index = i + 2
         break
 
-# Now process lines from start_index onwards
+# Process lines from start_index
 for line in lines[start_index:]:
     line = line.strip()
     if not line:
         continue
-    # Detect timestamp line, just output it
     if re.match(r".*\d{1,2}(:\d{2})? ?(AM|PM)", line):
         html_parts.append(f"{line}<br>")
         continue
-    # Forecast period header
     if line.startswith(".") and "..." in line:
         label, _, remainder = line[1:].partition("...")
         html_parts.append(f"""
@@ -45,27 +56,16 @@ for line in lines[start_index:]:
   <div class="period-text">{remainder.strip()}</div>
 </div>
 """)
-    # Continuation of forecast text
     elif html_parts and 'forecast-period' in html_parts[-1]:
         html_parts[-1] = html_parts[-1].replace(
             '</div>\n</div>', f' {line}</div>\n</div>')
     else:
         html_parts.append(f"{line}<br>")
 
-# Extract and format water temps (from the original raw text)
-temps_match = re.search(
-    r"The water temperature off Toledo is (\d+) degrees, off Cleveland (\d+)\s*degrees, and off Erie (\d+)\s*degrees\.",
-    raw_text
-)
-if temps_match:
-    t, c, e = temps_match.groups()
-    html_parts.append(f"""
-<br><strong>Water temps:</strong><br>
-Toledo: {t}°F<br>
-Cleveland: {c}°F<br>
-Erie: {e}°F<br>
-""")
+# Add back the water temps html block
+html_parts.append(water_temps_html)
 
+# Add last update timestamp
 html_parts.append(f"<br><small>Last Update: {update_time}</small>")
 
 with open("forecast.html", "w") as f:
