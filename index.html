@@ -1,17 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y3GG1723QJ"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-    
       gtag('config', 'G-Y3GG1723QJ');
     </script>
-      
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fishing Forecast</title>
@@ -26,7 +24,6 @@
         }
         h1 {
             color: black;
-            text-align: center;
         }
         h2 {
             color: #4682b4;
@@ -42,9 +39,6 @@
             font-size: 16px;
             display: inline-block;
             text-align: left;
-            width: 90%;
-            max-width: 600px;
-            margin: 20px auto;
             white-space: pre-wrap;
         }
         a {
@@ -63,21 +57,17 @@
             aspect-ratio: 16 / 9;
         }
 
-           #forecast {
-        font-size: 17px;
-        text-align: left;
-        line-height: 1.8;
-        max-width: 100ch;     /* limit to approx 100 characters wide */
-        margin: 0 auto;       /* center the container */
-        padding: 0 10px;      /* optional: add a little side padding for small screens */
+        #forecast {
+            font-size: 17px;
+            text-align: left;
+            line-height: 1.8;
+            max-width: 60ch;
+            margin: 0 auto;
         }
-
-        
         #forecast strong {
             color: #2e8b57;
             font-size: 18px;
         }
-        
         #forecast small {
             display: block;
             margin-top: 10px;
@@ -89,9 +79,6 @@
             iframe {
                 width: 100%;
                 height: auto;
-            }
-            pre {
-                width: 100%;
             }
         }
 
@@ -117,19 +104,32 @@
     <h2>Nearshore Forecast for Cleveland</h2>
     <div id="forecast">Loading forecast...</div>
     <p id="attribution" style="font-size: 12px; color: #555; margin-top: 20px;">
-      Source: <a href="https://tgftp.nws.noaa.gov/data/raw/fz/fzus51.kcle.nsh.cle.txt" target="_blank">NOAA Marine Forecast</a>
+        Source: <a href="https://tgftp.nws.noaa.gov/data/raw/fz/fzus51.kcle.nsh.cle.txt" target="_blank">NOAA Marine Forecast</a>
     </p>
 
-<script>
-fetch('https://raw.githubusercontent.com/fishman216kb/fishing-forecast/main/forecast.html')
-    .then(response => response.text())
-    .then(data => {
-        document.getElementById('forecast').innerHTML = data;
-    })
-    .catch(error => {
-        document.getElementById('forecast').textContent = "Error loading forecast.";
-    });
-</script>
+    <script>
+        fetch('https://raw.githubusercontent.com/fishman216kb/fishing-forecast/main/forecast.html')
+            .then(response => response.text())
+            .then(data => {
+                // Split into lines
+                let lines = data.split('\n');
+
+                // Trim first line after "Willowick OH-"
+                if (lines.length > 0) {
+                    const firstLine = lines[0];
+                    const cutoff = "Willowick OH-";
+                    const index = firstLine.indexOf(cutoff);
+                    if (index !== -1) {
+                        lines[0] = firstLine.slice(0, index + cutoff.length);
+                    }
+                }
+
+                document.getElementById('forecast').innerHTML = lines.join('\n');
+            })
+            .catch(error => {
+                document.getElementById('forecast').textContent = "Error loading forecast.";
+            });
+    </script>
 
     <div class="buoy-links and other info">
         <br>
@@ -167,15 +167,15 @@ fetch('https://raw.githubusercontent.com/fishman216kb/fishing-forecast/main/fore
 
     <script>
         fetch('https://waterservices.usgs.gov/nwis/iv/?format=json&sites=04201484&parameterCd=00060')
-        .then(response => response.json())
-        .then(data => {
-            const timeSeries = data.value.timeSeries[0];
-            const discharge = timeSeries.values[0].value[0].value;
-            document.getElementById('discharge-value').textContent = `Current discharge value: ${discharge} cubic feet per second (cfs)`;
-        })
-        .catch(error => {
-            document.getElementById('discharge-value').textContent = "Error loading discharge value.";
-        });
+            .then(response => response.json())
+            .then(data => {
+                const timeSeries = data.value.timeSeries[0];
+                const discharge = timeSeries.values[0].value[0].value;
+                document.getElementById('discharge-value').textContent = `Current discharge value: ${discharge} cubic feet per second (cfs)`;
+            })
+            .catch(error => {
+                document.getElementById('discharge-value').textContent = "Error loading discharge value.";
+            });
     </script>
 
 </body>
