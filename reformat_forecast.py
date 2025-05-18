@@ -1,81 +1,56 @@
 import re
 from datetime import datetime
 
-def reformat_forecast(input_file='forecast.txt', output_file='formatted_forecast.txt'):
-    with open(input_file, 'r') as f:
-        lines = f.readlines()
+# Load raw forecast text
+with open("raw_forecast.txt", "r") as f:
+    raw_text = f.read()
 
-    reformatted = []
-    water_temp_text = ""
-    forecast_period_regex = re.compile(r'^\.[A-Z]+')
+# Extract water temps using simple city + number match
+temp_matches = re.findall(r"(Toledo|Cleveland|Erie)[^\d]*(\d{2})", raw_text)
+temps = {city: f"{temp}°F" for city, temp in temp_matches}
 
-    # First, join lines so we can extract multi-line water temp text reliably
-    full_text = "".join(lines)
+# Extract forecast body (everything before "The water temperature...")
+forecast_body = raw_text.split("The water temperature")[0].strip()
 
-    # Extract the water temperature sentence from the whole text (greedy match)
-    water_temp_match = re.search(r'The water temperature off.*?degrees\.', full_text, re.DOTALL)
-    if water_temp_match:
-        water_temp_text = water_temp_match.group(0).replace('\n', ' ').strip()
+# Build HTML forecast content
+html_output = []
 
-    for line in lines:
-        stripped = line.strip()
+html_output.append('<section id="forecast">')
 
-        # Preserve blank lines
-        if stripped == "":
-            reformatted.append("")
-            continue
+# Split into lines and convert to semantic blocks
+for line in forecast_body.splitlines():
+    line = line.strip()
+    if line == "":
+        continue
+    if re.match(r"^[\.\.\.]*[A-Z ]+[\.\.\.]*$", line):
+        # Emphasized alert line
+        html_output.append(f'<p><strong>{line}</strong></p>')
+    elif re.match(r"^\.[A-Z ]+\.\.\.", line):
+        # Forecast period
+        html_output.append(f'<h3>{line}</h3>')
+    else:
+        # Regular line
+        html_output.append(f"<p>{line}</p>")
 
-        # Skip open lakes line
-        if stripped.startswith("See Lake Erie open lakes forecast"):
-            continue
+html_output.append("<h4>Water temps:</h4>")
+html_output.append("<ul>")
+for city in ["Toledo", "Cleveland", "Erie"]:
+    if city in temps:
+        html_output.append(f"<li><strong>{city}:</strong> {temps[city]}</li>")
+html_output.append("</ul>")
 
-        # Skip water temperature lines because we add formatted temps later
-        if "The water temperature off" in stripped or "degrees." in stripped:
-            continue
+html_output.append("""
+<p>Source: NOAA / National Weather Service<br>
+<a href="https://tgftp.nws.noaa.gov/data/raw/fz/fzus51.kcle.nsh.cle.txt" target="_blank">
+NOAA Forecast Text Source</a></p>
+""")
 
-        # Add line break before new forecast period lines (e.g., .SUNDAY...)
-        if forecast_period_regex.match(stripped):
-            if reformatted and reformatted[-1] != "":
-                reformatted.append("")
+# Add timestamp
+timestamp = datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S UTC")
+html_output.append(f'<small>Last Update: {timestamp}</small>')
 
-        reformatted.append(stripped)
+html_output.append('</section>')
 
-    # Parse water temps from the combined water_temp_text
-    if water_temp_text:
-        try:
-            # Find each city followed by 1 or 2 digits (whole number temp)
-            temps = {}
-            for city in ['Toledo', 'Cleveland', 'Erie']:
-                pattern = city + r'\D+(\d{1,2})'
-                match = re.search(pattern, water_temp_text)
-                if match:
-                    temps[city] = match.group(1)
-
-            if temps:
-                reformatted.append("")
-                reformatted.append("Water temps:")
-                for city in ['Toledo', 'Cleveland', 'Erie']:
-                    if city in temps:
-                        reformatted.append(f"{city}: {temps[city]}°F")
-        except Exception as e:
-            reformatted.append("⚠️ Error parsing water temperatures.")
-            print("Parsing error:", e)
-
-    # Add source info
-    reformatted.append("")
-    reformatted.append("Source: NOAA / National Weather Service")
-    reformatted.append("https://www.ndbc.noaa.gov/data/Forecasts/FZUS51.KCLE.html")
-
-    # Add timestamp for last update in UTC
-    reformatted.append("")
-    reformatted.append(f"Last Update: {datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S UTC')}")
-
-    # Write output file
-    with open(output_file, 'w') as f:
-        for line in reformatted:
-            f.write(line + '\n')
-
-    print(f"Formatted forecast written to {output_file}")
-
-if __name__ == "__main__":
-    reformat_forecast()
+# Save to file
+with open("forecast.html", "w") as f:
+    f.write("\n".join(html_output))
