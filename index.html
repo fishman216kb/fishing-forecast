@@ -45,7 +45,7 @@
             width: 90%;
             max-width: 600px;
             margin: 20px auto;
-            white-space: pre-wrap; /* Allow text to wrap properly on small screens */
+            white-space: pre-wrap;
         }
         a {
             color: #1e90ff;
@@ -58,12 +58,12 @@
             display: block;
             margin: 20px auto;
             width: 100%;
-            max-width: 960px; /* Larger width for desktop */
+            max-width: 960px;
             height: auto;
-            aspect-ratio: 16 / 9; /* Maintain aspect ratio */
+            aspect-ratio: 16 / 9;
         }
 
-         #forecast {
+        #forecast {
             font-size: 17px;
             text-align: left;
             line-height: 1.8;
@@ -81,25 +81,20 @@
             color: #888;
         }
 
-
-        
-        /* Media query for mobile screens */
         @media screen and (max-width: 768px) {
             iframe {
-                width: 100%; /* Full width on mobile */
-                height: auto; /* Adjust height automatically */
+                width: 100%;
+                height: auto;
             }
             pre {
-                width: 100%; /* Ensure the forecast text takes full width on mobile */
+                width: 100%;
             }
         }
 
-        
         .buoy-links, .cam-links {
             margin-bottom: 40px;
         } 
 
-        
         footer {
             text-align: center;
             margin-top: 40px;
@@ -116,18 +111,16 @@
     </header>
 
     <h2>Nearshore Forecast for Cleveland</h2>
-    <pre id="forecast"></pre>
+    <div id="forecast">Loading forecast...</div>
     <p id="attribution" style="font-size: 12px; color: #555; margin-top: 20px;">
       Source: <a href="https://tgftp.nws.noaa.gov/data/raw/fz/fzus51.kcle.nsh.cle.txt" target="_blank">NOAA Marine Forecast</a>
     </p>
 
 <script>
-fetch('https://raw.githubusercontent.com/fishman216kb/fishing-forecast/main/formatted_forecast.txt')
+fetch('https://raw.githubusercontent.com/fishman216kb/fishing-forecast/main/forecast.html')
     .then(response => response.text())
     .then(data => {
-        // Replace newlines with <br> for HTML display
-        const htmlFormatted = data.replace(/\n/g, '<br>');
-        document.getElementById('forecast').innerHTML = htmlFormatted;
+        document.getElementById('forecast').innerHTML = data;
     })
     .catch(error => {
         document.getElementById('forecast').textContent = "Error loading forecast.";
@@ -135,11 +128,6 @@ fetch('https://raw.githubusercontent.com/fishman216kb/fishing-forecast/main/form
 </script>
 
     <div class="buoy-links and other info">
-        <!--  tourney leaderboards for fall time
-        <h2>Tourney Leaderboards</h2>
-        <p><a href="https://lakeeriefallbrawl.com/fb2024/standings-all/" target="_blank">Fall Brawl Leaderboard</a></p>
-        <p><a href="https://www.walleyeslam.com/leaderboard" target="_blank">Walleye Slam Leaderboard</a></p>
-        -->
         <br>
         <h2>Buoy Links & Other Info</h2>
         <p><a href="https://limno.io/station/45196" target="_blank">Rocky River Buoy Data</a></p>
@@ -151,7 +139,7 @@ fetch('https://raw.githubusercontent.com/fishman216kb/fishing-forecast/main/form
         <p><a href="https://www.clevelandmetroparks.com/fishing" target="_blank">Metroparks Fishing Report</a></p>
         <br>
         <p><a href="https://waterdata.usgs.gov/monitoring-location/04201500/#parameterCode=00060&period=P7D&showMedian=false" target="_blank">Rocky River East Branch Flow Gauge</a></p>
-        <p id="discharge-value">Loading discharge value...</p> <!-- Placeholder for the discharge value -->
+        <p id="discharge-value">Loading discharge value...</p>
         <br>
     </div>
 
@@ -174,18 +162,16 @@ fetch('https://raw.githubusercontent.com/fishman216kb/fishing-forecast/main/form
     </footer>
 
     <script>
-        // Fetch discharge data from USGS
         fetch('https://waterservices.usgs.gov/nwis/iv/?format=json&sites=04201484&parameterCd=00060')
         .then(response => response.json())
         .then(data => {
-        const timeSeries = data.value.timeSeries[0];
-        const discharge = timeSeries.values[0].value[0].value; // Correctly accessing the discharge value
-        document.getElementById('discharge-value').textContent = `Current discharge value: ${discharge} cubic feet per second (cfs)`;
+            const timeSeries = data.value.timeSeries[0];
+            const discharge = timeSeries.values[0].value[0].value;
+            document.getElementById('discharge-value').textContent = `Current discharge value: ${discharge} cubic feet per second (cfs)`;
         })
         .catch(error => {
-        document.getElementById('discharge-value').textContent = "Error loading discharge value.";
+            document.getElementById('discharge-value').textContent = "Error loading discharge value.";
         });
-
     </script>
 
 </body>
