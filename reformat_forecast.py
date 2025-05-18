@@ -47,9 +47,12 @@ for line in lines[start_index:]:
     if not line:
         continue
     if re.match(r".*\d{1,2}(:\d{2})? ?(AM|PM)", line):
-        html_parts.append(f"{line}<br>")
+        html_parts.append(f"{line}<br><br>")
         continue
-    if line.startswith(".") and "..." in line:
+    if "ADVISORY" in line:
+        html_parts.append(f"{line}<br><br>")
+        continue
+    if line.startswith(".[A-Z]") and "..." in line:
         label, _, remainder = line[1:].partition("...")
         html_parts.append(f"""
 <div class="forecast-period">
