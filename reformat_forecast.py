@@ -1,56 +1,54 @@
 import re
 from datetime import datetime
 
-# Load raw forecast text
 with open("forecast.txt", "r") as f:
     raw_text = f.read()
 
-# Extract water temps using simple city + number match
-temp_matches = re.findall(r"(Toledo|Cleveland|Erie)[^\d]*(\d{2})", raw_text)
-temps = {city: f"{temp}°F" for city, temp in temp_matches}
+# Extract the update timestamp
+update_time = datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S UTC")
 
-# Extract forecast body (everything before "The water temperature...")
-forecast_body = raw_text.split("The water temperature")[0].strip()
+# Remove attribution section (starting with "Source:")
+raw_text = re.sub(r"\nSource:.*", "", raw_text, flags=re.DOTALL)
 
-# Build HTML forecast content
-html_output = []
+# Normalize line endings and split into lines
+lines = raw_text.strip().splitlines()
 
-html_output.append('<section id="forecast">')
+# Initialize output HTML parts
+html_parts = []
 
-# Split into lines and convert to semantic blocks
-for line in forecast_body.splitlines():
+# Add the header line (zone)
+html_parts.append(f"<strong>{lines[0]}</strong><br><br>")
+
+# Format each line
+in_forecast_section = False
+for line in lines[1:]:
     line = line.strip()
-    if line == "":
+    if not line:
         continue
-    if re.match(r"^[\.\.\.]*[A-Z ]+[\.\.\.]*$", line):
-        # Emphasized alert line
-        html_output.append(f'<p><strong>{line}</strong></p>')
-    elif re.match(r"^\.[A-Z ]+\.\.\.", line):
-        # Forecast period
-        html_output.append(f'<h3>{line}</h3>')
+    if re.match(r"^\.[A-Z ]+\.\.\.", line):
+        html_parts.append(f"<br><strong>{line[1:]}</strong><br>")
+        in_forecast_section = True
+    elif in_forecast_section and line.startswith("."):
+        html_parts.append(f"<br><strong>{line[1:]}</strong><br>")
     else:
-        # Regular line
-        html_output.append(f"<p>{line}</p>")
+        html_parts.append(f"{line}<br>")
 
-html_output.append("<h4>Water temps:</h4>")
-html_output.append("<ul>")
-for city in ["Toledo", "Cleveland", "Erie"]:
-    if city in temps:
-        html_output.append(f"<li><strong>{city}:</strong> {temps[city]}</li>")
-html_output.append("</ul>")
+# Extract temperatures
+temps_match = re.search(
+    r"The water temperature off Toledo is (\d+) degrees, off Cleveland (\d+)\s*degrees, and off Erie (\d+)\s*degrees\.",
+    raw_text
+)
+if temps_match:
+    toledo_temp, cleveland_temp, erie_temp = temps_match.groups()
+    html_parts.append(f"<br><strong>Water temps:</strong><br>")
+    html_parts.append(f"Toledo: {toledo_temp}°F<br>")
+    html_parts.append(f"Cleveland: {cleveland_temp}°F<br>")
+    html_parts.append(f"Erie: {erie_temp}°F<br>")
 
-html_output.append("""
-<p>Source: NOAA / National Weather Service<br>
-<a href="https://tgftp.nws.noaa.gov/data/raw/fz/fzus51.kcle.nsh.cle.txt" target="_blank">
-NOAA Forecast Text Source</a></p>
-""")
+# Add update time
+html_parts.append(f"<br><small>Last Update: {update_time}</small>")
 
-# Add timestamp
-timestamp = datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S UTC")
-html_output.append(f'<small>Last Update: {timestamp}</small>')
-
-html_output.append('</section>')
-
-# Save to file
+# Combine and save
+final_html = "\n".join(html_parts)
 with open("forecast.html", "w") as f:
-    f.write("\n".join(html_output))
+    f.write(final_html)
