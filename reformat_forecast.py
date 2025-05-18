@@ -49,7 +49,7 @@ for line in lines[start_index:]:
     if re.match(r".*\d{1,2}(:\d{2})? ?(AM|PM)", line):
         html_parts.append(f"{line}<br><br>")
         continue
-    if "ADVISORY" in line.upper:
+    if "ADVISORY" in line.upper():
         html_parts.append(f"<advisory>{line}</advisory><br><br>")
         continue
     if line.startswith(".") and "..." in line:
