@@ -4,51 +4,62 @@ from datetime import datetime
 with open("forecast.txt", "r") as f:
     raw_text = f.read()
 
-# Extract the update timestamp
 update_time = datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S UTC")
 
-# Remove attribution section (starting with "Source:")
+# Remove attribution
 raw_text = re.sub(r"\nSource:.*", "", raw_text, flags=re.DOTALL)
 
-# Normalize line endings and split into lines
 lines = raw_text.strip().splitlines()
-
-# Initialize output HTML parts
 html_parts = []
 
-# Add the header line (zone)
+# Header
 html_parts.append(f"<strong>{lines[0]}</strong><br><br>")
+zone_done = False
 
-# Format each line
-in_forecast_section = False
+# Process body
 for line in lines[1:]:
     line = line.strip()
     if not line:
         continue
-    if re.match(r"^\.[A-Z ]+\.\.\.", line):
-        html_parts.append(f"<br><strong>{line[1:]}</strong><br>")
-        in_forecast_section = True
-    elif in_forecast_section and line.startswith("."):
-        html_parts.append(f"<br><strong>{line[1:]}</strong><br>")
+
+    # Additional zones
+    if not zone_done and re.match(r".*\d+ (AM|PM)", line):
+        html_parts.append(line + "<br>")
+        zone_done = True
+        continue
+
+    # Forecast period header
+    if line.startswith(".") and "..." in line:
+        label, _, remainder = line[1:].partition("...")
+        html_parts.append(f"""
+<div class="forecast-period">
+  <div class="period-label">{label.strip()}</div>
+  <div class="period-text">{remainder.strip()}</div>
+</div>
+        """)
+    # Continuation of forecast text
+    elif html_parts and 'forecast-period' in html_parts[-1]:
+        # Append to previous forecast-text line
+        html_parts[-1] = html_parts[-1].replace(
+            '</div>\n</div>', f' {line}</div>\n</div>')
     else:
         html_parts.append(f"{line}<br>")
 
-# Extract temperatures
+# Extract and format water temps
 temps_match = re.search(
     r"The water temperature off Toledo is (\d+) degrees, off Cleveland (\d+)\s*degrees, and off Erie (\d+)\s*degrees\.",
     raw_text
 )
 if temps_match:
-    toledo_temp, cleveland_temp, erie_temp = temps_match.groups()
-    html_parts.append(f"<br><strong>Water temps:</strong><br>")
-    html_parts.append(f"Toledo: {toledo_temp}°F<br>")
-    html_parts.append(f"Cleveland: {cleveland_temp}°F<br>")
-    html_parts.append(f"Erie: {erie_temp}°F<br>")
+    t, c, e = temps_match.groups()
+    html_parts.append(f"""
+<br><strong>Water temps:</strong><br>
+Toledo: {t}°F<br>
+Cleveland: {c}°F<br>
+Erie: {e}°F<br>
+    """)
 
-# Add update time
 html_parts.append(f"<br><small>Last Update: {update_time}</small>")
 
-# Combine and save
-final_html = "\n".join(html_parts)
 with open("forecast.html", "w") as f:
-    f.write(final_html)
+    f.write("\n".join(html_parts))
