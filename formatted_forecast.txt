@@ -20,13 +20,13 @@ Mostly cloudy in the evening, then becoming partly cloudy. Waves
 or less.
 
 
-degrees, and off Erie 53 degrees.
 
 Water temps:
 Toledo: 65°F
 Cleveland: 56°F
+Erie: 53°F
 
 Source: NOAA / National Weather Service
 https://www.ndbc.noaa.gov/data/Forecasts/FZUS51.KCLE.html
 
-Last Update: 2025-05-18 02:53:14 UTC
+Last Update: 2025-05-18 02:57:21 UTC
