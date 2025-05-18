@@ -23,7 +23,7 @@ def reformat_forecast(input_file='forecast.txt', output_file='formatted_forecast
             continue
 
         # Capture water temp line
-        if stripped.startswith("The water temperature off"):
+        if "The water temperature off" in stripped:
             water_temp_line = stripped
             continue
 
@@ -37,17 +37,16 @@ def reformat_forecast(input_file='forecast.txt', output_file='formatted_forecast
     # Add parsed water temps
     if water_temp_line:
         try:
-            temps = {}
-            # Match patterns like: off Toledo is 65, off Cleveland 56, off Erie 53
+            # Match "off [City] [optional is] [temp] degrees"
             matches = re.findall(r'off (\w+)(?: is)? (\d+)', water_temp_line)
-            for city, temp in matches:
-                temps[city] = temp
+            temps = {city: temp for city, temp in matches}
 
-            reformatted.append("")
-            reformatted.append("Water temps:")
-            for city in ['Toledo', 'Cleveland', 'Erie']:
-                if city in temps:
-                    reformatted.append(f"{city}: {temps[city]}°F")
+            if temps:
+                reformatted.append("")
+                reformatted.append("Water temps:")
+                for city in ['Toledo', 'Cleveland', 'Erie']:
+                    if city in temps:
+                        reformatted.append(f"{city}: {temps[city]}°F")
         except Exception as e:
             reformatted.append("⚠️ Error parsing water temperatures.")
             print("Parsing error:", e)
