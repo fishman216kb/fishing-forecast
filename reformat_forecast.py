@@ -50,7 +50,7 @@ for line in lines[start_index:]:
         html_parts.append(f"{line}<br><br>")
         continue
     if "ADVISORY" in line:
-        html_parts.append(f"{line}<br><br>")
+        html_parts.append(f"<advisory>{line}</advisory><br><br>")
         continue
     if line.startswith(".") and "..." in line:
         label, _, remainder = line[1:].partition("...")
