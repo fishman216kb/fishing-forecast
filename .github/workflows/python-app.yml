@@ -37,13 +37,14 @@ jobs:
       - name: Run forecast reformatter
         run: python reformat_forecast.py
 
-      # Commit the output file (forecast.txt) to the repository
-      - name: Commit forecast.txt
+           # Commit the formatted forecast file
+      - name: Commit formatted forecast
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-          git add forecast.txt
-          git commit -m "Update forecast data" || echo "No changes to commit"
+          git add formatted_forecast.txt
+          git commit -m "Update formatted forecast" || echo "No changes to commit"
           git push origin main
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
