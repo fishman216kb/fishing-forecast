@@ -31,8 +31,11 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Run Python script
+      - name: Run scraper script
         run: python scraper.py
+
+      - name: Run forecast reformatter
+        run: python reformat_forecast.py
 
       # Commit the output file (forecast.txt) to the repository
       - name: Commit forecast.txt
