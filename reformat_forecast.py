@@ -56,7 +56,7 @@ for line in lines[start_index:]:
         label, _, remainder = line[1:].partition("...")
         html_parts.append(f"""
 <div class="forecast-period">
-  <div class="period-label"><br><dayheader>{label.strip()</dayheader>}</div>
+  <div class="period-label"><br><dayheader>{label.strip()}</dayheader></div>
   <div class="period-text">{remainder.strip()}</div>
 </div>
 """)
