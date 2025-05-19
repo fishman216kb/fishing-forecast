@@ -70,9 +70,9 @@ for line in lines[start_index:]:
 html_parts.append(water_temps_html)
 
 # Add last update timestamp
-html_parts.append(f"<br><small>Last Update: {update_time} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+html_parts.append(f"<br><small>Last Update: {update_time}" &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    Source: <a href="https://tgftp.nws.noaa.gov/data/raw/fz/fzus51.kcle.nsh.cle.txt" target="_blank">NOAA Marine Forecast</a></small>")
+    Source: <a href="https://tgftp.nws.noaa.gov/data/raw/fz/fzus51.kcle.nsh.cle.txt" target="_blank">NOAA Marine Forecast</a></small>)
 
 with open("forecast.html", "w") as f:
     f.write("\n".join(html_parts))
