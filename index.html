@@ -132,22 +132,17 @@
     </header>
 
     <h2>Nearshore Forecast for Cleveland</h2>
-    <div id="forecast">Loading forecast...</div>
+
+    
+    <div id="forecast" style="border: 1px solid #ccc; padding: 20px; margin: 20px 0;">
+        Loading forecast...
+    </div>
 
 
-    <script>
-    fetch('https://raw.githubusercontent.com/fishman216kb/fishing-forecast/main/forecast.html')
-        .then(response => response.text())
-        .then(data => {
-            document.getElementById('forecast').innerHTML = data;
-        })
-        .catch(error => {
-            document.getElementById('forecast').textContent = "Error loading forecast.";
-        });
-    </script>
+   
 
     <div class="buoy-links and other info">
-        <h2>Buoy Links & Other Info</h2>
+        <br><h2>Buoy Links & Other Info</h2>
         <p><a href="https://limno.io/station/45196" target="_blank">Rocky River Buoy Data</a></p>
         <p><a href="https://limno.io/station/45176" target="_blank">Crib Buoy Data</a></p>
         <p><a href="https://limno.io/station/45205" target="_blank">Edgewater Buoy Data</a></p>
@@ -177,6 +172,24 @@
         <p><a href="mailto:admin@216fishing.com">admin@216fishing.com</a></p>
         <p>© 216fishing 2025.00105</p>
     </footer>
+
+
+    
+
+     <script>
+         // fetch html formatted marine forecast
+    fetch('https://raw.githubusercontent.com/fishman216kb/fishing-forecast/main/forecast.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('forecast').innerHTML = data;
+        })
+        .catch(error => {
+            document.getElementById('forecast').textContent = "Error loading forecast.";
+        });
+    </script>
+
+
+    
 
     <script>
         // Fetch discharge data from USGS
