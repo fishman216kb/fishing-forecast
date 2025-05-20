@@ -50,15 +50,15 @@ for line in lines[start_index:]:
         html_parts.append(f"{line}<br>")
         continue
     if line.startswith("..."):
-        html_parts.append(f"<advisory>{line}</advisory><br><br>")
+        html_parts.append(f"<br><advisory>{line}</advisory><br>")
         continue
     if line.startswith(".") and "..." in line:
         label, _, remainder = line[1:].partition("...")
         html_parts.append(f"""
 <div class="forecast-period">
+  <br>
   <div class="period-label"><dayheader>{label.strip()}</dayheader></div>
   <div class="period-text">{remainder.strip()}</div>
-  <br>
 </div>
 """)
     elif html_parts and 'forecast-period' in html_parts[-1]:
