@@ -41,7 +41,7 @@ for i, line in enumerate(lines):
         # Look ahead for the timestamp line
         for j in range(i + 1, i + 4):  # Check the next few lines
             if j < len(lines) and re.match(r".*\d{1,2}(:\d{2})? ?(AM|PM)", lines[j]):
-                html_parts.append(f"{lines[j]}<br><br>")  # Add timestamp with extra spacing
+                html_parts.append(f"{lines[j]}<br>")  # Add timestamp with extra spacing
                 start_index = j + 1  # Start after timestamp
                 break
         break
