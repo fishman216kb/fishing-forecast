@@ -36,7 +36,7 @@ start_index = 0
 for i, line in enumerate(lines):
     if "Avon Point to Willowick OH" in line:
         trimmed_location = "Avon Point to Willowick OH-"
-        html_parts.append(f"<strong>{trimmed_location}</strong><br><br>")
+        html_parts.append(f"<strong>{trimmed_location}</strong><br>")
         # Skip the next line after this one (start at i+2)
         start_index = i + 2
         break
@@ -47,7 +47,7 @@ for line in lines[start_index:]:
     if not line:
         continue
     if re.match(r".*\d{1,2}(:\d{2})? ?(AM|PM)", line):
-        html_parts.append(f"{line}<br><br>")
+        html_parts.append(f"{line}<br>")
         continue
     if line.startswith("..."):
         html_parts.append(f"<advisory>{line}</advisory><br><br>")
