@@ -32,22 +32,24 @@ lines = raw_text.strip().splitlines()
 html_parts = []
 
 # Find and trim the location line
-start_index = 0
+start_index = 0  # Default fallback if not found
+
 for i, line in enumerate(lines):
     if "Avon Point to Willowick OH" in line:
         trimmed_location = "Avon Point to Willowick OH-"
-        html_parts.append(f"<strong>{trimmed_location}</strong><br>")
-        # Skip the next line after this one (start at i+2)
-        start_index = i + 2
+        html_parts.append(f"<strong>{trimmed_location}</strong><br><br>")
+        # Look ahead for the timestamp line
+        for j in range(i + 1, i + 4):  # Check the next few lines
+            if j < len(lines) and re.match(r".*\d{1,2}(:\d{2})? ?(AM|PM)", lines[j]):
+                html_parts.append(f"{lines[j]}<br><br>")  # Add timestamp with extra spacing
+                start_index = j + 1  # Start after timestamp
+                break
         break
 
 # Process lines from start_index
 for line in lines[start_index:]:
     line = line.strip()
     if not line:
-        continue
-    if re.match(r".*\d{1,2}(:\d{2})? ?(AM|PM)", line):
-        html_parts.append(f"{line}<br>")
         continue
     if line.startswith("..."):
         html_parts.append(f"<br><advisory>{line}</advisory><br>")
