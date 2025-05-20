@@ -72,8 +72,8 @@ html_parts.append(water_temps_html)
 
 # Add last update timestamp
 html_parts.append(
-    f'<br><small>Last Update: {update_time}{"&nbsp;" * 20}Source: '
-    '<a href="https://tgftp.nws.noaa.gov/data/raw/fz/fzus51.kcle.nsh.cle.txt" target="_blank">NOAA Marine Forecast</a></small>'
+    f'<small>Last Update: {update_time}<br>
+    Source: '    '<a href="https://tgftp.nws.noaa.gov/data/raw/fz/fzus51.kcle.nsh.cle.txt" target="_blank">NOAA Marine Forecast</a></small>'
 )
 
 
