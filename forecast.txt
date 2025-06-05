@@ -1,12 +1,13 @@
 Avon Point to Willowick OH-Willowick to Geneva-on-the Lake OH-
-343 AM EDT Thu Jun 5 2025
+945 AM EDT Thu Jun 5 2025
 
-.TODAY...East winds 5 to 10 knots becoming northeast. A chance of
-showers with a slight chance of thunderstorms this morning, then
-showers likely with a chance of thunderstorms this afternoon.
-Waves 1 foot or less. 
+.REST OF TODAY...Northeast winds 5 to 10 knots. A chance of
+showers and thunderstorms late this morning, then showers likely
+with a chance of thunderstorms early this afternoon. A chance of
+showers and thunderstorms late. Waves 1 foot or less. 
 .TONIGHT...Northeast winds 5 to 10 knots. A chance of showers and
-thunderstorms. Waves 2 feet or less. 
+thunderstorms in the evening, then a chance of showers with a
+slight chance of thunderstorms overnight. Waves 2 feet or less. 
 .FRIDAY...Northeast winds 5 to 10 knots. A chance of showers.
 Waves 2 feet or less. 
 .FRIDAY NIGHT...North winds 5 to 10 knots. A chance of showers.
@@ -16,5 +17,5 @@ Winds and waves higher in and near thunderstorms.
 
 See Lake Erie open lakes forecast for Saturday through Monday.
 
-The water temperature off Toledo is 63 degrees, off Cleveland 59
-degrees, and off Erie 59 degrees.
+The water temperature off Toledo is 65 degrees, off Cleveland 60
+degrees, and off Erie 61 degrees.
