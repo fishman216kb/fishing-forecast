@@ -76,17 +76,14 @@ for line in lines[start_index:]:
 
     # Detect start of forecast period (e.g., .TONIGHT... or .FRIDAY...)
     if line.startswith(".") and "..." in line:
-        # Close previous period if still open
-        if in_forecast_period:
-            html_parts[-1] += "</div>\n</div>"
-            in_forecast_period = False
-
+        html_parts[-1] += "</div>\n</div>"
+        in_forecast_period = False
         label, _, remainder = line[1:].partition("...")
         html_parts.append(f"""
-<div class="forecast-period">
-  <br>
-  <div class="period-label"><dayheader>{label.strip()}</dayheader></div>
-  <div class="period-text">{remainder.strip()}""")  # Open period-text div
+            <div class="forecast-period">
+              <br>
+              <div class="period-label"><dayheader>{label.strip()}</dayheader></div>
+              <div class="period-text">{remainder.strip()}""")  # Open period-text div
         in_forecast_period = True
         continue
 
