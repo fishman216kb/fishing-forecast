@@ -47,27 +47,47 @@ for i, line in enumerate(lines):
         break
 
 # Process lines from start_index
+advisory_text = ""
+collecting_advisory = False
+
 for line in lines[start_index:]:
     line = line.strip()
     if not line:
         continue
-    if line.startswith("...") or line.endswith("..."):
-        html_parts.append(f"<br><advisory>{line}</advisory><br>")
+
+    # Start collecting advisory text
+    if line.startswith("...") and not collecting_advisory:
+        collecting_advisory = True
+        advisory_text += line + " "
         continue
+
+    # Continue collecting advisory text if already started
+    if collecting_advisory:
+        advisory_text += line + " "
+        if line.endswith("..."):
+            # Advisory ends here
+            collecting_advisory = False
+            advisory_text = advisory_text.strip()  # Clean trailing space
+            html_parts.append(f"<br><advisory>{advisory_text}</advisory><br>")
+            advisory_text = ""  # Reset for possible next advisory
+        continue  # Skip further processing for these lines
+
+    # Regular forecast period parsing
     if line.startswith(".") and "..." in line:
         label, _, remainder = line[1:].partition("...")
         html_parts.append(f"""
-<div class="forecast-period">
-  <br>
-  <div class="period-label"><dayheader>{label.strip()}</dayheader></div>
-  <div class="period-text">{remainder.strip()}</div>
-</div>
-""")
+            <div class="forecast-period">
+              <br>
+              <div class="period-label"><dayheader>{label.strip()}</dayheader></div>
+              <div class="period-text">{remainder.strip()}</div>
+            </div>
+            """)
     elif html_parts and 'forecast-period' in html_parts[-1]:
         html_parts[-1] = html_parts[-1].replace(
             '</div>\n</div>', f' {line}</div>\n</div>')
     else:
         html_parts.append(f"{line}<br>")
+
 
 # Add back the water temps html block
 html_parts.append(water_temps_html)
