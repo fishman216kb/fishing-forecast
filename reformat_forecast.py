@@ -72,16 +72,15 @@ for line in lines[start_index:]:
             advisory_text = ""  # Reset for possible next advisory
         continue  # Skip further processing for these lines
 
-    # Regular forecast period parsing
     if line.startswith(".") and "..." in line:
         label, _, remainder = line[1:].partition("...")
         html_parts.append(f"""
-            <div class="forecast-period">
-              <br>
-              <div class="period-label"><dayheader>{label.strip()}</dayheader></div>
-              <div class="period-text">{remainder.strip()}</div>
-            </div>
-            """)
+<div class="forecast-period">
+  <br>
+  <div class="period-label"><dayheader>{label.strip()}</dayheader></div>
+  <div class="period-text">{remainder.strip()}</div>
+</div>
+""")
     elif html_parts and 'forecast-period' in html_parts[-1]:
         html_parts[-1] = html_parts[-1].replace(
             '</div>\n</div>', f' {line}</div>\n</div>')
