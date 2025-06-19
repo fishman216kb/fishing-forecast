@@ -51,7 +51,7 @@ for line in lines[start_index:]:
     line = line.strip()
     if not line:
         continue
-    if line.startswith("..."):
+    if line.startswith("...") or line.endswith("..."):
         html_parts.append(f"<br><advisory>{line}</advisory><br>")
         continue
     if line.startswith(".") and "..." in line:
