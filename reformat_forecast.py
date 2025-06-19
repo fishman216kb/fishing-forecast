@@ -50,43 +50,64 @@ for i, line in enumerate(lines):
 # Process lines from start_index
 advisory_text = ""
 collecting_advisory = False
+in_forecast_period = False
 
 for line in lines[start_index:]:
     line = line.strip()
     if not line:
         continue
 
-    # Start collecting advisory text
+    # Start collecting advisory text (multi-line advisory)
     if line.startswith("...") and not collecting_advisory:
         collecting_advisory = True
         advisory_text += line + " "
         continue
 
-    # Continue collecting advisory text if already started
+    # Continue collecting advisory text
     if collecting_advisory:
         advisory_text += line + " "
         if line.endswith("..."):
-            # Advisory ends here
             collecting_advisory = False
-            advisory_text = advisory_text.strip()  # Clean trailing space
+            advisory_text = advisory_text.strip()
             html_parts.append(f"<br><advisory>{advisory_text}</advisory><br>")
-            advisory_text = ""  # Reset for possible next advisory
-        continue  # Skip further processing for these lines
+            advisory_text = ""
+        continue  # Skip further parsing for advisory lines
 
+    # Detect start of a forecast period
     if line.startswith(".") and "..." in line:
         label, _, remainder = line[1:].partition("...")
         html_parts.append(f"""
 <div class="forecast-period">
   <br>
   <div class="period-label"><dayheader>{label.strip()}</dayheader></div>
-  <div class="period-text">{remainder.strip()}</div>
-</div>
-""")
-    elif html_parts and 'forecast-period' in html_parts[-1]:
-        html_parts[-1] = html_parts[-1].replace(
-            '</div>\n</div>', f' {line}</div>\n</div>')
-    else:
-        html_parts.append(f"{line}<br>")
+  <div class="period-text">{remainder.strip()}""")  # OPEN div-text, no closing yet
+        in_forecast_period = True
+        continue
+
+    # If inside forecast period, continue appending text
+    if in_forecast_period:
+        # Close period if this line is the end (next period or nothing)
+        if line.startswith(".") and "..." in line:
+            # Close previous forecast period properly before handling new one
+            html_parts[-1] += "</div>\n</div>"
+            label, _, remainder = line[1:].partition("...")
+            html_parts.append(f"""
+<div class="forecast-period">
+  <br>
+  <div class="period-label"><dayheader>{label.strip()}</dayheader></div>
+  <div class="period-text">{remainder.strip()}""")  # NEW period
+        else:
+            html_parts[-1] += ' ' + line  # Continue adding to period text
+        continue
+
+    # If the forecast period ended and no new one starts
+    if in_forecast_period:
+        html_parts[-1] += "</div>\n</div>"
+        in_forecast_period = False
+
+    # If none of the above, regular line (or water temps later)
+    html_parts.append(f"{line}<br>")
+
 
 
 # Add back the water temps html block
