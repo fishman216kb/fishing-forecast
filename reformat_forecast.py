@@ -24,10 +24,13 @@ Erie: {e}°F<br>
 <note>There may be an issue with the lake temps from NWS, buoys are showing different readings</note><br>
 """
 
-# Trim everything after the "See Lake Erie open lakes forecast" line
-cutoff_match = re.search(r"See Lake Erie open lakes forecast", raw_text)
-if cutoff_match:
-    raw_text = raw_text[:cutoff_match.start()]
+# Trim everything after the "Winds and waves higher" or "See Lake Erie open lakes forecast" lines
+cutoff_matchA = re.search(r"Winds and waves higher", raw_text)
+cutoff_matchB = re.search(r"See Lake Erie open lakes forecast", raw_text)
+if cutoff_matchA:
+    raw_text = raw_text[:cutoff_matchA.start()]
+elif cutoff_matchB:
+    raw_text = raw_text[:cutoff_matchB.start()]
 
 lines = raw_text.strip().splitlines()
 html_parts = []
