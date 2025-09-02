@@ -41,7 +41,7 @@
           flex: 1; /* Center text in available space */
           text-align: center;
           margin: 0;
-          font-size: 3em; /* Adjust to taste */
+          font-size: 2.5em; /* Adjust to taste */
         }
         
         .header-logo {
@@ -49,6 +49,39 @@
           width: auto;        /* Keep aspect ratio */
           margin: 0 10px;     /* Small spacing from edges */
         }
+
+
+        /* desktop/default stays the same */
+
+        /* mobile layout: stack logo above title */
+        @media (max-width: 640px) {
+          .site-header {
+            flex-direction: column;     /* stack vertically */
+            align-items: center;        /* center everything */
+            justify-content: center;
+            height: auto;               /* let it grow since we're stacking */
+            padding: 10px 12px;         /* comfortable spacing on phones */
+            gap: 8px;                   /* space between logo and title */
+          }
+        
+          /* show one centered logo; hide the right one */
+          .site-header .header-logo.right {
+            display: none;
+          }
+        
+          /* keep the left logo, but center it and shrink a bit on mobile */
+          .site-header .header-logo.left {
+            height: 56px;               /* tweak to taste */
+            margin: 0 auto;
+          }
+        
+          .site-header h1 {
+            text-align: center;
+            font-size: 1.6em;           /* adjust to taste (uses your em approach) */
+            margin: 0;
+          }
+        }
+
 
 
         
