@@ -28,10 +28,61 @@
         }
 
         
-        h1 {
-            color: black;
-            text-align: center;
+       .site-header {
+          background-color: #2e8b57;
+          color: black;
+          padding: 10px 0;
+          display: flex;
+          align-items: center;
+          justify-content: space-between; /* Push logos to edges */
         }
+        
+        .site-header h1 {
+          flex: 1; /* Center text in available space */
+          text-align: center;
+          margin: 0;
+          font-size: 2.5em; /* Adjust to taste */
+        }
+        
+        .header-logo {
+          height: 89px;       /* Matches header height, adjust as needed */
+          width: auto;        /* Keep aspect ratio */
+          margin: 0 10px;     /* Small spacing from edges */
+        }
+
+
+        /* desktop/default stays the same */
+
+        /* mobile layout: stack logo above title */
+        @media (max-width: 640px) {
+          .site-header {
+            flex-direction: column;     /* stack vertically */
+            align-items: center;        /* center everything */
+            justify-content: center;
+            height: auto;               /* let it grow since we're stacking */
+            padding: 10px 12px;         /* comfortable spacing on phones */
+            gap: 8px;                   /* space between logo and title */
+          }
+        
+          /* show one centered logo; hide the right one */
+          .site-header .header-logo.right {
+            display: none;
+          }
+        
+          /* keep the left logo, but center it and shrink a bit on mobile */
+          .site-header .header-logo.left {
+            height: 89px;               /* tweak to taste */
+            margin: 0 auto;
+          }
+        
+          .site-header h1 {
+            text-align: center;
+            font-size: 1.6em;           /* adjust to taste (uses your em approach) */
+            margin: 0;
+          }
+        }
+
+
 
         
         h2 {
@@ -39,6 +90,16 @@
             margin-top: 40px;
         }
 
+
+
+        .logo1 {
+          padding: 10px 0;
+          display: block;
+          margin: 0 auto;
+          max-width: 100%;   /* responsive: never exceed container width */
+          height: auto;      /* scale height proportionally */
+          max-height: 180px;
+        }
 
         
         
@@ -137,9 +198,12 @@
     
 <body>
 
-    <header style="background-color: #2e8b57; color: black; padding: 10px 0;">
-        <h1>Cleveland Area Boating & Fishing Forecast</h1>
+    <header class="site-header">
+      <img src="assets/img/216BW.png" alt="216fishing logo" class="header-logo left">
+      <h1>Cleveland Area Boating & Fishing Forecast</h1>
+      <img src="assets/img/216BW.png" alt="216fishing logo" class="header-logo right">
     </header>
+
 
     <h2>Nearshore Forecast for Cleveland</h2>
 
@@ -175,7 +239,11 @@
         </iframe>
     </div>
 
+
+       
+
     <footer>
+        <img src="assets/img/216DT.png" alt="216fishing logo1" class="logo1">
         <p><a href="mailto:admin@216fishing.com">admin@216fishing.com</a></p>
         <p>© 216fishing 2025.00105</p>
     </footer>
