@@ -28,10 +28,28 @@
         }
 
         
-        h1 {
-            color: black;
-            text-align: center;
+       .site-header {
+          background-color: #2e8b57;
+          color: black;
+          padding: 10px 0;
+          display: flex;
+          align-items: center;
+          justify-content: space-between; /* Push logos to edges */
         }
+        
+        .site-header h1 {
+          flex: 1; /* Center text in available space */
+          text-align: center;
+          margin: 0;
+          font-size: 1.5em; /* Adjust to taste */
+        }
+        
+        .header-logo {
+          height: 40px;       /* Matches header height, adjust as needed */
+          width: auto;        /* Keep aspect ratio */
+          margin: 0 10px;     /* Small spacing from edges */
+        }
+
 
         
         h2 {
@@ -137,9 +155,12 @@
     
 <body>
 
-    <header style="background-color: #2e8b57; color: black; padding: 10px 0;">
-        <h1>Cleveland Area Boating & Fishing Forecast</h1>
+    <header class="site-header">
+      <img src="assets/img/216BW.png" alt="216fishing logo" class="header-logo left">
+      <h1>Cleveland Area Boating & Fishing Forecast</h1>
+      <img src="assets/img/216BW.png" alt="216fishing logo" class="header-logo right">
     </header>
+
 
     <h2>Nearshore Forecast for Cleveland</h2>
 
