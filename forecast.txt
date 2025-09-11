@@ -1,15 +1,14 @@
 Avon Point to Willowick OH-
 Willowick to Geneva-on-the Lake OH-
-913 PM EDT Wed Sep 10 2025
+334 AM EDT Thu Sep 11 2025
 
-.OVERNIGHT...East winds less than 10 knots. Mostly clear.
-Waves 1 foot or less. 
-.THURSDAY...Light and variable winds becoming north 5 to
-10 knots. Sunny. Waves 1 foot or less. 
-.THURSDAY NIGHT...Northeast winds less than 10 knots becoming
-southeast. Mostly clear. Waves 1 foot or less. 
-.FRIDAY...Light and variable winds becoming northeast 5 to
-10 knots. Sunny. Waves 1 foot or less. 
+.TODAY...Light and variable winds. Sunny. Waves 1 foot or less. 
+.TONIGHT...North winds less than 10 knots becoming southeast.
+Mostly clear. Waves 1 foot or less. 
+.FRIDAY...South winds less than 10 knots. Sunny. Waves 1 foot or
+less. 
+.FRIDAY NIGHT...Northeast winds less than 10 knots becoming
+south. Mostly clear. Waves 1 foot or less. 
 
 See Lake Erie open lakes forecast for Saturday through Monday.
 
