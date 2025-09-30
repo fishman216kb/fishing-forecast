@@ -259,7 +259,7 @@
     <footer>
         <img src="assets/img/216DT.png" alt="216fishing logo1" class="logo1">
         <p><a href="mailto:admin@216fishing.com">admin@216fishing.com</a></p>
-        <p>© 216fishing 2025.00106</p>
+        <p>© 216fishing 2025.00107</p>
     </footer>
 
 
@@ -287,7 +287,7 @@
             .then(data => {
                 const timeSeries = data.value.timeSeries[0];
                 const discharge = timeSeries.values[0].value[0].value;
-                document.getElementById('discharge-value').textContent = `Current discharge value: ${discharge} cubic feet per second (cfs)`;
+                document.getElementById('discharge-value').textContent = `Current discharge value: ${discharge} cfs`;
             })
             .catch(error => {
                 document.getElementById('discharge-value').textContent = "Error loading discharge value.";
