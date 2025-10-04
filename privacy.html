@@ -1,39 +1,132 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Privacy & Cookie Policy | 216fishing.com</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y3GG1723QJ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);} 
+    gtag('js', new Date());
+    gtag('config', 'G-Y3GG1723QJ');
+  </script>
+
   <style>
-    body { max-width: 860px; margin: 40px auto; padding: 0 16px; font: 16px/1.6 system-ui, Arial, sans-serif; }
-    h1, h2, h3 { color: #2a2a2a; }
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f8ff;
+      margin: 0;
+      padding: 20px;
+      line-height: 1.6;
+      text-align: center;
+    }
+
+    .site-header {
+      background-color: #2e8b57;
+      color: black;
+      padding: 10px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between; /* Push logos to edges */
+    }
+    .site-header h1 {
+      flex: 1; /* Center text in available space */
+      text-align: center;
+      margin: 0;
+      font-size: 2.5em; /* Adjust to taste */
+    }
+    .header-logo {
+      height: 89px;       /* Matches header height, adjust as needed */
+      width: auto;        /* Keep aspect ratio */
+      margin: 0 10px;     /* Small spacing from edges */
+    }
+
+    /* mobile layout: stack logo above title */
+    @media (max-width: 640px) {
+      .site-header { flex-direction: column; align-items: center; justify-content: center; height: auto; padding: 10px 12px; gap: 8px; }
+      .site-header .header-logo.right { display: none; }
+      .site-header .header-logo.left { height: 89px; margin: 0 auto; }
+      .site-header h1 { text-align: center; font-size: 1.6em; margin: 0; }
+    }
+
+    h2 { color: #4682b4; margin-top: 40px; }
+
+    .logo1 {
+      padding: 10px 0;
+      display: block;
+      margin: 0 auto;
+      max-width: 100%;
+      height: auto;
+      max-height: 180px;
+    }
+
+    /* Page content container */
+    .content {
+      max-width: 75ch;
+      margin: 1em auto;
+      padding: 2em;
+      background: #fff;
+      border: 1px solid #ccc;
+      text-align: left;
+      font-size: 17px;
+      line-height: 1.8;
+    }
+
+    a { color: #1e90ff; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    footer { text-align: center; margin-top: 40px; padding: 20px; background-color: #e0e0e0; font-size: 11px; }
+
+    .local-nav { margin: 0.5rem 0 1.25rem; font-size: 14px; }
   </style>
 </head>
 <body>
-  <h1>Privacy & Cookie Policy</h1>
-  <p>Last updated: October 2025</p>
 
-  <h2>Overview</h2>
-  <p>216fishing.com respects your privacy. This policy explains how we collect and use information when you visit our site.</p>
+  <header class="site-header">
+    <img src="assets/img/216BW.png" alt="216fishing logo" class="header-logo left">
+    <h1>Privacy & Cookie Policy</h1>
+    <img src="assets/img/216BW.png" alt="216fishing logo" class="header-logo right">
+  </header>
 
-  <h2>Analytics</h2>
-  <p>We use <strong>Google Analytics 4 (GA4)</strong> to understand how visitors use the site (for example, which pages are visited and how users navigate). Google Analytics uses cookies to collect anonymous data. This helps us improve the site and provide more useful fishing information.</p>
+  <div class="local-nav">
+    <a href="/">← Back to Home</a>
+  </div>
 
-  <p>Google may also process information as described in their <a href="https://policies.google.com/technologies/partner-sites" target="_blank" rel="noopener">Privacy & Terms</a>.</p>
+  <main class="content">
+    <p><em>Last updated: October 2025</em></p>
 
-  <h2>Cookies</h2>
-  <p>Cookies are small text files stored in your browser. On this site, they are used only for analytics purposes. You may disable cookies in your browser settings, but some site functionality may be limited.</p>
+    <h2>Overview</h2>
+    <p>216fishing.com respects your privacy. This page explains how we collect and use information when you visit our site.</p>
 
-  <h2>Your Choices</h2>
-  <ul>
-    <li>You can opt out of Google Analytics by installing the <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener">Google Analytics Opt-out Browser Add-on</a>.</li>
-    <li>You can clear or block cookies through your browser settings.</li>
-  </ul>
+    <h2>Analytics (GA4)</h2>
+    <p>We use <strong>Google Analytics 4 (GA4)</strong> to understand how visitors use the site (for example, which pages are visited and general navigation patterns). GA4 uses cookies that help us measure site performance so we can improve features for local anglers and boaters.</p>
+    <p>Learn more about how Google uses data from partner sites here: <a href="https://policies.google.com/technologies/partner-sites" target="_blank" rel="noopener">Google Privacy & Terms</a>.</p>
 
-  <h2>Information Sharing</h2>
-  <p>We do not sell, trade, or share your personal information. Data collected through Google Analytics is aggregated and does not identify individual users.</p>
+    <h2>Cookies</h2>
+    <p>Cookies are small text files stored in your browser. On 216fishing.com, cookies are used only for analytics purposes. You can disable cookies in your browser settings; some site features may be limited if cookies are blocked.</p>
 
-  <h2>Contact</h2>
-  <p>If you have any questions about this Privacy & Cookie Policy, please email us at <a href="mailto:admin@216fishing.com">admin@216fishing.com</a>.</p>
+    <h2>Your Choices</h2>
+    <ul>
+      <li>Opt out of analytics by installing the <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener">Google Analytics Opt-out Browser Add-on</a>.</li>
+      <li>Clear or block cookies in your browser settings.</li>
+    </ul>
+
+    <h2>Information Sharing</h2>
+    <p>We do not sell or trade personal information. Data collected via Google Analytics is aggregated and not used to identify individual users.</p>
+
+    <h2>Contact</h2>
+    <p>If you have questions about this policy, contact us at <a href="mailto:admin@216fishing.com">admin@216fishing.com</a>.</p>
+  </main>
+
+  <footer>
+    <img src="assets/img/216DT.png" alt="216fishing logo1" class="logo1">
+    <p><a href="/">Home</a></p>
+    <p><a href="/about.html">About</a></p>
+    <p>© 216fishing 2025</p>
+  </footer>
+
 </body>
 </html>
