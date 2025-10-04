@@ -21,7 +21,7 @@ if temps_match:
 Toledo: {t}°F<br>
 Cleveland: {c}°F<br>
 Erie: {e}°F<br>
-<note>There may be an issue with the lake temps from NWS, buoys are showing different readings</note><br>
+<note>There may be an issue with the lake temps from NOAA, buoys are showing different readings</note><br>
 """
 
 # Trim everything after the "Winds and waves higher" or "See Lake Erie open lakes forecast" lines
