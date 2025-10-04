@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About | 216fishing.com</title>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y3GG1723QJ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);} 
+    gtag('js', new Date());
+    gtag('config', 'G-Y3GG1723QJ');
+  </script>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f8ff;
+      margin: 0;
+      padding: 20px;
+      line-height: 1.6;
+      text-align: center;
+    }
+
+    .site-header {
+      background-color: #2e8b57;
+      color: black;
+      padding: 10px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between; /* Push logos to edges */
+    }
+    .site-header h1 {
+      flex: 1; /* Center text in available space */
+      text-align: center;
+      margin: 0;
+      font-size: 2.5em; /* Adjust to taste */
+    }
+    .header-logo {
+      height: 89px;       /* Matches header height, adjust as needed */
+      width: auto;        /* Keep aspect ratio */
+      margin: 0 10px;     /* Small spacing from edges */
+    }
+
+    /* mobile layout: stack logo above title */
+    @media (max-width: 640px) {
+      .site-header { flex-direction: column; align-items: center; justify-content: center; height: auto; padding: 10px 12px; gap: 8px; }
+      .site-header .header-logo.right { display: none; }
+      .site-header .header-logo.left { height: 89px; margin: 0 auto; }
+      .site-header h1 { text-align: center; font-size: 1.6em; margin: 0; }
+    }
+
+    h2 { color: #4682b4; margin-top: 40px; }
+
+    .logo1 {
+      padding: 10px 0;
+      display: block;
+      margin: 0 auto;
+      max-width: 100%;
+      height: auto;
+      max-height: 180px;
+    }
+
+    /* Page content container */
+    .content {
+      max-width: 75ch;
+      margin: 1em auto;
+      padding: 2em;
+      background: #fff;
+      border: 1px solid #ccc;
+      text-align: left;
+      font-size: 17px;
+      line-height: 1.8;
+    }
+
+    a { color: #1e90ff; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    footer { text-align: center; margin-top: 40px; padding: 20px; background-color: #e0e0e0; font-size: 11px; }
+
+    /* Simple inline nav under the page title */
+    .local-nav { margin: 0.5rem 0 1.25rem; font-size: 14px; }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <img src="assets/img/216BW.png" alt="216fishing logo" class="header-logo left">
+    <h1>About 216fishing.com</h1>
+    <img src="assets/img/216BW.png" alt="216fishing logo" class="header-logo right">
+  </header>
+
+  <div class="local-nav">
+    <a href="/">← Back to Home</a>
+  </div>
+
+  <main class="content">
+    <h2>Our Goal</h2>
+    <p>
+      <strong>216fishing.com</strong> was created as a resource for anglers and boaters who use Lake Erie near Cleveland, Ohio.
+      The site brings together weather forecasts, buoy data, and live camera links so local trips can be planned with confidence.
+      We reference trusted sources such as NOAA and local weather services, along with publicly available webcam feeds.
+    </p>
+
+    <h2>Contact</h2>
+    <p>
+      Have feedback, suggestions, or spot an issue? Email us at
+      <a href="mailto:admin@216fishing.com">admin@216fishing.com</a>.
+    </p>
+  </main>
+
+  <footer>
+    <img src="assets/img/216DT.png" alt="216fishing logo1" class="logo1">
+    <p><a href="/">Home</a></p>
+    <p><a href="/privacy.html">Privacy policy</a></p>
+    <p>© 216fishing 2025.00108</p>
+  </footer>
+
+</body>
+</html>
