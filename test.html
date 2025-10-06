@@ -3,7 +3,43 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Fishing Forecast</title>
+    <meta name="description" content="216fishing.com provides the latest Cleveland area fishing and boating forecast, Lake Erie buoy data, and live webcams to help plan your trip." />
+
+    <title>Cleveland Area Fishing & Boating Forecast | 216fishing.com</title>
+
+
+    <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "Organization",
+              "@id": "https://216fishing.com#org",
+              "name": "216fishing",
+              "url": "https://216fishing.com",
+              "logo": {
+                "@type": "ImageObject",
+                "url": "https://216fishing.com/assets/img/216DT.png"
+              },
+              "contactPoint": {
+                "@type": "ContactPoint",
+                "email": "admin@216fishing.com",
+                "contactType": "customer support"
+              }
+            },
+            {
+              "@type": "WebSite",
+              "@id": "https://216fishing.com#website",
+              "url": "https://216fishing.com",
+              "name": "216fishing",
+              "publisher": { "@id": "https://216fishing.com#org" }
+            }
+          ]
+        }
+</script>
+
+
+    
 
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y3GG1723QJ"></script>
@@ -45,7 +81,7 @@
         }
         
         .header-logo {
-          height: 80px;       /* Matches header height, adjust as needed */
+          height: 89px;       /* Matches header height, adjust as needed */
           width: auto;        /* Keep aspect ratio */
           margin: 0 10px;     /* Small spacing from edges */
         }
@@ -71,7 +107,7 @@
         
           /* keep the left logo, but center it and shrink a bit on mobile */
           .site-header .header-logo.left {
-            height: 56px;               /* tweak to taste */
+            height: 89px;               /* tweak to taste */
             margin: 0 auto;
           }
         
@@ -199,9 +235,9 @@
 <body>
 
     <header class="site-header">
-      <img src="assets/img/216BW.png" alt="216fishing logo" class="header-logo left">
+      <img src="assets/img/216BW.png" alt="216fishing black logo" class="header-logo left">
       <h1>Cleveland Area Boating & Fishing Forecast</h1>
-      <img src="assets/img/216BW.png" alt="216fishing logo" class="header-logo right">
+      <img src="assets/img/216BW.png" alt="216fishing black logo" class="header-logo right">
     </header>
 
 
@@ -211,25 +247,398 @@
     <div id="forecast">Loading forecast...</div>
 
 
-   
+
+    <!-- =========================
+     216fishing - Weather/Wind Compare (drop-in)
+     ========================= -->
+<section id="wx-compare" style="max-width:980px;margin:2rem auto;padding:1rem;border:1px solid #ddd;border-radius:12px;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;">
+  <h2 style="margin:0 0 .5rem 0;">Lake Erie (Cleveland) — Next 24h</h2>
+  <div style="color:#555;margin-bottom:.75rem;font-size:.9rem">
+    Compare sources at a glance. Click tabs for details. Lat/Lon:
+    <span id="wx-latlon">41.52, -81.72</span>
+  </div>
+
+  <!-- Controls -->
+  <div style="display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1rem;">
+    <label style="display:flex;align-items:center;gap:.5rem;border:1px solid #ccc;padding:.4rem .6rem;border-radius:8px;">
+      <span>Location:</span>
+      <input id="wx-lat" type="number" step="0.0001" value="41.5200" style="width:6.5rem;padding:.2rem .4rem;border:1px solid #ccc;border-radius:6px;">
+      <input id="wx-lon" type="number" step="0.0001" value="-81.7200" style="width:6.5rem;padding:.2rem .4rem;border:1px solid #ccc;border-radius:6px;">
+      <button id="wx-go" style="padding:.35rem .7rem;border:1px solid #444;background:#111;color:#fff;border-radius:8px;cursor:pointer;">Update</button>
+    </label>
+    <label style="display:flex;align-items:center;gap:.4rem;border:1px solid #ccc;padding:.4rem .6rem;border-radius:8px;">
+      <input id="wx-imp" type="checkbox" checked>
+      <span>Imperial (mph/°F)</span>
+    </label>
+  </div>
+
+  <!-- Summary cards -->
+  <div id="wx-cards" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:.75rem;margin-bottom:1rem;">
+    <div style="border:1px solid #ddd;border-radius:10px;padding:.75rem">
+      <div style="font-weight:600;margin-bottom:.4rem">NWS (hourly)</div>
+      <div id="nws-now">—</div>
+      <div id="nws-next" style="font-size:.9rem;color:#555;margin-top:.4rem">—</div>
+    </div>
+    <div style="border:1px solid #ddd;border-radius:10px;padding:.75rem">
+      <div style="font-weight:600;margin-bottom:.4rem">Open-Meteo</div>
+      <div id="om-now">—</div>
+      <div id="om-next" style="font-size:.9rem;color:#555;margin-top:.4rem">—</div>
+    </div>
+  </div>
+
+  <!-- Tabs -->
+  <div style="display:flex;gap:.5rem;margin:.5rem 0 1rem 0;flex-wrap:wrap;">
+    <button class="tab-btn active" data-tab="tab-nws" style="padding:.45rem .8rem;border:1px solid #333;background:#111;color:#fff;border-radius:999px;cursor:pointer;">NWS Hourly</button>
+    <button class="tab-btn" data-tab="tab-om" style="padding:.45rem .8rem;border:1px solid #aaa;background:#fff;color:#111;border-radius:999px;cursor:pointer;">Open-Meteo Hourly</button>
+    <button class="tab-btn" data-tab="tab-windy" style="padding:.45rem .8rem;border:1px solid #aaa;background:#fff;color:#111;border-radius:999px;cursor:pointer;">Windy Map</button>
+  </div>
+
+  <div id="tab-nws" class="tab-panel" style="display:block">
+    <div id="nws-table">Loading NWS…</div>
+  </div>
+  <div id="tab-om" class="tab-panel" style="display:none">
+    <div id="om-table">Loading Open-Meteo…</div>
+  </div>
+  <div id="tab-windy" class="tab-panel" style="display:none">
+    <!-- Collapsible map to avoid clutter -->
+    <details>
+      <summary style="cursor:pointer;padding:.5rem .75rem;border:1px solid #ddd;border-radius:8px;background:#f9f9f9;">Show Windy wind map</summary>
+      <div id="windy-frame" style="margin-top:.5rem;aspect-ratio:16/9;border:1px solid #ddd;border-radius:8px;overflow:hidden">
+        <iframe id="windy-embed" title="Windy"
+          style="width:100%;height:100%;border:0"
+          src="">
+        </iframe>
+      </div>
+    </details>
+  </div>
+
+  <!-- Quick links -->
+  <div style="margin-top:1.25rem">
+    <details>
+      <summary style="cursor:pointer;font-weight:600;margin-bottom:.5rem">More forecasts & tools</summary>
+      <ul style="margin:.5rem 0 0 1rem;line-height:1.7">
+        <li><a href="https://www.weather.gov/cle/" target="_blank" rel="noopener">NWS Cleveland (CLE) forecast</a></li>
+        <li><a href="https://www.weather.gov/greatlakes/" target="_blank" rel="noopener">NWS Great Lakes (marine)</a></li>
+        <li><a href="https://windy.com" target="_blank" rel="noopener">Windy.com (full app)</a></li>
+        <li><a href="https://www.ndbc.noaa.gov/" target="_blank" rel="noopener">NOAA NDBC buoys</a></li>
+        <li><a href="https://www.meteologix.com/" target="_blank" rel="noopener">Meteologix (model maps)</a></li>
+        <li><a href="https://www.windy.com/station" target="_blank" rel="noopener">Nearby stations on Windy</a></li>
+      </ul>
+    </details>
+  </div>
+</section>
+
+<script>
+(function(){
+  const ui = {
+    lat: document.getElementById('wx-lat'),
+    lon: document.getElementById('wx-lon'),
+    go: document.getElementById('wx-go'),
+    imp: document.getElementById('wx-imp'),
+    latlon: document.getElementById('wx-latlon'),
+    tabs: Array.from(document.querySelectorAll('.tab-btn')),
+    panels: Array.from(document.querySelectorAll('.tab-panel')),
+    windy: document.getElementById('windy-embed'),
+    nwsNow: document.getElementById('nws-now'),
+    nwsNext: document.getElementById('nws-next'),
+    omNow: document.getElementById('om-now'),
+    omNext: document.getElementById('om-next'),
+    nwsTable: document.getElementById('nws-table'),
+    omTable: document.getElementById('om-table')
+  };
+
+  // Tab logic
+  ui.tabs.forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      ui.tabs.forEach(b=>{ b.classList.remove('active'); b.style.background='#fff'; b.style.color='#111'; b.style.borderColor='#aaa'; });
+      btn.classList.add('active'); btn.style.background='#111'; btn.style.color='#fff'; btn.style.borderColor='#111';
+      const tabId = btn.getAttribute('data-tab');
+      ui.panels.forEach(p=>p.style.display = (p.id===tabId)?'block':'none');
+    });
+  });
+
+  // Helpers
+  const u = (mph)=> ui.imp.checked ? mph : (mph*0.44704).toFixed(1); // mph -> m/s
+  const tF = (c)=> ui.imp.checked ? (c*9/5+32) : c;
+
+  function formatTime(iso){
+    const d = new Date(iso);
+    return d.toLocaleString([], {hour:'numeric', minute:'2-digit'});
+  }
+  function arrow(deg){
+    const dirs = ['N','NNE','NE','ENE','E','ESE','SE','SSE','S','SSW','SW','WSW','W','WNW','NW','NNW'];
+    const i = Math.round((deg%360)/22.5) % 16;
+    return dirs[i];
+  }
+  function mphLabel(){ return ui.imp.checked ? 'mph' : 'm/s'; }
+  function tempLabel(){ return ui.imp.checked ? '°F' : '°C'; }
+
+  async function fetchNWS(lat, lon){
+    // 1) resolve gridpoint
+    const p = await fetch(`https://api.weather.gov/points/${lat},${lon}`, {headers: {'Accept': 'application/geo+json'}});
+    if(!p.ok) throw new Error('NWS points failed');
+    const j = await p.json();
+    const hourlyUrl = j?.properties?.forecastHourly;
+    // 2) hourly forecast
+    const h = await fetch(hourlyUrl, {headers: {'Accept': 'application/geo+json'}});
+    if(!h.ok) throw new Error('NWS hourly failed');
+    const hj = await h.json();
+    const periods = hj?.properties?.periods || [];
+    return periods; // array of ~hourly periods
+  }
+
+  async function fetchOpenMeteo(lat, lon){
+    const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&hourly=temperature_2m,wind_speed_10m,wind_gusts_10m,wind_direction_10m&timezone=auto&windspeed_unit=mph`;
+    const r = await fetch(url);
+    if(!r.ok) throw new Error('Open-Meteo failed');
+    return r.json();
+  }
+
+  function renderNWS(periods){
+    // pick next 24h
+    const now = Date.now();
+    const next = periods.filter(p=> new Date(p.startTime).getTime() >= now).slice(0, 24);
+    if(next.length===0){ ui.nwsTable.textContent='No data'; return; }
+
+    // Summary
+    const cur = next[0];
+    // NWS windSpeed is like "12 mph", sometimes "5 to 10 mph"
+    const speedMph = (()=> {
+      const m = (cur.windSpeed||'').match(/(\d+)(?:\s*to\s*(\d+))?\s*mph/i);
+      if(!m) return NaN;
+      return m[2] ? ( (+m[1] + +m[2])/2 ) : (+m[1]);
+    })();
+    const dirTxt = cur.windDirection || '';
+    ui.nwsNow.innerHTML = `Now: <strong>${isNaN(speedMph)?'—':(ui.imp.checked?speedMph: (speedMph*0.44704).toFixed(1))} ${mphLabel()}</strong> ${dirTxt ? '('+dirTxt+')' : ''} &middot; <span>${cur.shortForecast||''}</span>`;
+    ui.nwsNext.textContent = `Next hours: ${next.slice(0,6).map(p=>`${new Date(p.startTime).getHours()}:00`).join(' → ')}`;
+
+    // Table
+    const rows = next.map(p=>{
+      const spd = (()=> {
+        const m = (p.windSpeed||'').match(/(\d+)(?:\s*to\s*(\d+))?\s*mph/i);
+        if(!m) return '—';
+        const mph = m[2] ? ((+m[1]+ +m[2])/2) : +m[1];
+        return (ui.imp.checked ? mph : (mph*0.44704)).toFixed(ui.imp.checked?0:1);
+      })();
+      const dir = p.windDirection || '—';
+      const tempF = p.temperature;
+      return `<tr>
+        <td>${formatTime(p.startTime)}</td>
+        <td style="text-align:right">${spd} ${mphLabel()}</td>
+        <td style="text-align:center">${dir}</td>
+        <td style="text-align:right">${ui.imp.checked?tempF:(((tempF-32)*5/9)|0)} ${tempLabel()}</td>
+        <td>${p.shortForecast||''}</td>
+      </tr>`;
+    }).join('');
+    ui.nwsTable.innerHTML = `
+      <div style="overflow:auto">
+        <table style="min-width:560px;border-collapse:collapse;width:100%">
+          <thead>
+            <tr>
+              <th style="text-align:left;border-bottom:1px solid #ccc;padding:.4rem">Time</th>
+              <th style="text-align:right;border-bottom:1px solid #ccc;padding:.4rem">Wind</th>
+              <th style="text-align:center;border-bottom:1px solid #ccc;padding:.4rem">Dir</th>
+              <th style="text-align:right;border-bottom:1px solid #ccc;padding:.4rem">Temp</th>
+              <th style="text-align:left;border-bottom:1px solid #ccc;padding:.4rem">Forecast</th>
+            </tr>
+          </thead>
+          <tbody>${rows}</tbody>
+        </table>
+      </div>
+      <div style="font-size:.85rem;color:#666;margin-top:.4rem">Source: National Weather Service</div>
+    `;
+  }
+
+  function renderOpenMeteo(data){
+    const H = data?.hourly || {};
+    const times = H.time||[];
+    const idxNow = times.findIndex(t => new Date(t).getTime() >= Date.now());
+    const slice = (idxNow===-1?0:idxNow);
+    const until = Math.min(slice+24, times.length);
+
+    const nowSpd = H.wind_speed_10m?.[slice] ?? null;
+    const nowGst = H.wind_gusts_10m?.[slice] ?? null;
+    const nowDir = H.wind_direction_10m?.[slice] ?? null;
+    const nowTemp = H.temperature_2m?.[slice] ?? null;
+    ui.omNow.innerHTML = `Now: <strong>${ui.imp.checked?nowSpd: (nowSpd*0.44704).toFixed(1)} ${mphLabel()}</strong>${nowGst?` (gusts ${ui.imp.checked?nowGst:(nowGst*0.44704).toFixed(1)} ${mphLabel()})`:''} ${nowDir!==null?`(${arrow(nowDir)})`:''}`;
+
+    ui.omNext.textContent = `Next hours: ${times.slice(slice, slice+6).map(t=>`${new Date(t).getHours()}:00`).join(' → ')}`;
+
+    const rows = [];
+    for(let i=slice; i<until; i++){
+      rows.push(`<tr>
+        <td>${formatTime(times[i])}</td>
+        <td style="text-align:right">${ui.imp.checked?H.wind_speed_10m[i]:(H.wind_speed_10m[i]*0.44704).toFixed(1)} ${mphLabel()}</td>
+        <td style="text-align:right">${ui.imp.checked?H.wind_gusts_10m[i]:(H.wind_gusts_10m[i]*0.44704).toFixed(1)} ${mphLabel()}</td>
+        <td style="text-align:center">${arrow(H.wind_direction_10m[i])}</td>
+        <td style="text-align:right">${ui.imp.checked?Math.round(H.temperature_2m[i]):Math.round((H.temperature_2m[i]-32)*5/9)} ${tempLabel()}</td>
+      </tr>`);
+    }
+    ui.omTable.innerHTML = `
+      <div style="overflow:auto">
+        <table style="min-width:560px;border-collapse:collapse;width:100%">
+          <thead>
+            <tr>
+              <th style="text-align:left;border-bottom:1px solid #ccc;padding:.4rem">Time</th>
+              <th style="text-align:right;border-bottom:1px solid #ccc;padding:.4rem">Wind</th>
+              <th style="text-align:right;border-bottom:1px solid #ccc;padding:.4rem">Gusts</th>
+              <th style="text-align:center;border-bottom:1px solid #ccc;padding:.4rem">Dir</th>
+              <th style="text-align:right;border-bottom:1px solid #ccc;padding:.4rem">Temp</th>
+            </tr>
+          </thead>
+          <tbody>${rows.join('')}</tbody>
+        </table>
+      </div>
+      <div style="font-size:.85rem;color:#666;margin-top:.4rem">Source: Open-Meteo</div>
+    `;
+  }
+
+  function setWindy(lat, lon){
+    // Simple embed centered on location
+    // Zoom=8, layer=wind, overlay=wind
+    const url = `https://embed.windy.com/embed2.html?lat=${lat}&lon=${lon}&zoom=8&level=surface&overlay=wind&menu=&message=true&marker=true&calendar=now&pressure=true&type=map&location=coordinates`;
+    ui.windy.src = url;
+  }
+
+  async function refresh(){
+    const lat = parseFloat(ui.lat.value), lon = parseFloat(ui.lon.value);
+    ui.latlon.textContent = `${lat.toFixed(4)}, ${lon.toFixed(4)}`;
+    setWindy(lat, lon);
+    try{
+      const [nwsPeriods, om] = await Promise.all([fetchNWS(lat, lon), fetchOpenMeteo(lat, lon)]);
+      renderNWS(nwsPeriods);
+      renderOpenMeteo(om);
+    }catch(err){
+      console.error(err);
+      ui.nwsTable.textContent = 'Error loading NWS.';
+      ui.omTable.textContent = 'Error loading Open-Meteo.';
+    }
+  }
+
+  ui.go.addEventListener('click', refresh);
+  ui.imp.addEventListener('change', refresh);
+  // initial load
+  refresh();
+})();
+</script>
+
+    
 
     <div class="buoy-links and other info">
-        <h2>Buoy Links & Other Info</h2>
-        <p><a href="https://data.freeboard.tech/station/45196/" target="_blank">Rocky River Buoy Data</a></p>
-        <p><a href="https://data.freeboard.tech/station/45176/" target="_blank">Crib Buoy Data</a></p>
-        <p><a href="https://data.freeboard.tech/station/45205/" target="_blank">Edgewater Buoy Data</a></p>
-        <br>
-        <p><a href="https://solunarforecast.com/hunting_fishing/best_times/zip_postal_code/calendar/us/44107" target="_blank">44107 Solunar Forecast Calendar</a></p>
-        <br>
-        <p><a href="https://www.clevelandmetroparks.com/fishing" target="_blank">Metroparks Fishing Report</a></p>
-        <br>
-        <p><a href="https://waterdata.usgs.gov/monitoring-location/04201500/#parameterCode=00060&period=P7D&showMedian=false" target="_blank">Rocky River East Branch Flow Gauge</a></p>
+        <h2>Buoy Links</h2>
+        
+        <p><a href="https://data.freeboard.tech/station/45196/" 
+            target="_blank"
+            data-category="buoy" 
+            data-label="Rocky River Buoy">
+            Rocky River Buoy
+        </a></p>
+        
+        <p><a href="https://data.freeboard.tech/station/45176/" 
+            target="_blank"
+            data-category="buoy" 
+            data-label="Crib Buoy">
+            Crib Buoy
+        </a></p>
+        
+        <p><a href="https://data.freeboard.tech/station/45205/" 
+            target="_blank"
+            data-category="buoy" 
+            data-label="Edgewater Buoy">
+            Edgewater Buoy
+        </a></p>
+        
+        <p><a href="https://data.freeboard.tech/station/45164/" 
+            target="_blank"
+            data-category="buoy" 
+            data-label="Cleveland offshore Buoy">   
+            Cleveland Offshore Buoy
+        </a></p>
+        
+        <p><a href="https://data.freeboard.tech/station/45204/" 
+            target="_blank"
+            data-category="buoy" 
+            data-label="Rocky River Buoy">
+            Sheffield Buoy
+        </a></p>
+        
+        <p><a href="https://data.freeboard.tech/station/45206/" 
+            target="_blank"
+            data-category="buoy" 
+            data-label="Rocky River Buoy">
+            Euclid Beach Buoy
+        </a></p>
+        
+        <p><a href="https://data.freeboard.tech/station/45197/" 
+            target="_blank"
+            data-category="buoy" 
+            data-label="Rocky River Buoy">
+            Euclid Buoy
+        </a></p>
+        <br><br>
+        
+        <h2>Reports & Forecasts</h2>
+        
+        <p><a href="https://solunarforecast.com/hunting_fishing/best_times/zip_postal_code/calendar/us/44107" 
+            target="_blank"
+            data-category="forecasts" 
+            data-label="Solunar forecast">
+            44107 Solunar Forecast Calendar
+        </a></p>
+        
+        <p><a href="https://www.clevelandmetroparks.com/fishing" 
+            target="_blank"
+            data-category="forecasts" 
+            data-label="Fishing report">
+            Metroparks Fishing Report
+        </a></p>
+        
+        <p><a href="https://waterdata.usgs.gov/monitoring-location/04201500/#parameterCode=00060&period=P7D&showMedian=false" 
+            target="_blank"
+            data-category="forecasts" 
+            data-label="RR flow gauge">
+            Rocky River East Branch Flow Gauge
+        </a></p>
+        
         <p id="discharge-value">Loading discharge value...</p>
+        <br>
     </div>
 
     <div class="cam-links">
-        <h2>Pier W Cam</h2>
-        <p><a href="https://www.earthcam.com/usa/ohio/cleveland/?cam=pierw" target="_blank">Open Pier W Cam Feed</a></p>
+        <h2>Lake Erie Webcams</h2>
+        
+        <p><a href="https://www.clevelandmetroparks.com/parks/visit/parks/lakefront-reservation/edgewater-beach" 
+            target="_blank"
+            data-category="webcams" 
+            data-label="Edgewater cam">
+            Edgewater Beach Cam
+        </a></p>
+        
+        <p><a href="https://www.earthcam.com/usa/ohio/cleveland/?cam=pierw" 
+            target="_blank"
+            data-category="webcams" 
+            data-label="Pier W cam">
+            Pier W - Lakewood
+        </a></p>
+        
+        <p><a href="https://www.bayboatclub.org/dock-cam/"
+            target="_blank"
+            data-category="webcams" 
+            data-label="BBC cam">
+            Bay Boat Club - Bay Village
+        </a></p>
+        
+        <p><a href="https://www.youtube.com/watch?v=ELPLNeM0f_E="
+            target="_blank"
+            data-category="webcams" 
+            data-label="Miller Rd cam">
+            Miller Road Park - Avon Lake
+        </a></p>
+        
+        <p>Crib Cam is currently offline</p>
+        
+        
+        <!--       ***  CRIB CAM TAKEN DOWN WHILE FEED IS DOWN   ***
         <h2>Crib Cam</h2>
         <iframe 
             src="https://www.youtube.com/embed/pTCHt8PrImY?si=4NNaU5qttawhIo-s" 
@@ -237,15 +646,32 @@
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
             allowfullscreen>
         </iframe>
+        -->
+
+        
     </div>
 
 
        
 
     <footer>
-        <img src="assets/img/216DT.png" alt="216fishing logo1" class="logo1">
-        <p><a href="mailto:admin@216fishing.com">admin@216fishing.com</a></p>
-        <p>© 216fishing 2025.00105</p>
+        <img src="assets/img/216DT.png" alt="216fishing downtown sunrise logo" class="logo1">
+        
+        <p><a href="https://216fishing.com/about.html"
+            target="_blank"
+            data-category="pages" 
+            data-label="about page">
+            About
+        </a></p>
+        
+        <p><a href="https://216fishing.com/privacy.html"
+            target="_blank"
+            data-category="pages" 
+            data-label="privacy page">
+            Privacy policy
+        </a></p>
+        
+        <p>© 216fishing 2025.00108</p>
     </footer>
 
 
@@ -273,12 +699,35 @@
             .then(data => {
                 const timeSeries = data.value.timeSeries[0];
                 const discharge = timeSeries.values[0].value[0].value;
-                document.getElementById('discharge-value').textContent = `Current discharge value: ${discharge} cubic feet per second (cfs)`;
+                document.getElementById('discharge-value').textContent = `Current discharge value: ${discharge} cfs`;
             })
             .catch(error => {
                 document.getElementById('discharge-value').textContent = "Error loading discharge value.";
             });
     </script>
+
+
+
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      document.querySelectorAll("a[data-category]").forEach(function(link) {
+        link.addEventListener("click", function() {
+          const category = link.getAttribute("data-category");
+          const label = link.getAttribute("data-label") || link.textContent.trim();
+          const url = link.href;
+    
+          gtag('event', 'link_click', {
+            'event_category': category,
+            'event_label': label,
+            'link_url': url,
+            'page_path': window.location.pathname
+          });
+        });
+      });
+    });
+    </script>
+
+    
 
 </body>
 </html>
