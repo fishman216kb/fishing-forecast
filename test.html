@@ -248,62 +248,54 @@
 
 
 
-<!-- ===================== -->
-<!-- WIND MAP              -->
-<!-- ===================== -->
-<section id="windy-wind" style="max-width:820px;margin:2rem auto;padding:0 1rem;">
-  <h2 style="text-align:center;">Windy — Wind Map</h2>
-  <div style="display:flex;justify-content:center;margin-bottom:.75rem">
-    <label style="display:flex;align-items:center;gap:.5rem;border:1px solid #ccc;padding:.4rem .6rem;border-radius:999px;">
-      <span>Location</span>
-      <select class="windy-location" data-overlay="wind"
-              style="padding:.25rem .4rem;border:1px solid #bbb;border-radius:8px"></select>
-    </label>
-  </div>
-  <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:12px;border:1px solid #ddd">
-    <iframe class="windy-frame" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"></iframe>
-  </div>
+<!-- =========================== -->
+<!-- 216fishing — Windy Collapsibles -->
+<!-- =========================== -->
+<section id="windy-blocks" style="max-width:820px;margin:2rem auto;padding:0 1rem;">
+  <h2 style="text-align:center;margin:0 0 .75rem 0;">Windy Maps (Tap to open)</h2>
+
+  <!-- (A) WIND MAP DROPDOWN -->
+  <details class="windy-drop" data-overlay="wind" style="margin:.75rem 0">
+    <summary style="cursor:pointer;padding:.6rem .8rem;border:1px solid #ddd;border-radius:10px;background:#f9f9f9;">
+      Wind map — Cleveland/Edgewater
+    </summary>
+    <div style="margin-top:.6rem;position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:12px;border:1px solid #ddd">
+      <!-- src is blank initially; set on first open -->
+      <iframe class="windy-frame" title="Windy — Wind"
+        style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"
+        loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+    </div>
+  </details>
+
+  <!-- (B) WAVE MAP DROPDOWN -->
+  <details class="windy-drop" data-overlay="waves" style="margin:.75rem 0">
+    <summary style="cursor:pointer;padding:.6rem .8rem;border:1px solid #ddd;border-radius:10px;background:#f9f9f9;">
+      Wave map — Cleveland/Edgewater
+    </summary>
+    <div style="margin-top:.6rem;position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:12px;border:1px solid #ddd">
+      <!-- src is blank initially; set on first open -->
+      <iframe class="windy-frame" title="Windy — Waves"
+        style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"
+        loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+    </div>
+  </details>
 </section>
 
-<!-- ===================== -->
-<!-- WAVE MAP              -->
-<!-- ===================== -->
-<section id="windy-waves" style="max-width:820px;margin:2rem auto;padding:0 1rem;">
-  <h2 style="text-align:center;">Windy — Wave Map</h2>
-  <div style="display:flex;justify-content:center;margin-bottom:.75rem">
-    <label style="display:flex;align-items:center;gap:.5rem;border:1px solid #ccc;padding:.4rem .6rem;border-radius:999px;">
-      <span>Location</span>
-      <select class="windy-location" data-overlay="waves"
-              style="padding:.25rem .4rem;border:1px solid #bbb;border-radius:8px"></select>
-    </label>
-  </div>
-  <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:12px;border:1px solid #ddd">
-    <iframe class="windy-frame" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"></iframe>
-  </div>
-</section>
-
-<!-- ===================== -->
-<!-- Shared Script Logic   -->
-<!-- ===================== -->
 <script>
 (function(){
-  // Define your locations once
-  const locations = [
-    {name: "Edgewater (CLE)", coords: [41.5200, -81.7200]},
-    {name: "Cleveland Harbor", coords: [41.4689, -81.7351]},
-    {name: "Lorain Harbor", coords: [41.4683, -82.1824]},
-    {name: "Geneva-on-the-Lake", coords: [41.8595, -80.7925]},
-    {name: "Put-in-Bay", coords: [41.7213, -82.8080]}
-  ];
+  // === Adjust your defaults here (Edgewater/Cleveland) ===
+  const LAT  = 41.5200;
+  const LON  = -81.7200;
+  const ZOOM = 8;
 
   function buildWindyURL(lat, lon, overlay){
     const base = 'https://embed.windy.com/embed2.html';
     const params = new URLSearchParams({
       lat: lat.toFixed(4),
       lon: lon.toFixed(4),
-      zoom: '8',
+      zoom: String(ZOOM),
       level: 'surface',
-      overlay: overlay, // wind or waves
+      overlay,             // 'wind' or 'waves'
       marker: 'true',
       detail: 'true',
       detailLat: lat.toFixed(4),
@@ -314,36 +306,25 @@
       metricWind: 'mph',
       metricTemp: '%C2%B0F'
     });
-    if (overlay === 'waves') {
-      params.set('product','ecmwfWaves'); // required for waves
-    }
+    if (overlay === 'waves') params.set('product','ecmwfWaves');
     return `${base}?${params.toString()}`;
   }
 
-  // Initialize all dropdowns + frames
-  document.querySelectorAll('.windy-location').forEach((sel, idx) => {
-    // Fill dropdown
-    locations.forEach((loc,i)=>{
-      const opt = document.createElement('option');
-      opt.value = loc.coords.join(',');
-      opt.textContent = loc.name;
-      if(i===0) opt.selected = true;
-      sel.appendChild(opt);
+  // Lazy-load each iframe the first time its dropdown is opened
+  document.querySelectorAll('.windy-drop').forEach(drop => {
+    let loaded = false;
+    drop.addEventListener('toggle', () => {
+      if (drop.open && !loaded) {
+        const overlay = drop.dataset.overlay;
+        const frame = drop.querySelector('.windy-frame');
+        frame.src = buildWindyURL(LAT, LON, overlay);
+        loaded = true;
+      }
     });
-
-    // Link to its matching iframe
-    const frame = sel.closest('section').querySelector('.windy-frame');
-    const overlay = sel.dataset.overlay;
-
-    function refresh(){
-      const [lat,lon] = sel.value.split(',').map(parseFloat);
-      frame.src = buildWindyURL(lat, lon, overlay);
-    }
-    sel.addEventListener('change', refresh);
-    refresh(); // load first option
   });
 })();
 </script>
+
 
 
 
