@@ -298,66 +298,52 @@
 
 
 
-    <!-- 216fishing — 3-Day Wind • Waves • Weather (Open-Meteo) -->
-    <section id="wx3" style="max-width:980px;margin:2rem auto;padding:0 1rem;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif">
-      <h2 style="text-align:center;margin:0 0 .5rem">Next 3 Days — Wind · Waves · Weather</h2>
-      <div id="wx3-sub" style="text-align:center;color:#555;margin-bottom:.5rem">Loading location…</div>
+    <!-- 216fishing — Collapsible Wind · Waves · Weather (sticky header, scrollable) -->
+    <section style="max-width:980px;margin:2rem auto;padding:0 1rem;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif">
+      <h2 style="text-align:center;margin:0 0 .5rem">Wind · Waves · Weather (Next 3 Days)</h2>
     
-      <!-- Range buttons -->
-      <div id="wx3-range" style="display:flex;gap:.5rem;justify-content:center;margin:.5rem 0 1rem">
-        <button data-h="24" style="padding:.35rem .7rem;border:1px solid #ccc;border-radius:999px;background:#111;color:#fff;cursor:pointer">24h</button>
-        <button data-h="48" style="padding:.35rem .7rem;border:1px solid #ccc;border-radius:999px;background:#fff;color:#111;cursor:pointer">48h</button>
-        <button data-h="72" style="padding:.35rem .7rem;border:1px solid #ccc;border-radius:999px;background:#fff;color:#111;cursor:pointer">72h</button>
-      </div>
+      <details id="wx3-details" style="margin:.75rem 0">
+        <summary style="cursor:pointer;padding:.6rem .8rem;border:1px solid #ddd;border-radius:10px;background:#f9f9f9">
+          Tap to open hourly table (Edgewater, Cleveland)
+        </summary>
     
-      <!-- Table wrapper (scrolls on phone) -->
-      <div id="wx3-wrap" style="overflow:auto;border:1px solid #ddd;border-radius:12px">
-        <div style="padding:.75rem">Loading…</div>
-      </div>
+        <!-- Controls -->
+        <div style="display:flex;gap:.5rem;justify-content:center;margin:.75rem 0 .5rem">
+          <button data-h="24" class="wx3-btn" style="padding:.35rem .7rem;border:1px solid #ccc;border-radius:999px;background:#111;color:#fff;cursor:pointer">24h</button>
+          <button data-h="48" class="wx3-btn" style="padding:.35rem .7rem;border:1px solid #ccc;border-radius:999px;background:#fff;color:#111;cursor:pointer">48h</button>
+          <button data-h="72" class="wx3-btn" style="padding:.35rem .7rem;border:1px solid #ccc;border-radius:999px;background:#fff;color:#111;cursor:pointer">72h</button>
+        </div>
     
-      <div style="text-align:center;color:#666;font-size:.9rem;margin-top:.4rem">
-        Source: Open-Meteo Weather & Marine APIs. Units: mph · °F · ft · s.
-      </div>
+        <!-- Scrollable table container (header stays visible) -->
+        <div id="wx3-scroll" style="max-height:420px;overflow:auto;border:1px solid #ddd;border-radius:12px">
+          <div style="padding:.75rem">Loading…</div>
+        </div>
+    
+        <div style="text-align:center;color:#666;font-size:.9rem;margin-top:.4rem">
+          Source: Open-Meteo (Weather & Marine). Units: mph · °F · ft · s.
+        </div>
+      </details>
     </section>
     
     <script>
-    (async function(){
+    (function(){
       // === Adjust your defaults here ===
-      const LOCATION_NAME = "Edgewater (Cleveland)";
+      const NAME = "Edgewater (Cleveland)";
       const LAT = 41.5200, LON = -81.7200;
     
-      // UI bits
-      const sub = document.getElementById('wx3-sub');
-      const wrap = document.getElementById('wx3-wrap');
-      const buttons = Array.from(document.querySelectorAll('#wx3-range button'));
+      // Internal state
+      let loaded = false;
       let hours = 24;
+      let W=null, M=null, TIMES=[];
     
-      // Weather API (wind, gusts, dir, temp, precip prob, weathercode)
+      // Build URLs
       const weatherURL = `https://api.open-meteo.com/v1/forecast?latitude=${LAT}&longitude=${LON}&hourly=temperature_2m,wind_speed_10m,wind_gusts_10m,wind_direction_10m,precipitation_probability,weathercode&timezone=auto&windspeed_unit=mph&temperature_unit=fahrenheit`;
-      // Marine API (waves)
       const marineURL  = `https://marine-api.open-meteo.com/v1/marine?latitude=${LAT}&longitude=${LON}&hourly=wave_height,wave_period,wave_direction&timezone=auto`;
     
-      sub.textContent = `${LOCATION_NAME} — ${LAT.toFixed(4)}, ${LON.toFixed(4)}`;
-    
-      // Fetch once; re-render on button clicks
-      let W=null, M=null, TIMES=[];
-      try{
-        const [wRes, mRes] = await Promise.all([fetch(weatherURL), fetch(marineURL)]);
-        if(!wRes.ok || !mRes.ok) throw new Error('Fetch failed');
-        const wJson = await wRes.json();
-        const mJson = await mRes.json();
-        W = wJson.hourly; M = mJson.hourly; TIMES = W.time;
-      }catch(e){
-        wrap.innerHTML = `<div style="padding:.75rem;color:#b00">Error loading forecast.</div>`;
-        console.error(e);
-        return;
-      }
-    
       // Helpers
-      const ft = m => (m * 3.28084);
+      const ft = m => (m*3.28084);
       const dir = d => ['N','NNE','NE','ENE','E','ESE','SE','SSE','S','SSW','SW','WSW','W','WNW','NW','NNW'][Math.round((d%360)/22.5)%16];
       function wmo(code){
-        // Minimal WMO mapping (icon + text)
         const map = {
           0:["☀️","Clear"], 1:["🌤","Mainly clear"], 2:["⛅","Partly cloudy"], 3:["☁️","Overcast"],
           45:["🌫️","Fog"], 48:["🌫️","Rime fog"],
@@ -373,85 +359,115 @@
         return map[code] || ["🌡️","Weather"];
       }
     
+      // Render the table into the scroll box
       function render(){
-        // find first index at/after now
+        const box = document.getElementById('wx3-scroll');
         const now = Date.now();
         let i0 = TIMES.findIndex(t => new Date(t).getTime() >= now);
-        if (i0 < 0) i0 = 0;
+        if(i0 < 0) i0 = 0;
         const i1 = Math.min(i0 + hours, TIMES.length);
     
-        // build rows
         let rows = "";
-        for (let i=i0; i<i1; i++){
+        for(let i=i0;i<i1;i++){
           const t = new Date(TIMES[i]);
           const stamp = t.toLocaleString([], {weekday:'short', hour:'numeric'}); // e.g., Tue, 3 PM
-    
           const wspd = W.wind_speed_10m?.[i];
           const wgst = W.wind_gusts_10m?.[i];
-          const wdir = W.wind_direction_10m?.[i];
+          const wdirA = W.wind_direction_10m?.[i];
+          const wh = M.wave_height?.[i];
+          const wp = M.wave_period?.[i];
+          const wdirS = M.wave_direction?.[i];
           const temp = W.temperature_2m?.[i];
-          const pop  = W.precipitation_probability?.[i]; // %
+          const pop = W.precipitation_probability?.[i];
           const [ico, desc] = wmo(W.weathercode?.[i] ?? 0);
-    
-          const wh   = M.wave_height?.[i];     // meters
-          const wp   = M.wave_period?.[i];     // seconds
-          const wdirSea = M.wave_direction?.[i];
     
           rows += `<tr>
             <td style="padding:.45rem .5rem;white-space:nowrap">${stamp}</td>
             <td style="text-align:right;padding:.45rem .5rem">${wspd!=null?Math.round(wspd):"—"} mph</td>
             <td style="text-align:right;padding:.45rem .5rem">${wgst!=null?Math.round(wgst):"—"} mph</td>
-            <td style="text-align:center;padding:.45rem .5rem">${wdir!=null?dir(wdir):"—"}</td>
+            <td style="text-align:center;padding:.45rem .5rem">${wdirA!=null?dir(wdirA):"—"}</td>
             <td style="text-align:right;padding:.45rem .5rem">${wh!=null?ft(wh).toFixed(1):"—"} ft</td>
             <td style="text-align:right;padding:.45rem .5rem">${wp!=null?Math.round(wp):"—"} s</td>
-            <td style="text-align:center;padding:.45rem .5rem">${wdirSea!=null?dir(wdirSea):"—"}</td>
+            <td style="text-align:center;padding:.45rem .5rem">${wdirS!=null?dir(wdirS):"—"}</td>
             <td style="padding:.45rem .5rem">
               <span style="margin-right:.35rem">${ico}</span>
-              <span>${Math.round(temp??NaN)}°F</span>
-              <span style="color:#555;margin-left:.35rem">${pop!=null?pop: "—"}%</span><br>
+              <span>${temp!=null?Math.round(temp):"—"}°F</span>
+              <span style="color:#555;margin-left:.35rem">${pop!=null?pop:"—"}%</span><br>
               <span style="color:#666;font-size:.85rem">${desc}</span>
             </td>
           </tr>`;
         }
     
-        wrap.innerHTML = `
+        // Table with sticky header
+        box.innerHTML = `
           <div style="overflow:auto">
             <table style="min-width:900px;border-collapse:collapse;width:100%">
               <thead>
                 <tr>
-                  <th style="text-align:left;border-bottom:1px solid #ddd;padding:.5rem">Time</th>
-                  <th style="text-align:right;border-bottom:1px solid #ddd;padding:.5rem">Wind</th>
-                  <th style="text-align:right;border-bottom:1px solid #ddd;padding:.5rem">Gusts</th>
-                  <th style="text-align:center;border-bottom:1px solid #ddd;padding:.5rem">Wind Dir</th>
-                  <th style="text-align:right;border-bottom:1px solid #ddd;padding:.5rem">Wave Ht</th>
-                  <th style="text-align:right;border-bottom:1px solid #ddd;padding:.5rem">Wave Per</th>
-                  <th style="text-align:center;border-bottom:1px solid #ddd;padding:.5rem">Wave Dir</th>
-                  <th style="text-align:left;border-bottom:1px solid #ddd;padding:.5rem">Weather (icon · temp · precip%)</th>
+                  <th class="wx3-th">Time</th>
+                  <th class="wx3-th" style="text-align:right">Wind</th>
+                  <th class="wx3-th" style="text-align:right">Gusts</th>
+                  <th class="wx3-th" style="text-align:center">Wind Dir</th>
+                  <th class="wx3-th" style="text-align:right">Wave Ht</th>
+                  <th class="wx3-th" style="text-align:right">Wave Per</th>
+                  <th class="wx3-th" style="text-align:center">Wave Dir</th>
+                  <th class="wx3-th" style="text-align:left">Weather (icon · temp · precip%)</th>
                 </tr>
               </thead>
               <tbody>${rows}</tbody>
             </table>
           </div>`;
+    
+        // Make header sticky
+        const styleId = 'wx3-sticky-style';
+        if (!document.getElementById(styleId)) {
+          const s = document.createElement('style');
+          s.id = styleId;
+          s.textContent = `
+            #wx3-scroll thead th.wx3-th{
+              position: sticky; top: 0; background:#fff; z-index: 2;
+              border-bottom:1px solid #ddd; padding:.5rem;
+            }
+            #wx3-scroll td{ border-bottom:1px solid #eee; }
+          `;
+          document.head.appendChild(s);
+        }
       }
     
-      // Range button logic
-      buttons.forEach(b=>{
-        b.addEventListener('click', ()=>{
-          hours = +b.dataset.h;
-          buttons.forEach(x=>{
-            const on = (+x.dataset.h === hours);
-            x.style.background = on ? '#111' : '#fff';
-            x.style.color = on ? '#fff' : '#111';
-          });
-          render();
-        });
+      // Fetch on first open
+      document.getElementById('wx3-details').addEventListener('toggle', async (e)=>{
+        if (e.target.open && !loaded){
+          try{
+            const [wRes, mRes] = await Promise.all([fetch(weatherURL), fetch(marineURL)]);
+            if(!wRes.ok || !mRes.ok) throw new Error('Fetch failed');
+            const wJson = await wRes.json();
+            const mJson = await mRes.json();
+            W = wJson.hourly; M = mJson.hourly; TIMES = W.time;
+            loaded = true;
+            render();
+          }catch(err){
+            document.getElementById('wx3-scroll').innerHTML =
+              `<div style="padding:.75rem;color:#b00">Error loading forecast.</div>`;
+            console.error(err);
+          }
+        }
       });
     
-      // Initial render
-      render();
+      // Range buttons (re-render only; no re-fetch)
+      document.querySelectorAll('.wx3-btn').forEach(btn=>{
+        btn.addEventListener('click', ()=>{
+          hours = +btn.dataset.h;
+          document.querySelectorAll('.wx3-btn').forEach(b=>{
+            const on = (+b.dataset.h === hours);
+            b.style.background = on ? '#111' : '#fff';
+            b.style.color = on ? '#fff' : '#111';
+          });
+          if (loaded) render();
+        });
+      });
     })();
     </script>
-    <!-- END OF     216fishing — 3-Day Wind • Waves • Weather (Open-Meteo) -->
+    <!-- END OF    216fishing — Collapsible Wind · Waves · Weather (sticky header, scrollable) -->
 
 
 
