@@ -296,6 +296,161 @@
      <!-- END OF   Windy collapsible (loads on first open) -->
 
 
+
+
+    <!-- 216fishing — Collapsible Wind · Waves · Weather (72h, sticky header, Weather column w/ icon+temp+precip) -->
+    <section style="max-width:980px;margin:2rem auto;padding:0 1rem;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif">
+      <h2 style="text-align:center;margin:0 0 .5rem">Wind · Waves · Weather — Next 72 Hours</h2>
+    
+      <details id="wx72-details" style="margin:.75rem 0">
+        <summary style="cursor:pointer;padding:.6rem .8rem;border:1px solid #ddd;border-radius:10px;background:#f9f9f9">
+          Click here to open hourly table
+        </summary>
+    
+        <!-- Scrollable table container; header sticks inside this scroll box -->
+        <div id="wx72-scroll" style="max-height:420px;overflow:auto;border:1px solid #ddd;border-radius:12px">
+          <div style="padding:.75rem">Loading…</div>
+        </div>
+    
+        <div style="text-align:center;color:#666;font-size:.9rem;margin-top:.4rem">
+          Source: Open-Meteo (Weather & Marine)
+        </div>
+      </details>
+    </section>
+    
+    <script>
+    (function(){
+      // === Location (edit if needed) ===
+      const LAT = 41.5200, LON = -81.7200; // Edgewater/Cleveland
+    
+      // State
+      let loaded = false;
+      let W=null, M=null, TIMES=[];
+    
+      // Endpoints (no API key)
+      const weatherURL = `https://api.open-meteo.com/v1/forecast?latitude=${LAT}&longitude=${LON}&hourly=temperature_2m,wind_speed_10m,wind_gusts_10m,wind_direction_10m,precipitation_probability,weathercode&timezone=auto&windspeed_unit=mph&temperature_unit=fahrenheit`;
+      const marineURL  = `https://marine-api.open-meteo.com/v1/marine?latitude=${LAT}&longitude=${LON}&hourly=wave_height,wave_period,wave_direction&timezone=auto`;
+    
+      // Helpers
+      const ft = m => (m*3.28084);
+      const dir = d => ['N','NNE','NE','ENE','E','ESE','SE','SSE','S','SSW','SW','WSW','W','WNW','NW','NNW'][Math.round((d%360)/22.5)%16];
+      function wmo(code){
+        const map = {
+          0:["☀️","Clear"], 1:["🌤","Mainly clear"], 2:["⛅","Partly cloudy"], 3:["☁️","Overcast"],
+          45:["🌫️","Fog"], 48:["🌫️","Rime fog"],
+          51:["🌦","Drizzle"], 53:["🌦","Drizzle"], 55:["🌧","Drizzle"],
+          61:["🌧","Rain"], 63:["🌧","Rain"], 65:["🌧","Heavy rain"],
+          66:["🌧","Freezing rain"], 67:["🌧","Freezing rain"],
+          71:["🌨","Snow"], 73:["🌨","Snow"], 75:["❄️","Heavy snow"],
+          77:["❄️","Snow grains"],
+          80:["🌧","Rain showers"], 81:["🌧","Rain showers"], 82:["🌧","Heavy showers"],
+          85:["🌨","Snow showers"], 86:["❄️","Heavy snow shwrs"],
+          95:["⛈","Thunderstorm"], 96:["⛈","T-storm w/ hail"], 97:["⛈","T-storm w/ hail"]
+        };
+        return map[code] || ["🌡️","Weather"];
+      }
+    
+      function render72(){
+        const box = document.getElementById('wx72-scroll');
+    
+        // start at next available hour, render 72 hours
+        const now = Date.now();
+        let i0 = TIMES.findIndex(t => new Date(t).getTime() >= now);
+        if (i0 < 0) i0 = 0;
+        const i1 = Math.min(i0 + 72, TIMES.length);
+    
+        let rows = "";
+        for (let i=i0; i<i1; i++){
+          const t = new Date(TIMES[i]);
+          const stamp = t.toLocaleString([], {weekday:'short', hour:'numeric'});
+    
+          const wspd = W.wind_speed_10m?.[i];
+          const wgst = W.wind_gusts_10m?.[i];
+          const wdirA = W.wind_direction_10m?.[i];
+    
+          const wh = M.wave_height?.[i];
+          const wp = M.wave_period?.[i];
+          const wdirS = M.wave_direction?.[i];
+    
+          const temp = W.temperature_2m?.[i];
+          const pop  = W.precipitation_probability?.[i];
+          const [ico, desc] = wmo(W.weathercode?.[i] ?? 0);
+    
+          rows += `<tr>
+            <td style="padding:.45rem .5rem;white-space:nowrap">${stamp}</td>
+            <td style="text-align:center;padding:.45rem .5rem">${wspd!=null?Math.round(wspd):"—"} mph</td>
+            <td style="text-align:center;padding:.45rem .5rem">${wgst!=null?Math.round(wgst):"—"} mph</td>
+            <td style="text-align:center;padding:.45rem .5rem">${wdirA!=null?dir(wdirA):"—"}</td>
+            <td style="text-align:center;padding:.45rem .5rem">${wh!=null?ft(wh).toFixed(1):"—"} ft</td>
+            <td style="text-align:center;padding:.45rem .5rem">${wp!=null?Math.round(wp):"—"} s</td>
+            <td style="text-align:center;padding:.45rem .5rem">${wdirS!=null?dir(wdirS):"—"}</td>
+            <td style="padding:.45rem .5rem">
+              <span style="margin-right:.35rem">${ico}</span>
+              <span>${temp!=null?Math.round(temp):"—"}°F</span>
+              <span style="color:#555;margin-left:.35rem">${pop!=null?pop:"—"}%</span><br>
+              <span style="color:#666;font-size:.85rem">${desc}</span>
+            </td>
+          </tr>`;
+        }
+    
+        // Table directly inside the scroll container (sticky header works reliably)
+        box.innerHTML = `
+          <table style="min-width:900px;width:100%;border-spacing:0;border-collapse:separate">
+            <thead>
+              <tr>
+                <th class="wx72-th" style="text-align:center">Time</th>
+                <th class="wx72-th" style="text-align:center">Wind</th>
+                <th class="wx72-th" style="text-align:center">Gusts</th>
+                <th class="wx72-th" style="text-align:center">Wind Dir</th>
+                <th class="wx72-th" style="text-align:center">Wave Ht</th>
+                <th class="wx72-th" style="text-align:center">Wave Per</th>
+                <th class="wx72-th" style="text-align:center">Wave Dir</th>
+                <th class="wx72-th" style="text-align:center">Weather</th>
+              </tr>
+            </thead>
+            <tbody>${rows}</tbody>
+          </table>`;
+    
+        // Sticky header CSS (injected once)
+        const styleId = 'wx72-sticky-style';
+        if (!document.getElementById(styleId)) {
+          const s = document.createElement('style');
+          s.id = styleId;
+          s.textContent = `
+            #wx72-scroll thead th.wx72-th{
+              position: sticky; top: 0; z-index: 1;
+              background: #fff; border-bottom: 1px solid #ddd; padding: .5rem;
+            }
+            #wx72-scroll td{ border-bottom:1px solid #eee; }
+          `;
+          document.head.appendChild(s);
+        }
+      }
+    
+      // Lazy fetch on first open
+      document.getElementById('wx72-details').addEventListener('toggle', async (e)=>{
+        if (e.target.open && !loaded){
+          try{
+            const [wRes, mRes] = await Promise.all([fetch(weatherURL), fetch(marineURL)]);
+            if(!wRes.ok || !mRes.ok) throw new Error('Fetch failed');
+            const wJson = await wRes.json();
+            const mJson = await mRes.json();
+            W = wJson.hourly; M = mJson.hourly; TIMES = W.time;
+            loaded = true;
+            render72();
+          }catch(err){
+            document.getElementById('wx72-scroll').innerHTML =
+              `<div style="padding:.75rem;color:#b00">Error loading forecast.</div>`;
+            console.error(err);
+          }
+        }
+      });
+    })();
+    </script>
+    <!-- END OF    216fishing — Collapsible Wind · Waves · Weather (sticky header, scrollable) -->
+    
+
+
   
    
      <!-- Data & Info Links -->
