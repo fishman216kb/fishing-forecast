@@ -121,11 +121,20 @@ if in_forecast_period:
 # Add water temps block
 html_parts.append(water_temps_html)
 
-# Add update time
+
+# Add update time (+ GA4-friendly attributes on the source link)
+source_link = (
+    '<a href="https://tgftp.nws.noaa.gov/data/raw/fz/fzus51.kcle.nsh.cle.txt" '
+    'target="_blank" rel="noopener" '
+    'data-category="forecast" data-label="NOAA Marine Forecast">'
+    'NOAA Marine Forecast</a>'
+)
+
 html_parts.append(
     f'<small>Last Update: {update_time}<br>'
-    'Source: <a href="https://tgftp.nws.noaa.gov/data/raw/fz/fzus51.kcle.nsh.cle.txt" target="_blank">NOAA Marine Forecast</a></small>'
+    f'Source: {source_link}</small>'
 )
+
 
 # Write to output
 with open("forecast.html", "w") as f:
