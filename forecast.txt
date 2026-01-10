@@ -1,17 +1,17 @@
 Avon Point to Willowick OH-Willowick to Geneva-on-the Lake OH-
 Geneva-on-the-Lake to Conneaut OH-Conneaut OH to Ripley NY-
-311 AM EST Sat Jan 10 2026
+1006 AM EST Sat Jan 10 2026
 
-...GALE WARNING IN EFFECT FROM THIS EVENING THROUGH SUNDAY
-EVENING...
+...GALE WARNING IN EFFECT FROM 7 PM EST THIS EVENING THROUGH
+SUNDAY EVENING...
 
-.TODAY...East winds 5 to 15 knots becoming southeast. A slight
-chance of rain late this morning. A chance of rain early this
-afternoon, then rain late. Waves 2 feet or less. 
+.REST OF TODAY...East winds 5 to 15 knots becoming southeast. A
+slight chance of rain late this morning, then a chance of rain
+early this afternoon. Rain late. Waves 1 foot or less. 
 .TONIGHT...Southwest winds 15 to 20 knots becoming west and
-increasing to 35 knot gales. Rain in the evening, then a chance 
-of snow overnight. Waves 2 to 4 feet building to 9 to 12 feet. 
-Waves occasionally around 15 feet. 
+increasing to 30 knots. Rain in the evening, then a chance of
+snow overnight. Waves 2 to 4 feet building to 9 to 12 feet. Waves
+occasionally around 15 feet. 
 .SUNDAY...West winds to 30 knots increasing to 35 knot gales in
 the afternoon. Snow likely. Waves 9 to 13 feet. Waves
 occasionally around 16 feet. 
@@ -21,5 +21,5 @@ subsiding to 3 to 6 feet. Waves occasionally around 15 feet.
 
 See Lake Erie open lakes forecast for Monday through Wednesday.
 
-The water temperature off Toledo is 34 degrees, off Cleveland 34
-degrees, and off Erie 34 degrees.
+The water temperature off Toledo is 38 degrees, off Cleveland 34
+degrees, and off Erie 35 degrees.
