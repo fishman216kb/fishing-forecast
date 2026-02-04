@@ -1,10 +1,10 @@
 Avon Point to Willowick OH-
 Willowick to Geneva-on-the Lake OH-Geneva-on-the-
 Lake to Conneaut OH-Conneaut OH to Ripley NY-
-301 AM EST Wed Feb 4 2026
+923 AM EST Wed Feb 4 2026
 
-.TODAY...Northwest winds 10 knots or less. A slight chance of
-snow this morning. The lake is mostly ice covered.
+.REST OF TODAY...Northwest winds 10 knots or less. A slight
+chance of snow late this morning. The lake is mostly ice covered.
 .TONIGHT...Northwest winds less than 10 knots becoming west.
 Mostly cloudy. 
 .THURSDAY...Southwest winds 10 knots or less. Mostly cloudy. 
@@ -15,5 +15,5 @@ Waves omitted due to the lake being mostly ice covered.
 
 See Lake Erie open lakes forecast for Friday through Sunday.
 
-The water temperature off Toledo is 33 degrees, off Cleveland 33
-degrees, and off Erie 32 degrees.
+The water temperature off Toledo is 34 degrees, off Cleveland 33
+degrees, and off Erie 33 degrees.
