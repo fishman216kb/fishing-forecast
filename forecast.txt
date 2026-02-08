@@ -1,8 +1,8 @@
 Avon Point to Willowick OH-
-337 AM EST Sun Feb 8 2026
+920 AM EST Sun Feb 8 2026
 
-.TODAY...North winds less than 10 knots becoming northeast.
-Mostly sunny. The lake is mostly ice covered.
+.THIS AFTERNOON...Northeast winds less than 10 knots. Sunny. The
+lake is mostly ice covered.
 .TONIGHT...East winds less than 10 knots becoming southeast.
 Mostly clear. 
 .MONDAY...Southeast winds less than 10 knots. Partly sunny. 
@@ -13,5 +13,5 @@ Waves omitted due to the lake being mostly ice covered.
 
 See Lake Erie open lakes forecast for Tuesday through Thursday.
 
-The water temperature off Toledo is 37 degrees, off Cleveland 33
-degrees, and off Erie 32 degrees.
+The water temperature off Toledo is 38 degrees, off Cleveland 33
+degrees, and off Erie 33 degrees.
