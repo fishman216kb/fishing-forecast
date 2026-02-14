@@ -1,676 +1,414 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <meta name="description" content="216fishing.com provides the latest Cleveland area fishing and boating forecast, Lake Erie buoy data, and live webcams to help plan your trip." />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="216 Fishing — Great Lakes-tested trolling gear and custom worm harnesses built and fished in Northeast Ohio." />
 
-    <title>Cleveland Area Fishing & Boating Forecast | 216fishing.com</title>
+  <title>Great Lakes Tested Worm Harnesses & Planer Board Accessories | 216fishing.com</title>
 
-
-    <script type="application/ld+json">
+  <!-- Schema stays, just adjust description/brand focus -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
         {
-          "@context": "https://schema.org",
-          "@graph": [
-            {
-              "@type": "Organization",
-              "@id": "https://216fishing.com#org",
-              "name": "216fishing",
-              "url": "https://216fishing.com",
-              "logo": {
-                "@type": "ImageObject",
-                "url": "https://216fishing.com/assets/img/216DT.png"
-              },
-              "contactPoint": {
-                "@type": "ContactPoint",
-                "email": "admin@216fishing.com",
-                "contactType": "customer support"
-              }
-            },
-            {
-              "@type": "WebSite",
-              "@id": "https://216fishing.com#website",
-              "url": "https://216fishing.com",
-              "name": "216fishing",
-              "publisher": { "@id": "https://216fishing.com#org" }
-            }
-          ]
-        }
-</script>
-
-
-    
-
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y3GG1723QJ"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-Y3GG1723QJ');
-    </script>
-
-
-    
-    
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f8ff;
-            margin: 0;
-            padding: 20px;
-            line-height: 1.6;
-            text-align: center;
-        }
-
-        
-       .site-header {
-          background-color: #2e8b57;
-          color: black;
-          padding: 10px 0;
-          display: flex;
-          align-items: center;
-          justify-content: space-between; /* Push logos to edges */
-        }
-        
-        .site-header h1 {
-          flex: 1; /* Center text in available space */
-          text-align: center;
-          margin: 0;
-          font-size: 2.5em; /* Adjust to taste */
-        }
-        
-        .header-logo {
-          height: 89px;       /* Matches header height, adjust as needed */
-          width: auto;        /* Keep aspect ratio */
-          margin: 0 10px;     /* Small spacing from edges */
-        }
-
-
-        /* desktop/default stays the same */
-
-        /* mobile layout: stack logo above title */
-        @media (max-width: 640px) {
-          .site-header {
-            flex-direction: column;     /* stack vertically */
-            align-items: center;        /* center everything */
-            justify-content: center;
-            height: auto;               /* let it grow since we're stacking */
-            padding: 10px 12px;         /* comfortable spacing on phones */
-            gap: 8px;                   /* space between logo and title */
+          "@type": "Organization",
+          "@id": "https://216fishing.com#org",
+          "name": "216fishing",
+          "url": "https://216fishing.com",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://216fishing.com/assets/img/216DT.png"
+          },
+          "contactPoint": {
+            "@type": "ContactPoint",
+            "email": "admin@216fishing.com",
+            "contactType": "customer support"
           }
-        
-          /* show one centered logo; hide the right one */
-          .site-header .header-logo.right {
-            display: none;
-          }
-        
-          /* keep the left logo, but center it and shrink a bit on mobile */
-          .site-header .header-logo.left {
-            height: 89px;               /* tweak to taste */
-            margin: 0 auto;
-          }
-        
-          .site-header h1 {
-            text-align: center;
-            font-size: 1.6em;           /* adjust to taste (uses your em approach) */
-            margin: 0;
-          }
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://216fishing.com#website",
+          "url": "https://216fishing.com",
+          "name": "216fishing",
+          "publisher": { "@id": "https://216fishing.com#org" }
         }
+      ]
+    }
+  </script>
 
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y3GG1723QJ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-Y3GG1723QJ');
+  </script>
 
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f8ff;
+      margin: 0;
+      padding: 20px;
+      line-height: 1.6;
+      text-align: center;
+    }
 
-        
-        h2 {
-            color: #4682b4;
-            margin-top: 40px;
-        }
+    .site-header {
+      background-color: #2e8b57;
+      color: black;
+      padding: 10px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
 
+    .site-header h1 {
+      flex: 1;
+      text-align: center;
+      margin: 0;
+      font-size: 2.5em;
+    }
 
+    .header-logo {
+      height: 89px;
+      width: auto;
+      margin: 0 10px;
+    }
 
-        .logo1 {
-          padding: 10px 0;
-          display: block;
-          margin: 0 auto;
-          max-width: 100%;   /* responsive: never exceed container width */
-          height: auto;      /* scale height proportionally */
-          max-height: 180px;
-        }
+    @media (max-width: 640px) {
+      .site-header {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: auto;
+        padding: 10px 12px;
+        gap: 8px;
+      }
+      .site-header .header-logo.right { display: none; }
+      .site-header .header-logo.left {
+        height: 89px;
+        margin: 0 auto;
+      }
+      .site-header h1 {
+        text-align: center;
+        font-size: 1.6em;
+        margin: 0;
+      }
+    }
 
-        
-        
-        #forecast {
-            font-size: 17px;
-            text-align: left;
-            line-height: 1.8;
-            margin: 1em auto;
-            max-width: 75ch;
-            padding: 2em;
-            border: 1px solid #ccc;
-        }
+    h2 {
+      color: #4682b4;
+      margin-top: 30px;
+    }
 
-        #forecast strong {
-            color: #2e8b57;
-            font-size: 18px;
-        }
-        #forecast small {
-            display: block;
-            margin-top: 10px;
-            font-size: 12px;
-            text-align: center;
-            color: #888;
-        }
+    a {
+      color: #1e90ff;
+      text-decoration: none;
+    }
+    a:hover { text-decoration: underline; }
 
-         #forecast note {
-            display: block;
-            margin-top: 10px;
-            font-size: 12px;
-            color: #888;
-        }
+    /* Simple nav under header */
+    .top-nav {
+      max-width: 960px;
+      margin: 14px auto 0;
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .nav-pill {
+      display: inline-block;
+      padding: 8px 12px;
+      border: 1px solid #ddd;
+      border-radius: 999px;
+      background: #f9f9f9;
+      font-size: 14px;
+    }
 
-        #forecast advisory {
-            color: red;
-            font-size: 16px;
-            font-weight: bold;
-        }
+    /* Hero */
+    .hero {
+      max-width: 960px;
+      margin: 22px auto 0;
+      padding: 18px;
+      border: 1px solid #ccc;
+      background: #fff;
+      text-align: left;
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap: 18px;
+      align-items: center;
+    }
+    @media (max-width: 820px) {
+      .hero-grid { grid-template-columns: 1fr; text-align: center; }
+      .hero { text-align: center; }
+    }
 
-        #forecast dayheader {
-            font-size: 18px;
-            font-weight: bold;
-        }
+    .hero h2 {
+      margin: 0 0 10px;
+      color: #2e8b57;
+    }
+    .hero p {
+      margin: 0 0 10px;
+      font-size: 16px;
+    }
+    .hero ul {
+      margin: 10px 0 0 18px;
+      padding: 0;
+      text-align: left;
+      display: inline-block;
+    }
+    .hero-actions {
+      margin-top: 14px;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    @media (max-width: 820px) {
+      .hero-actions { justify-content: center; }
+    }
+    .btn {
+      display: inline-block;
+      padding: 10px 14px;
+      border-radius: 10px;
+      border: 1px solid #ddd;
+      background: #f9f9f9;
+      font-weight: bold;
+    }
+    .btn-primary {
+      border-color: #2e8b57;
+      background: #e9f6ee;
+      color: #1f6a43;
+    }
 
+    .hero-logo {
+      width: 100%;
+      max-width: 320px;
+      height: auto;
+      display: block;
+      margin: 0 auto;
+    }
 
+    /* Product grid */
+    .section {
+      max-width: 960px;
+      margin: 26px auto 0;
+      padding: 0 6px;
+    }
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-top: 12px;
+    }
+    @media (max-width: 900px) {
+      .product-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 640px) {
+      .product-grid { grid-template-columns: 1fr; }
+    }
 
-        
-            
-        a {
-            color: #1e90ff;
-            text-decoration: none;
-        }
-        a:hover {
-            text-decoration: underline;
-        }
+    .card {
+      text-align: left;
+      border: 1px solid #ccc;
+      background: #fff;
+      padding: 14px;
+    }
+    .card h3 {
+      margin: 0 0 8px;
+      color: #2e8b57;
+      font-size: 18px;
+    }
+    .card p { margin: 0 0 12px; }
+    .tag {
+      display: inline-block;
+      font-size: 12px;
+      color: #555;
+      border: 1px solid #eee;
+      background: #fafafa;
+      padding: 4px 8px;
+      margin-bottom: 10px;
+    }
+    .buy-row {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
 
-
-
-        
-        iframe {
-            display: block;
-            margin: 20px auto;
-            width: 100%;
-            max-width: 960px;
-            height: auto;
-            aspect-ratio: 16 / 9;
-        }
-        @media screen and (max-width: 768px) {
-            iframe {
-                width: 100%;
-                height: auto;
-            }
-        }
-
-
-        
-        .buoy-links, .cam-links {
-            margin-bottom: 40px;
-        }
-
-
-
-
-        
-        footer {
-            text-align: center;
-            margin-top: 40px;
-            padding: 20px;
-            background-color: #e0e0e0;
-            font-size: 11px;
-        }
-
-    </style>
+    /* Footer matches your current style */
+    footer {
+      text-align: center;
+      margin-top: 40px;
+      padding: 20px;
+      background-color: #e0e0e0;
+      font-size: 11px;
+    }
+    .logo1 {
+      padding: 10px 0;
+      display: block;
+      margin: 0 auto;
+      max-width: 100%;
+      height: auto;
+      max-height: 180px;
+    }
+  </style>
 </head>
 
-
-    
 <body>
+  <header class="site-header">
+    <img src="assets/img/216BW.png" alt="216fishing black logo" class="header-logo left">
+    <h1>216 Fishing</h1>
+    <img src="assets/img/216BW.png" alt="216fishing black logo" class="header-logo right">
+  </header>
 
-    <header class="site-header">
-      <img src="assets/img/216BW.png" alt="216fishing black logo" class="header-logo left">
-      <h1>Cleveland Area Boating & Fishing Forecast</h1>
-      <img src="assets/img/216BW.png" alt="216fishing black logo" class="header-logo right">
-    </header>
+  <nav class="top-nav" aria-label="Primary navigation">
+    <a class="nav-pill" href="/" data-category="nav" data-label="Home">Home</a>
+    <a class="nav-pill" href="/forecast/" data-category="nav" data-label="Forecast">Forecast</a>
+    <a class="nav-pill" href="/about.html" data-category="nav" data-label="About">About</a>
+  </nav>
 
+  <section class="hero">
+    <div class="hero-grid">
+      <div>
+        <h2>Great Lakes-tested worm harnesses & planer board accessories</h2>
+        <p>
+          Practical, reliable gear built and fished in Northeast Ohio — designed for real Lake Erie conditions.
+        </p>
+        <ul>
+          <li>Small-batch builds</li>
+          <li>Durable components</li>
+          <li>Built by anglers — tested on the water</li>
+        </ul>
 
-    <h2>Nearshore Forecast for Cleveland</h2>
-
-    
-    <div id="forecast">Loading forecast...</div>
-
-
-
-    <!-- Windy collapsible (loads on first open) -->
-    <section style="max-width:820px;margin:2rem auto;padding:0 1rem">
-      <h2 style="text-align:center;margin:0 0 .75rem">Windy Map - Edgewater</h2>
-    
-      <details id="windy-collapsible" style="margin:.75rem 0">
-        <summary style="cursor:pointer;padding:.6rem .8rem;border:1px solid #ddd;border-radius:10px;background:#f9f9f9">
-          Click here to open interactive map
-        </summary>
-    
-        <div style="margin-top:.6rem;position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:12px;border:1px solid #ddd">
-          <iframe id="windy-frame" title="Windy — Interactive"
-            style="position:absolute;top:0;left:0;width:100%;height:100%;border:0"
-            loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#featured" data-category="cta" data-label="View offerings">View current offerings</a>
+          <a class="btn" href="/forecast/" data-category="cta" data-label="Open forecast">Check the forecast</a>
         </div>
-      </details>
-    </section>
-    
-    <script>
-        (function(){
-          const LAT=41.5200, LON=-81.7200, ZOOM=8;
-          function windyURL(){
-            const u = new URL('https://embed.windy.com/embed2.html');
-            const p = {
-              lat: LAT.toFixed(4), lon: LON.toFixed(4), zoom: ZOOM,
-              level: 'surface', overlay: 'wind',        // default layer; user can change
-              marker: 'true', detail: 'false',          // keep forecast overlay off for mobile
-              type: 'map', location: 'coordinates', calendar: 'now',
-              metricWind: 'mph', metricTemp: '%C2%B0F'
-            };
-            Object.entries(p).forEach(([k,v])=>u.searchParams.set(k,v));
-            return u.toString();
-          }
-        
-          const dd = document.getElementById('windy-collapsible');
-          const frame = document.getElementById('windy-frame');
-          let loaded = false;
-        
-          dd.addEventListener('toggle', () => {
-            if (dd.open && !loaded) {
-              frame.src = windyURL();
-              loaded = true;
-            }
-          });
-        })();
-    </script>
-     <!-- END OF   Windy collapsible (loads on first open) -->
+      </div>
 
-
-
-
-   <!-- 216fishing — Collapsible Wind · Waves · Weather (72h, sticky header, Weather column w/ icon+temp+precip) -->
-    <section style="max-width:980px;margin:2rem auto;padding:0 1rem;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif">
-      <h2 style="text-align:center;margin:0 0 .5rem">Wind · Waves · Weather — Next 72 Hours</h2>
-    
-      <details id="wx72-details" style="margin:.75rem 0">
-        <summary style="cursor:pointer;padding:.6rem .8rem;border:1px solid #ddd;border-radius:10px;background:#f9f9f9">
-          Click here to open hourly table
-        </summary>
-    
-        <!-- Scrollable table container; header sticks inside this scroll box -->
-        <div id="wx72-scroll" style="max-height:420px;overflow:auto;border:1px solid #ddd;border-radius:12px">
-          <div style="padding:.75rem">Loading…</div>
-        </div>
-    
-        <div style="text-align:center;color:#666;font-size:.9rem;margin-top:.4rem">
-          Source: Open-Meteo (Weather & Marine)
-        </div>
-      </details>
-    </section>
-    
-    <script>
-    (function(){
-      // === Location (edit if needed) ===
-      const LAT = 41.5200, LON = -81.7200; // Edgewater/Cleveland
-    
-      // State
-      let loaded = false;
-      let W=null, M=null, TIMES=[];
-    
-      // Endpoints (no API key)
-      const weatherURL = `https://api.open-meteo.com/v1/forecast?latitude=${LAT}&longitude=${LON}&hourly=temperature_2m,wind_speed_10m,wind_gusts_10m,wind_direction_10m,precipitation_probability,weathercode&timezone=auto&windspeed_unit=mph&temperature_unit=fahrenheit`;
-      const marineURL  = `https://marine-api.open-meteo.com/v1/marine?latitude=${LAT}&longitude=${LON}&hourly=wave_height,wave_period,wave_direction&timezone=auto`;
-    
-      // Helpers
-      const ft = m => (m*3.28084);
-      const dir = d => ['N','NNE','NE','ENE','E','ESE','SE','SSE','S','SSW','SW','WSW','W','WNW','NW','NNW'][Math.round((d%360)/22.5)%16];
-      function wmo(code){
-        const map = {
-          0:["☀️","Clear"], 1:["🌤","Mainly clear"], 2:["⛅","Partly cloudy"], 3:["☁️","Overcast"],
-          45:["🌫️","Fog"], 48:["🌫️","Rime fog"],
-          51:["🌦","Drizzle"], 53:["🌦","Drizzle"], 55:["🌧","Drizzle"],
-          61:["🌧","Rain"], 63:["🌧","Rain"], 65:["🌧","Heavy rain"],
-          66:["🌧","Freezing rain"], 67:["🌧","Freezing rain"],
-          71:["🌨","Snow"], 73:["🌨","Snow"], 75:["❄️","Heavy snow"],
-          77:["❄️","Snow grains"],
-          80:["🌧","Rain showers"], 81:["🌧","Rain showers"], 82:["🌧","Heavy showers"],
-          85:["🌨","Snow showers"], 86:["❄️","Heavy snow shwrs"],
-          95:["⛈","Thunderstorm"], 96:["⛈","T-storm w/ hail"], 97:["⛈","T-storm w/ hail"]
-        };
-        return map[code] || ["🌡️","Weather"];
-      }
-    
-      function render72(){
-        const box = document.getElementById('wx72-scroll');
-    
-        // start at next available hour, render 72 hours
-        const now = Date.now();
-        let i0 = TIMES.findIndex(t => new Date(t).getTime() >= now);
-        if (i0 < 0) i0 = 0;
-        const i1 = Math.min(i0 + 72, TIMES.length);
-    
-        let rows = "";
-        for (let i=i0; i<i1; i++){
-          const t = new Date(TIMES[i]);
-          const stamp = t.toLocaleString([], {weekday:'short', hour:'numeric'});
-    
-          const wspd = W.wind_speed_10m?.[i];
-          const wgst = W.wind_gusts_10m?.[i];
-          const wdirA = W.wind_direction_10m?.[i];
-    
-          const wh = M.wave_height?.[i];
-          const wp = M.wave_period?.[i];
-          const wdirS = M.wave_direction?.[i];
-    
-          const temp = W.temperature_2m?.[i];
-          const pop  = W.precipitation_probability?.[i];
-          const [ico, desc] = wmo(W.weathercode?.[i] ?? 0);
-    
-          rows += `<tr>
-            <td style="padding:.45rem .5rem;white-space:nowrap">${stamp}</td>
-            <td style="text-align:center;padding:.45rem .5rem">${wspd!=null?Math.round(wspd):"—"} mph</td>
-            <td style="text-align:center;padding:.45rem .5rem">${wgst!=null?Math.round(wgst):"—"} mph</td>
-            <td style="text-align:center;padding:.45rem .5rem">${wdirA!=null?dir(wdirA):"—"}</td>
-            <td style="text-align:center;padding:.45rem .5rem">${wh!=null?ft(wh).toFixed(1):"—"} ft</td>
-            <td style="text-align:center;padding:.45rem .5rem">${wp!=null?Math.round(wp):"—"} s</td>
-            <td style="text-align:center;padding:.45rem .5rem">${wdirS!=null?dir(wdirS):"—"}</td>
-            <td style="padding:.45rem .5rem">
-              <span style="margin-right:.35rem">${ico}</span>
-              <span>${temp!=null?Math.round(temp):"—"}°F</span>
-              <span style="color:#555;margin-left:.35rem">${pop!=null?pop:"—"}%</span><br>
-              <span style="color:#666;font-size:.85rem">${desc}</span>
-            </td>
-          </tr>`;
-        }
-    
-        // Table directly inside the scroll container (sticky header works reliably)
-        box.innerHTML = `
-          <table style="min-width:900px;width:100%;border-spacing:0;border-collapse:separate">
-            <thead>
-              <tr>
-                <th class="wx72-th" style="text-align:center">Time</th>
-                <th class="wx72-th" style="text-align:center">Wind</th>
-                <th class="wx72-th" style="text-align:center">Gusts</th>
-                <th class="wx72-th" style="text-align:center">Wind Dir</th>
-                <th class="wx72-th" style="text-align:center">Wave Ht</th>
-                <th class="wx72-th" style="text-align:center">Wave Per</th>
-                <th class="wx72-th" style="text-align:center">Wave Dir</th>
-                <th class="wx72-th" style="text-align:center">Weather</th>
-              </tr>
-            </thead>
-            <tbody>${rows}</tbody>
-          </table>`;
-    
-        // Sticky header CSS (injected once)
-        const styleId = 'wx72-sticky-style';
-        if (!document.getElementById(styleId)) {
-          const s = document.createElement('style');
-          s.id = styleId;
-          s.textContent = `
-            #wx72-scroll thead th.wx72-th{
-              position: sticky; top: 0; z-index: 1;
-              background: #fff; border-bottom: 1px solid #ddd; padding: .5rem;
-            }
-            #wx72-scroll td{ border-bottom:1px solid #eee; }
-          `;
-          document.head.appendChild(s);
-        }
-      }
-    
-      // Lazy fetch on first open
-      document.getElementById('wx72-details').addEventListener('toggle', async (e)=>{
-        if (e.target.open && !loaded){
-          try{
-            const [wRes, mRes] = await Promise.all([fetch(weatherURL), fetch(marineURL)]);
-            if(!wRes.ok || !mRes.ok) throw new Error('Fetch failed');
-            const wJson = await wRes.json();
-            const mJson = await mRes.json();
-            W = wJson.hourly; M = mJson.hourly; TIMES = W.time;
-            loaded = true;
-            render72();
-          }catch(err){
-            document.getElementById('wx72-scroll').innerHTML =
-              `<div style="padding:.75rem;color:#b00">Error loading forecast.</div>`;
-            console.error(err);
-          }
-        }
-      });
-    })();
-    </script>
-    <!-- END OF    216fishing — Collapsible Wind · Waves · Weather (sticky header, scrollable) -->
-
-
-
-  
-   
-     <!-- Data & Info Links -->
-    <div class="buoy-links and other info">
-        <!-- Buoy Links -->
-        <h2>Buoy Links</h2>
-        
-        <p><a href="https://data.freeboard.tech/station/45196/" 
-            target="_blank"
-            data-category="buoy" 
-            data-label="Rocky River Buoy">
-            Rocky River Buoy
-        </a></p>
-        
-        <p><a href="https://data.freeboard.tech/station/45176/" 
-            target="_blank"
-            data-category="buoy" 
-            data-label="Crib Buoy">
-            Crib Buoy
-        </a></p>
-        
-        <p><a href="https://data.freeboard.tech/station/45205/" 
-            target="_blank"
-            data-category="buoy" 
-            data-label="Edgewater Buoy">
-            Edgewater Buoy
-        </a></p>
-        
-        <p><a href="https://data.freeboard.tech/station/45164/" 
-            target="_blank"
-            data-category="buoy" 
-            data-label="Cleveland offshore Buoy">   
-            Cleveland Offshore Buoy
-        </a></p>
-        
-        <p><a href="https://data.freeboard.tech/station/45204/" 
-            target="_blank"
-            data-category="buoy" 
-            data-label="Rocky River Buoy">
-            Sheffield Buoy
-        </a></p>
-        
-        <p><a href="https://data.freeboard.tech/station/45206/" 
-            target="_blank"
-            data-category="buoy" 
-            data-label="Rocky River Buoy">
-            Euclid Beach Buoy
-        </a></p>
-        
-        <p><a href="https://data.freeboard.tech/station/45197/" 
-            target="_blank"
-            data-category="buoy" 
-            data-label="Rocky River Buoy">
-            Euclid Buoy
-        </a></p>
-        <br><br>
-        <!-- END OF     Buoy Links -->
-
-
-
-        <!-- Tourney Links -->
-        <h2>Fall Tournements</h2>
-
-        <p><a href="https://www.walleyeslam.com/"
-               target="_blank"
-               data-category="tourneys"
-               data-label="walleye slam">
-               Walleye Slam
-               </a></p>
-
-        <p><a href="https://lakeeriefallbrawl.com/"
-               target="_blank"
-               data-category="tourneys"
-               data-label="Fall brawl">
-               Fall Brawl
-               </a></p>
-         <!-- END OF   Tourney Links -->
-
-
-
-        <!-- Reports & Forecasts -->
-        <h2>Reports & Forecasts</h2>
-        
-        <p><a href="https://solunarforecast.com/hunting_fishing/best_times/zip_postal_code/calendar/us/44107" 
-            target="_blank"
-            data-category="forecasts" 
-            data-label="Solunar forecast">
-            44107 Solunar Forecast Calendar
-        </a></p>
-        
-        <p><a href="https://www.clevelandmetroparks.com/fishing" 
-            target="_blank"
-            data-category="forecasts" 
-            data-label="Fishing report">
-            Metroparks Fishing Report
-        </a></p>
-        
-        <p><a href="https://waterdata.usgs.gov/monitoring-location/04201500/#parameterCode=00060&period=P7D&showMedian=false" 
-            target="_blank"
-            data-category="forecasts" 
-            data-label="RR flow gauge">
-            Rocky River East Branch Flow Gauge
-        </a></p>
-        
-        <p id="discharge-value">Loading discharge value...</p>
-        <br>
-        <!-- END OF    Reports & Forecasts -->
+      <div>
+        <img src="assets/img/216DT.png" alt="216fishing logo" class="hero-logo">
+      </div>
     </div>
-    <!-- END OF    Data & Info Links -->
+  </section>
 
+  <section class="section" id="featured">
+    <h2>Current offerings</h2>
+    <p style="max-width:75ch;margin:0 auto;">
+      For now, purchases are handled through eBay. Click any item below to view the live listing.
+    </p>
 
+    <div class="product-grid">
 
-    <!-- Cam Links -->
-    <div class="cam-links">
-        <h2>Lake Erie Webcams</h2>
-        
-        <p><a href="https://www.clevelandmetroparks.com/parks/visit/parks/lakefront-reservation/edgewater-beach" 
-            target="_blank"
-            data-category="webcams" 
-            data-label="Edgewater cam">
-            Edgewater Beach Cam
-        </a></p>
-        
-        <p><a href="https://www.earthcam.com/usa/ohio/cleveland/?cam=pierw" 
-            target="_blank"
-            data-category="webcams" 
-            data-label="Pier W cam">
-            Pier W - Lakewood
-        </a></p>
-        
-        <p><a href="https://www.bayboatclub.org/dock-cam/"
-            target="_blank"
-            data-category="webcams" 
-            data-label="BBC cam">
-            Bay Boat Club - Bay Village
-        </a></p>
-        
-        
-        <p>Crib Cam is currently offline</p>
-        
-        
-        <!--       ***  CRIB CAM TAKEN DOWN WHILE FEED IS DOWN   ***
-        <h2>Crib Cam</h2>
-        <iframe 
-            src="https://www.youtube.com/embed/pTCHt8PrImY?si=4NNaU5qttawhIo-s" 
-            title="Crib Cam" frameborder="0" 
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-            allowfullscreen>
-        </iframe>
-        -->
+      <!-- PRODUCT CARD TEMPLATE (duplicate as needed) -->
 
+      <div class="card">
+        <span class="tag">Planer Board Accessory</span>
+        <h3>Board Savers</h3>
+        <p>Planer board retaining pin add-on set</p>
+        <div class="buy-row">
+          <a class="btn btn-primary"
+             href="https://www.ebay.com/itm/406697570664"
+             target="_blank" rel="noopener"
+             data-category="product"
+             data-label="Board saver - Buy on eBay">
+             Buy on eBay
+          </a>
+        </div>
+      </div>
         
+        
+      <div class="card">
+        <span class="tag">Worm Harness</span>
+        <h3>Purples</h3>
+        <div class="buy-row">
+          <a class="btn btn-primary"
+             href="https://www.ebay.com/itm/406572193793"
+             target="_blank" rel="noopener"
+             data-category="product"
+             data-label="Purples - Buy on eBay">
+             Buy on eBay
+          </a>
+        </div>
+      </div>
+
+      <div class="card">
+        <span class="tag">Worm Harness</span>
+        <h3>Shads</h3>
+        <div class="buy-row">
+          <a class="btn btn-primary"
+             href="https://www.ebay.com/itm/406582086531"
+             target="_blank" rel="noopener"
+             data-category="product"
+             data-label="Shads - Buy on eBay">
+             Buy on eBay
+          </a>
+        </div>
+      </div>
+
+       <div class="card">
+        <span class="tag">Worm Harness</span>
+        <h3>Two Tones</h3>
+        <div class="buy-row">
+          <a class="btn btn-primary"
+             href="https://www.ebay.com/itm/406585963751"
+             target="_blank" rel="noopener"
+             data-category="product"
+             data-label="Two Tones - Buy on eBay">
+             Buy on eBay
+          </a>
+        </div>
+      </div>  
+
+      
+
+      <!-- Add/remove cards to match what you actually sell today -->
+
     </div>
-    <!-- END OF    Cam Links -->
+  </section>
 
+  <section class="section">
+    <h2>Why 216 Fishing</h2>
+    <div style="max-width:75ch;margin:0 auto;text-align:left;border:1px solid #ccc;background:#fff;padding:14px;">
+      <p style="margin:0 0 10px;">
+        216 Fishing started as a Lake Erie forecast page, built to help plan better days on the water.
+        The same “keep it practical” mindset carries into the gear — simple upgrades and harnesses built to run right.
+      </p>
+      <p style="margin:0;">
+        Want the lake conditions first? Head straight to the <a href="/forecast/" data-category="internal" data-label="Forecast link">Forecast</a>.
+      </p>
+    </div>
+  </section>
 
-       
+  <footer>
+    <img src="assets/img/216DT.png" alt="216fishing downtown sunrise logo" class="logo1">
 
-    <footer>
-        <img src="assets/img/216DT.png" alt="216fishing downtown sunrise logo" class="logo1">
-        
-        <p><a href="https://216fishing.com/about.html"
-            target="_blank"
-            data-category="pages" 
-            data-label="about page">
-            About
-        </a></p>
-        
-        <p><a href="https://216fishing.com/privacy.html"
-            target="_blank"
-            data-category="pages" 
-            data-label="privacy page">
-            Privacy policy
-        </a></p>
-        
-        <p>© 216fishing 2025.00109</p>
-    </footer>
+    <p><a href="https://216fishing.com/about.html"
+      target="_blank" rel="noopener"
+      data-category="pages" data-label="about page">About</a></p>
 
+    <p><a href="https://216fishing.com/privacy.html"
+      target="_blank" rel="noopener"
+      data-category="pages" data-label="privacy page">Privacy policy</a></p>
 
-    
+    <p>© 216fishing 2026</p>
+  </footer>
 
-     <script>
-         // fetch html formatted marine forecast
-    fetch('https://raw.githubusercontent.com/fishman216kb/fishing-forecast/main/forecast.html')
-        .then(response => response.text())
-        .then(data => {
-            document.getElementById('forecast').innerHTML = data;
-        })
-        .catch(error => {
-            document.getElementById('forecast').textContent = "Error loading forecast.";
-        });
-    </script>
-
-
-    
-
-    <script>
-        // Fetch discharge data from USGS
-        fetch('https://waterservices.usgs.gov/nwis/iv/?format=json&sites=04201484&parameterCd=00060')
-            .then(response => response.json())
-            .then(data => {
-                const timeSeries = data.value.timeSeries[0];
-                const discharge = timeSeries.values[0].value[0].value;
-                document.getElementById('discharge-value').textContent = `Current discharge value: ${discharge} cfs`;
-            })
-            .catch(error => {
-                document.getElementById('discharge-value').textContent = "Error loading discharge value.";
-            });
-    </script>
-
-
-
-    <script>
+  <!-- Keep your GA link tracking as-is -->
+  <script>
     document.addEventListener("DOMContentLoaded", function() {
       document.querySelectorAll("a[data-category]").forEach(function(link) {
         link.addEventListener("click", function() {
           const category = link.getAttribute("data-category");
           const label = link.getAttribute("data-label") || link.textContent.trim();
           const url = link.href;
-    
+
           gtag('event', 'link_click', {
             'event_category': category,
             'event_label': label,
@@ -680,9 +418,6 @@
         });
       });
     });
-    </script>
-
-    
-
+  </script>
 </body>
 </html>
