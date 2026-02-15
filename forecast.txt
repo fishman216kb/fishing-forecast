@@ -1,16 +1,13 @@
 Avon Point to Willowick OH-
-Willowick to Geneva-on-the Lake OH-Geneva-on-the-
-Lake to Conneaut OH-Conneaut OH to Ripley NY-
-907 PM EST Sat Feb 14 2026
+341 AM EST Sun Feb 15 2026
 
-.OVERNIGHT...Southeast winds less than 10 knots. Mostly
-cloudy. The lake is mostly ice covered.
-.SUNDAY...South winds less than 10 knots becoming southwest.
-Partly sunny. 
-.SUNDAY NIGHT...South winds less than 10 knots becoming west.
-Mostly cloudy. 
+.TODAY...Southwest winds less than 10 knots becoming south.
+Partly sunny. The lake is mostly ice covered.
+.TONIGHT...South winds less than 10 knots becoming west. Mostly
+cloudy. 
 .MONDAY...Southwest winds 10 knots or less. Mostly cloudy in the
 morning, then becoming mostly sunny. 
+.MONDAY NIGHT...Southwest winds 5 to 15 knots. Partly cloudy. 
 
 Waves omitted due to the lake being mostly ice covered.
 
