@@ -2,33 +2,67 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>216 Fishing Expo Redirect</title>
 
-  <!-- Fallback meta refresh (in case JavaScript is disabled) -->
-  <meta http-equiv="refresh" content="3; url=https://www.ebay.com/itm/406697570664">
+  <!-- Fallback meta refresh (if JS disabled) -->
+  <meta http-equiv="refresh" content="5; url=https://www.ebay.com/itm/406697570664">
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y3GG1723QJ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-Y3GG1723QJ');
+  </script>
 
 </head>
-<body>
+<body style="font-family: Arial, sans-serif; text-align:center; padding:40px;">
 
   <p>Redirecting to the 216 Fishing Board Saver listing...</p>
+  <p>If you are not redirected automatically,
+     <a href="https://www.ebay.com/itm/406697570664">click here</a>.
+  </p>
 
   <script>
-    (function() {
-      var destination = "https://www.ebay.com/itm/406697570664";
+    (function () {
 
-      // Fire GA4 event if gtag is available
-      if (typeof gtag === "function") {
-        gtag('event', 'expo_qr_scan', {
-          event_category: 'Promo',
-          event_label: 'Board Saver Expo',
-          link_url: window.location.href
-        });
+      const DESTINATION = "https://www.ebay.com/itm/406697570664";
+      const MAX_WAIT = 1000; // max wait for GA (1 second)
+      const START_TIME = Date.now();
+
+      function redirect() {
+        window.location.replace(DESTINATION);
       }
 
-      // Delay redirect slightly to ensure GA event fires
-      setTimeout(function() {
-        window.location.href = destination;
-      }, 500); // 0.5 second delay
+      function fireEventAndRedirect() {
+        if (typeof gtag === "function") {
+
+          gtag('event', 'expo_qr_scan', {
+            event_category: 'Promo',
+            event_label: 'Board Saver Expo',
+            link_url: window.location.href,
+            destination_url: DESTINATION
+          });
+
+          // Small delay to allow GA hit to send
+          setTimeout(redirect, 300);
+          return;
+        }
+
+        // If GA hasn’t loaded after max wait, just redirect
+        if (Date.now() - START_TIME > MAX_WAIT) {
+          redirect();
+          return;
+        }
+
+        // Check again shortly
+        setTimeout(fireEventAndRedirect, 50);
+      }
+
+      fireEventAndRedirect();
+
     })();
   </script>
 
