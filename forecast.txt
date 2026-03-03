@@ -1,9 +1,9 @@
 Avon Point to Willowick OH-
-402 AM EST Tue Mar 3 2026
+924 AM EST Tue Mar 3 2026
 
-.TODAY...East winds 10 knots or less becoming northwest. A chance
-of rain early, then rain likely late this morning. A chance of
-rain this afternoon. Waves in ice free areas 1 foot or less. 
+.REST OF TODAY...East winds less than 10 knots becoming
+northwest. Rain likely late this morning, then a chance of rain
+this afternoon. Waves in ice free areas 1 foot or less. 
 .TONIGHT...Northwest winds less than 10 knots. A chance of rain
 in the evening. Waves 1 foot or less. 
 .WEDNESDAY...Northeast winds 10 knots or less. A chance of rain
@@ -15,5 +15,5 @@ Wave heights are for ice free areas.
 
 See Lake Erie open lakes forecast for Thursday through Saturday.
 
-The water temperature off Toledo is 37 degrees, off Cleveland 34
+The water temperature off Toledo is 37 degrees, off Cleveland 33
 degrees, and off Erie 33 degrees.
