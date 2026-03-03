@@ -1,17 +1,15 @@
 Avon Point to Willowick OH-
-926 PM EST Mon Mar 2 2026
+402 AM EST Tue Mar 3 2026
 
-.OVERNIGHT...East winds 10 knots or less. A slight chance
-of rain, freezing rain and snow late. Waves in ice free areas
-2 feet or less. 
-.TUESDAY...East winds 10 knots or less becoming northeast. A
-chance of rain, a slight chance of freezing rain and snow in the
-morning, then a chance of rain in the afternoon. Waves 1 foot or
-less. 
-.TUESDAY NIGHT...Northeast winds less than 10 knots. A chance of
-rain in the evening. Waves 1 foot or less. 
-.WEDNESDAY...Northeast winds 10 knots or less becoming east. A
-chance of rain in the afternoon. Waves 1 foot or less. 
+.TODAY...East winds 10 knots or less becoming northwest. A chance
+of rain early, then rain likely late this morning. A chance of
+rain this afternoon. Waves in ice free areas 1 foot or less. 
+.TONIGHT...Northwest winds less than 10 knots. A chance of rain
+in the evening. Waves 1 foot or less. 
+.WEDNESDAY...Northeast winds 10 knots or less. A chance of rain
+in the afternoon. Waves 1 foot or less. 
+.WEDNESDAY NIGHT...East winds 10 knots or less. A chance of rain
+in the evening, then rain likely overnight. Waves 1 foot or less.
 
 Wave heights are for ice free areas.
 
