@@ -1,13 +1,13 @@
 Avon Point to Willowick OH-Willowick to Geneva-on-the Lake OH-
 Geneva-on-the-Lake to Conneaut OH-Conneaut OH to Ripley NY-
-354 AM EDT Thu May 14 2026
+951 AM EDT Thu May 14 2026
 
 ...SMALL CRAFT ADVISORY IN EFFECT UNTIL NOON EDT TODAY...
 
-.TODAY...Northwest winds 15 to 20 knots diminishing to 10 to
-15 knots. Showers likely this morning, then a chance of showers
-this afternoon. Waves 3 to 5 feet subsiding to 2 to 4 feet. Waves
-occasionally around 6 feet. 
+.REST OF TODAY...Northwest winds 15 to 20 knots diminishing to
+10 to 15 knots. Showers likely late this morning, then a chance
+of showers this afternoon. Waves 3 to 5 feet subsiding to 2 to
+4 feet. Waves occasionally around 6 feet. 
 .TONIGHT...Northwest winds 5 to 15 knots. Partly cloudy. Waves
 1 to 3 feet. 
 .FRIDAY...West winds 10 knots or less. Mostly sunny. Waves 1 foot
@@ -17,5 +17,5 @@ or less.
 
 See Lake Erie open lakes forecast for Saturday through Monday.
 
-The water temperature off Toledo is 58 degrees, off Cleveland 52
-degrees, and off Erie 55 degrees.
+The water temperature off Toledo is 58 degrees, off Cleveland 53
+degrees, and off Erie 54 degrees.
