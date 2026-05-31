@@ -218,11 +218,19 @@
       margin-top: 12px;
     }
     @media (max-width: 900px) {
-      .product-grid { grid-template-columns: 1fr; }
+      .product-grid { grid-template-columns: repeat(2, 1fr); }
     }
+    
     @media (max-width: 640px) {
       .product-grid { grid-template-columns: 1fr; }
+       .featured-card {
+        grid-column: auto;
+        max-width: none;
+        width: auto;
+      }
     }
+
+ 
 
     .card {
       text-align: center;
@@ -230,6 +238,13 @@
       background: #fff;
       padding: 14px;
     }
+
+    .featured-card {
+      grid-column: 1 / span 2;
+      justify-self: center;
+      max-width: 650px;
+    }
+    
     .card h3 {
       margin: 0 0 8px;
       color: #2e8b57;
