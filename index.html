@@ -224,9 +224,10 @@
     @media (max-width: 640px) {
       .product-grid { grid-template-columns: 1fr; }
       .featured-card {
-        grid-column: 1;
-        max-width: none;
-        width: auto;
+        grid-column: 1 / -1;
+        max-width: 100%;
+        width: 100%;
+        justify-self: stretch;
       }
     }
 
@@ -240,9 +241,10 @@
     }
 
     .featured-card {
-      grid-column: 1 / span 2;
+      grid-column: 1 / -1;
       justify-self: center;
       max-width: 650px;
+      width: 100%;
     }
     
     .card h3 {
@@ -263,6 +265,7 @@
 
     .product-img{
       width: 100%;
+      height: auto;
       object-fit: cover;
       display: block;
       margin: 0 auto 10px;
