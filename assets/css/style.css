@@ -6,13 +6,22 @@
       padding: 20px;
       line-height: 1.6;
       text-align: center;
-    }
+ }
 
-    .site-header {
+ .site-header {
       background-color: #2e8b57;
       color: black;
       padding: 10px 0;
       display: flex;
       align-items: center;
       justify-content: space-between;
-    }
+ }
+
+ .site-header h1 {
+      flex: 1;
+      text-align: center;
+      margin: 0;
+      font-family: 'Jomhuria', sans-serif;
+      font-size: 6.9em;
+      letter-spacing: 5px;
+ }
