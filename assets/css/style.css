@@ -1,1 +1,18 @@
 
+ body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f8ff;
+      margin: 0;
+      padding: 20px;
+      line-height: 1.6;
+      text-align: center;
+    }
+
+    .site-header {
+      background-color: #2e8b57;
+      color: black;
+      padding: 10px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
