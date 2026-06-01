@@ -7,6 +7,8 @@
 
   <title>Great Lakes Tested Worm Harnesses & Planer Board Accessories | 216fishing.com</title>
 
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/216flavi.png">
+
   <!-- Schema stays, just adjust description/brand focus -->
   <script type="application/ld+json">
     {
@@ -23,7 +25,7 @@
           },
           "contactPoint": {
             "@type": "ContactPoint",
-            "email": "admin@216fishing.com",
+            "email": "info@216fishing.com",
             "contactType": "customer support"
           }
         },
@@ -47,7 +49,7 @@
     gtag('config', 'G-Y3GG1723QJ');
   </script>
 
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Jomhuria&display=swap" rel="stylesheet">
   
   <style>
     body {
@@ -73,9 +75,9 @@
       flex: 1;
       text-align: center;
       margin: 0;
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 2.5em;
-      letter-spacing: 1px;
+      font-family: 'Jomhuria', sans-serif;
+      font-size: 6.9em;
+      letter-spacing: 5px;
     }
 
 
@@ -144,7 +146,7 @@
       padding: 18px;
       border: 1px solid #ccc;
       background: #fff;
-      text-align: left;
+      text-align: center;
     }
     .hero-grid {
       display: grid;
@@ -176,6 +178,7 @@
       display: flex;
       gap: 10px;
       flex-wrap: wrap;
+      justify-content: center;
     }
     @media (max-width: 820px) {
       .hero-actions { justify-content: center; }
@@ -217,9 +220,18 @@
     @media (max-width: 900px) {
       .product-grid { grid-template-columns: repeat(2, 1fr); }
     }
+    
     @media (max-width: 640px) {
       .product-grid { grid-template-columns: 1fr; }
+      .featured-card {
+        grid-column: 1 / -1;
+        max-width: 100%;
+        width: 100%;
+        justify-self: stretch;
+      }
     }
+
+ 
 
     .card {
       text-align: center;
@@ -227,6 +239,14 @@
       background: #fff;
       padding: 14px;
     }
+
+    .featured-card {
+      grid-column: 1 / -1;
+      justify-self: center;
+      max-width: 650px;
+      width: 100%;
+    }
+    
     .card h3 {
       margin: 0 0 8px;
       color: #2e8b57;
@@ -245,6 +265,7 @@
 
     .product-img{
       width: 100%;
+      height: auto;
       object-fit: cover;
       display: block;
       margin: 0 auto 10px;
@@ -281,8 +302,7 @@
   <header class="site-header">
     <img src="assets/img/216BW.png" alt="216fishing black logo" class="header-logo left">
     <h1 class="site-title">
-      Great Lakes Tested.<br>
-      Built for the Water.
+      GREAT LAKES TESTED
     </h1>
     <img src="assets/img/216BW.png" alt="216fishing black logo" class="header-logo right">
   </header>
@@ -295,7 +315,7 @@
   <section class="hero">
     <div class="hero-grid">
       <div>
-        <h2>Great Lakes-tested worm harnesses & planer board accessories</h2>
+        <h2>Great Lakes tested worm harnesses & planer board accessories</h2>
         <p>
           Practical, reliable gear built and fished in Northeast Ohio — designed for real Lake Erie conditions.
         </p>
@@ -327,10 +347,10 @@
 
       <!-- PRODUCT CARD TEMPLATE (duplicate as needed) -->
 
-      <div class="card">
+      <div class="card featured-card">
         <h3>Board Savers</h3>
+        <img class="product-img" src="/assets/img/boardsaver4x3.jpg" alt="Board Savers">
         <p>Planer board retaining pin add-on set</p>
-        <img class="product-img" src="/assets/img/both close up.jpg" alt="Board Savers">
         <div class="buy-row">
           <a class="btn btn-primary"
              href="https://www.ebay.com/itm/406697570664"
@@ -345,13 +365,13 @@
         
       <div class="card">
         <h3>Purples</h3>
-        <img class="product-img" src="/assets/img/purples.jpg" alt="Purples">
+        <img class="product-img" src="/assets/img/uvpurples4x3.jpg" alt="UV Purples">
         <div class="buy-row">
           <a class="btn btn-primary"
              href="https://www.ebay.com/itm/406572193793"
              target="_blank" rel="noopener"
              data-category="product"
-             data-label="Purples - Buy on eBay">
+             data-label="UV Purples - Buy on eBay">
              Buy on eBay
           </a>
         </div>
@@ -359,7 +379,7 @@
 
       <div class="card">
         <h3>Shads</h3>
-        <img class="product-img" src="/assets/img/shads.jpg" alt="Shads">
+        <img class="product-img" src="/assets/img/shads4x3.jpg" alt="Shads">
         <div class="buy-row">
           <a class="btn btn-primary"
              href="https://www.ebay.com/itm/406582086531"
@@ -372,14 +392,56 @@
       </div>
 
        <div class="card">
-        <h3>Two Tones</h3>
-         <img class="product-img" src="/assets/img/twotones.jpg" alt="Two Tones">
+        <h3>Two Tones 1</h3>
+         <img class="product-img" src="/assets/img/twotones14x3.jpg" alt="Two Tones 1">
         <div class="buy-row">
           <a class="btn btn-primary"
              href="https://www.ebay.com/itm/406585963751"
              target="_blank" rel="noopener"
              data-category="product"
-             data-label="Two Tones - Buy on eBay">
+             data-label="Two Tones 1 - Buy on eBay">
+             Buy on eBay
+          </a>
+        </div>
+      </div>  
+
+      <div class="card">
+        <h3>Two Tones 2</h3>
+         <img class="product-img" src="/assets/img/twotones24x3.jpg" alt="Two Tones 2">
+        <div class="buy-row">
+          <a class="btn btn-primary"
+             href="https://www.ebay.com/itm/406886930818"
+             target="_blank" rel="noopener"
+             data-category="product"
+             data-label="Two Tones 2 - Buy on eBay">
+             Buy on eBay
+          </a>
+        </div>
+      </div>  
+
+      <div class="card">
+        <h3>Blade Singles</h3>
+         <img class="product-img" src="/assets/img/bladesMM4x3.jpg" alt="Blade Singles">
+        <div class="buy-row">
+          <a class="btn btn-primary"
+             href="https://www.ebay.com/itm/406887264503"
+             target="_blank" rel="noopener"
+             data-category="product"
+             data-label="Blade Singles - Buy on eBay">
+             Buy on eBay
+          </a>
+        </div>
+      </div>  
+
+      <div class="card">
+        <h3>Harness Singles</h3>
+         <img class="product-img" src="/assets/img/harnessesMM4x3.jpg" alt="Harness Singles">
+        <div class="buy-row">
+          <a class="btn btn-primary"
+             href="https://www.ebay.com/itm/406887409000"
+             target="_blank" rel="noopener"
+             data-category="product"
+             data-label="Harness Singles - Buy on eBay">
              Buy on eBay
           </a>
         </div>
