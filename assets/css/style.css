@@ -1,4 +1,8 @@
 
+/* =========================
+   GLOBAL STYLES
+   ========================= */
+
  body {
       font-family: Arial, sans-serif;
       background-color: #f0f8ff;
@@ -6,7 +10,27 @@
       padding: 20px;
       line-height: 1.6;
       text-align: center;
- }
+   }
+
+
+ h2 {
+      color: #4682b4;
+      margin-top: 30px;
+    }
+
+
+ a {
+      color: #1e90ff;
+      text-decoration: none;
+    }
+
+ a:hover { text-decoration: underline; }
+
+
+
+/* =========================
+   HEADER
+   ========================= */
 
  .site-header {
       background-color: #2e8b57;
@@ -15,7 +39,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
- }
+   }
 
  .site-header h1 {
       flex: 1;
@@ -24,4 +48,50 @@
       font-family: 'Jomhuria', sans-serif;
       font-size: 6.9em;
       letter-spacing: 5px;
- }
+   }
+
+ .header-logo {
+      height: 89px;
+      width: auto;
+      margin: 0 10px;
+   }
+
+
+@media (max-width: 640px) {
+      .site-header {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: auto;
+        padding: 10px 12px;
+        gap: 8px;
+      }
+      .site-header .header-logo.right { display: none; }
+      .site-header .header-logo.left {
+        height: 89px;
+        margin: 0 auto;
+      }
+      .site-header h1 {
+        text-align: center;
+        font-size: 1.6em;
+        margin: 0;
+      }
+    }
+
+
+
+/* =========================
+   PRODUCTS
+   ========================= */
+
+
+
+
+/* =========================
+   FOOTER
+   ========================= */
+
+
+
+
+
