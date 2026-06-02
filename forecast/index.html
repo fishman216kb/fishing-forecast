@@ -52,100 +52,13 @@
     </script>
 
 
+    <link href="https://fonts.googleapis.com/css2?family=Jomhuria&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/style.css">
+
     
     
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f8ff;
-            margin: 0;
-            padding: 20px;
-            line-height: 1.6;
-            text-align: center;
-        }
-
-        
-       .site-header {
-          background-color: #2e8b57;
-          color: black;
-          padding: 10px 0;
-          display: flex;
-          align-items: center;
-          justify-content: space-between; /* Push logos to edges */
-        }
-        
-        .site-header h1 {
-          flex: 1; /* Center text in available space */
-          text-align: center;
-          margin: 0;
-          font-size: 2.5em; /* Adjust to taste */
-        }
-        
-        .header-logo {
-          height: 89px;       /* Matches header height, adjust as needed */
-          width: auto;        /* Keep aspect ratio */
-          margin: 0 10px;     /* Small spacing from edges */
-        }
-
-
-        /* desktop/default stays the same */
-
-        /* mobile layout: stack logo above title */
-        @media (max-width: 640px) {
-          .site-header {
-            flex-direction: column;     /* stack vertically */
-            align-items: center;        /* center everything */
-            justify-content: center;
-            height: auto;               /* let it grow since we're stacking */
-            padding: 10px 12px;         /* comfortable spacing on phones */
-            gap: 8px;                   /* space between logo and title */
-          }
-        
-          /* show one centered logo; hide the right one */
-          .site-header .header-logo.right {
-            display: none;
-          }
-        
-          /* keep the left logo, but center it and shrink a bit on mobile */
-          .site-header .header-logo.left {
-            height: 89px;               /* tweak to taste */
-            margin: 0 auto;
-          }
-        
-          .site-header h1 {
-            text-align: center;
-            font-size: 1.6em;           /* adjust to taste (uses your em approach) */
-            margin: 0;
-          }
-        }
-
-
-        .nav-pill {
-          display: inline-block;
-          padding: 8px 12px;
-          border: 1px solid #ddd;
-          border-radius: 999px;
-          background: #f9f9f9;
-          font-size: 14px;
-        }
-        
-        h2 {
-            color: #4682b4;
-            margin-top: 40px;
-        }
-
-
-
-        .logo1 {
-          padding: 10px 0;
-          display: block;
-          margin: 0 auto;
-          max-width: 100%;   /* responsive: never exceed container width */
-          height: auto;      /* scale height proportionally */
-          max-height: 180px;
-        }
-
-        
+               
         
         #forecast {
             font-size: 17px;
@@ -186,21 +99,7 @@
             font-size: 18px;
             font-weight: bold;
         }
-
-
-
         
-            
-        a {
-            color: #1e90ff;
-            text-decoration: none;
-        }
-        a:hover {
-            text-decoration: underline;
-        }
-
-
-
         
         iframe {
             display: block;
@@ -223,19 +122,9 @@
             margin-bottom: 40px;
         }
 
-
-
-
-        
-        footer {
-            text-align: center;
-            margin-top: 40px;
-            padding: 20px;
-            background-color: #e0e0e0;
-            font-size: 11px;
-        }
-
     </style>
+
+    
 </head>
 
 
@@ -248,10 +137,10 @@
       <img src="/assets/img/216BW.png" alt="216fishing black logo" class="header-logo right">
     </header>
 
-    <div class="top-nav" style="max-width:960px;margin:14px auto 0;display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
-      <a class="nav-pill" href="/" data-category="nav" data-label="Home">Home</a>
-      <a class="nav-pill" href="/forecast/" data-category="nav" data-label="Forecast">Forecast</a>
-    </div>
+    <nav class="top-nav" aria-label="Primary navigation">
+        <a class="nav-pill" href="/" data-category="nav" data-label="Home">Home</a>
+        <a class="nav-pill active" href="/forecast/" data-category="nav" data-label="Forecast">Forecast</a>
+    </nav>
 
     <h2>Nearshore Forecast for Cleveland</h2>
 
