@@ -17,74 +17,12 @@
     gtag('config', 'G-Y3GG1723QJ');
   </script>
 
+  <link href="https://fonts.googleapis.com/css2?family=Jomhuria&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/style.css">
+  
+
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f0f8ff;
-      margin: 0;
-      padding: 20px;
-      line-height: 1.6;
-      text-align: center;
-    }
-
-    .site-header {
-      background-color: #2e8b57;
-      color: black;
-      padding: 10px 0;
-      display: flex;
-      align-items: center;
-      justify-content: space-between; /* Push logos to edges */
-    }
-    .site-header h1 {
-      flex: 1; /* Center text in available space */
-      text-align: center;
-      margin: 0;
-      font-size: 2.5em; /* Adjust to taste */
-    }
-    .header-logo {
-      height: 89px;       /* Matches header height, adjust as needed */
-      width: auto;        /* Keep aspect ratio */
-      margin: 0 10px;     /* Small spacing from edges */
-    }
-
-    /* mobile layout: stack logo above title */
-    @media (max-width: 640px) {
-      .site-header { flex-direction: column; align-items: center; justify-content: center; height: auto; padding: 10px 12px; gap: 8px; }
-      .site-header .header-logo.right { display: none; }
-      .site-header .header-logo.left { height: 89px; margin: 0 auto; }
-      .site-header h1 { text-align: center; font-size: 1.6em; margin: 0; }
-    }
-
-    h2 { color: #4682b4; margin-top: 40px; }
-
-    .logo1 {
-      padding: 10px 0;
-      display: block;
-      margin: 0 auto;
-      max-width: 100%;
-      height: auto;
-      max-height: 180px;
-    }
-
-    /* Simple nav under header */
-    .top-nav {
-      max-width: 960px;
-      margin: 14px auto 0;
-      display: flex;
-      gap: 12px;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-    .nav-pill {
-      display: inline-block;
-      padding: 8px 12px;
-      border: 1px solid #ddd;
-      border-radius: 999px;
-      background: #f9f9f9;
-      font-size: 14px;
-    }
-
-    
+   
 
     /* Page content container */
     .content {
@@ -98,14 +36,10 @@
       line-height: 1.8;
     }
 
-    a { color: #1e90ff; text-decoration: none; }
-    a:hover { text-decoration: underline; }
-
-    footer { text-align: center; margin-top: 40px; padding: 20px; background-color: #e0e0e0; font-size: 11px; }
-
-    /* Simple inline nav under the page title */
-    .local-nav { margin: 0.5rem 0 1.25rem; font-size: 14px; }
   </style>
+
+
+
 </head>
 
 
@@ -119,10 +53,10 @@
     <img src="/assets/img/216BW.png" alt="216fishing logo" class="header-logo right">
   </header>
 
-  <div class="top-nav" style="max-width:960px;margin:14px auto 0;display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
-      <a class="nav-pill" href="/" data-category="nav" data-label="Home">Home</a>
-      <a class="nav-pill" href="/forecast/" data-category="nav" data-label="Forecast">Forecast</a>
-  </div>
+ <nav class="top-nav" aria-label="Primary navigation">
+    <a class="nav-pill" href="/" data-category="nav" data-label="Home">Home</a>
+    <a class="nav-pill" href="/forecast/" data-category="nav" data-label="Forecast">Forecast</a>
+ </nav>
 
  <main class="content">
   <h2>About 216 Fishing</h2>
