@@ -9,7 +9,7 @@
 
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/216flavi.png">
 
-  <!-- Schema stays, just adjust description/brand focus -->
+  
   <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -197,11 +197,12 @@
     }
 
   
-  </style>
+  </style> 
+</head>
+
 
 
   
-</head>
 
 <body>
   <header class="site-header">
@@ -213,8 +214,19 @@
   </header>
 
   <nav class="top-nav" aria-label="Primary navigation">
-    <a class="nav-pill active" href="/" data-category="nav" data-label="Home">Home</a>
-    <a class="nav-pill" href="/forecast/" data-category="nav" data-label="Forecast">Forecast</a>
+    <a class="nav-pill active" 
+      href="/" 
+      data-category="nav" 
+      data-label="Home">
+      Home
+    </a>
+    
+    <a class="nav-pill" 
+      href="/forecast/" 
+      data-category="nav" 
+      data-label="Forecast">
+      Forecast
+    </a>
   </nav>
 
   <section class="hero">
@@ -231,8 +243,20 @@
         </ul>
 
         <div class="hero-actions">
-          <a class="btn btn-primary" href="#featured" data-category="cta" data-label="View offerings">View current offerings</a>
-          <a class="btn btn-primary" href="/forecast/" data-category="cta" data-label="Open forecast">Check the forecast</a>
+          <a class="btn btn-primary" 
+            href="#featured" 
+            data-category="nav" 
+            data-label="View offerings">
+            View current offerings
+          </a>
+          
+          <a class="btn btn-primary" 
+            href="/forecast/" 
+            data-category="nav" 
+            data-label="Open forecast">
+            Check the forecast
+          </a>
+          
         </div>
       </div>
 
@@ -261,7 +285,8 @@
              href="https://www.ebay.com/itm/406697570664"
              target="_blank" rel="noopener"
              data-category="product"
-             data-label="Board saver - Buy on eBay">
+             data-label="Board saver - Buy on eBay"
+             data-product="Board Savers">
              Buy on eBay
           </a>
         </div>
@@ -276,7 +301,8 @@
              href="https://www.ebay.com/itm/406572193793"
              target="_blank" rel="noopener"
              data-category="product"
-             data-label="UV Purples - Buy on eBay">
+             data-label="UV Purples - Buy on eBay"
+             data-product="Harness set UV Purples">
              Buy on eBay
           </a>
         </div>
@@ -290,7 +316,8 @@
              href="https://www.ebay.com/itm/406582086531"
              target="_blank" rel="noopener"
              data-category="product"
-             data-label="Shads - Buy on eBay">
+             data-label="Shads - Buy on eBay"
+             data-product="Harness set Shads">
              Buy on eBay
           </a>
         </div>
@@ -304,7 +331,8 @@
              href="https://www.ebay.com/itm/406585963751"
              target="_blank" rel="noopener"
              data-category="product"
-             data-label="Two Tones 1 - Buy on eBay">
+             data-label="Two Tones 1 - Buy on eBay"
+             data-product="Harness set Two Tone 1">
              Buy on eBay
           </a>
         </div>
@@ -318,7 +346,8 @@
              href="https://www.ebay.com/itm/406886930818"
              target="_blank" rel="noopener"
              data-category="product"
-             data-label="Two Tones 2 - Buy on eBay">
+             data-label="Two Tones 2 - Buy on eBay"
+             data-product="Harness set Two Tone 2">
              Buy on eBay
           </a>
         </div>
@@ -332,7 +361,8 @@
              href="https://www.ebay.com/itm/406887264503"
              target="_blank" rel="noopener"
              data-category="product"
-             data-label="Blade Singles - Buy on eBay">
+             data-label="Blade Singles - Buy on eBay"
+             data-product="Blade Singles">
              Buy on eBay
           </a>
         </div>
@@ -346,7 +376,8 @@
              href="https://www.ebay.com/itm/406887409000"
              target="_blank" rel="noopener"
              data-category="product"
-             data-label="Harness Singles - Buy on eBay">
+             data-label="Harness Singles - Buy on eBay"
+             data-product="Harness Singles">
              Buy on eBay
           </a>
         </div>
@@ -367,23 +398,42 @@
         The same “keep it practical” mindset carries into the gear — simple upgrades and harnesses that we actually use.
       </p>
       <p style="margin:0;">
-       Looking for the original forecast page? -  <a href="/forecast/" data-category="internal" data-label="Forecast link">Forecast</a>.
+       Looking for the original forecast page? -  
+        <a href="/forecast/" 
+          data-category="nav" 
+          data-label="Forecast link">
+          Forecast
+        </a>
       </p>
+      
     </div>
   </section>
 
   <footer>
     <img src="assets/img/216DT.png" alt="216fishing downtown sunrise logo" class="logo1">
 
-    <p><a href="https://216fishing.com/about.html"
-      target="_blank" rel="noopener"
-      data-category="pages" data-label="about page">About</a></p>
+    <p>
+      <a href="https://216fishing.com/about.html"
+        target="_blank" 
+        rel="noopener"
+        data-category="nav" 
+        data-label="about page">
+        About
+      </a>
+    </p>
 
-    <p><a href="https://216fishing.com/privacy.html"
-      target="_blank" rel="noopener"
-      data-category="pages" data-label="privacy page">Privacy policy</a></p>
+    <p>
+      <a href="https://216fishing.com/privacy.html"
+        target="_blank" 
+        rel="noopener"
+        data-category="nav" 
+        data-label="privacy page">
+        Privacy policy
+      </a>
+    </p>
 
     <p>© 216fishing 2026</p>
+    
   </footer>
 
   <!-- Keep your GA link tracking as-is -->
@@ -401,6 +451,17 @@
             'link_url': url,
             'page_path': window.location.pathname
           });
+
+           // Product-specific tracking
+          if (category === "product") {
+            gtag('event', 'product_click', {
+              product_name: product || label,
+              event_label: label,
+              link_url: url,
+              page_path: window.location.pathname
+            });
+          }
+          
         });
       });
     });
