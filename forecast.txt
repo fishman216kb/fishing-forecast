@@ -1,14 +1,17 @@
 Avon Point to Willowick OH-
-942 PM EDT Tue Sep 1 2026
+359 AM EDT Wed Sep 2 2026
 
-.OVERNIGHT...Southwest winds 5 to 10 knots. A slight chance
-of showers and thunderstorms late. Waves 1 foot or less. 
-.WEDNESDAY...Southwest winds 5 to 10 knots. Sunny. Waves 1 foot
-or less. 
-.WEDNESDAY NIGHT...Southwest winds 10 to 15 knots. A chance of
-showers and thunderstorms overnight. Waves 2 feet or less. 
-.THURSDAY...Southwest winds 5 to 10 knots becoming west. A chance
-of showers and thunderstorms. Waves 2 feet or less. 
+.TODAY...Southwest winds 5 to 10 knots. A chance of showers and
+thunderstorms early. A slight chance of showers and thunderstorms
+late. Waves 1 foot or less. 
+.TONIGHT...Southwest winds 5 to 15 knots. A chance of showers
+with a slight chance of thunderstorms. Waves 2 feet or less. 
+.THURSDAY...West winds 5 to 10 knots becoming northwest. A chance
+of showers in the morning, then a chance of showers and
+thunderstorms in the afternoon. Waves 2 feet or less. 
+.THURSDAY NIGHT...Northeast winds less than 10 knots. A chance of
+showers and thunderstorms in the evening, then showers likely
+with a chance of thunderstorms overnight. Waves 1 foot or less. 
 
 Winds and waves higher in and near thunderstorms.
 
